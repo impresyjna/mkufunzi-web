@@ -107,13 +107,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionpack (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="actionview (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activejob (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activemodel (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activerecord (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="activesupport (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v6.0.3, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.7.7, ruby-2.1.5-p273) [gem]" level="application" />
@@ -122,13 +115,13 @@
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.3.6, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.7.0, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.6.3, ruby-2.1.5-p273) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pg (v0.17.1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.6.4, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rails (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-deprecated_sanitizer (v1.0.3, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v1.0.7, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.0.2, ruby-2.1.5-p273) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="railties (v4.2.4, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.19.1, ruby-2.1.5-p273) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tilt (v1.4.1, ruby-2.1.5-p273) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.2, ruby-2.1.5-p273) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
