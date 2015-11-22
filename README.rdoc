@@ -11,6 +11,8 @@ Things you may want to cover:
 
 * Configuration
 
+* Database architecture
+
 * Database creation
 
 * Database initialization
