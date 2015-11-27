@@ -1,0 +1,47 @@
+#top, #left-bar{
+	border-color: #2e3f50 !important;
+	background-color: #2e3f50 !important
+}
+
+#logo {
+	font-family: 'Herculanum';
+	font-size: 25px;
+	color: #00b494;
+}
+
+#circle-photo {
+	height: 50px;
+	width: 50px;
+}
+
+
+@media screen and (min-width: 768px){
+	#left-bar{
+		height: 2000px;
+	}
+	#personal_info{
+		height: 110px;
+		width: 100%;
+		background-color: #bdbdbd;
+	}
+
+	#circle-photo-big{
+		height: 80px;
+		width: 80px;
+		margin: 15px 15px 15px 15px;
+	}
+}
+
+@media screen and (max-width: 768px){
+	#personal_info{
+		height: 50px;
+		width: 100%;
+		color: #fff;
+	}
+
+	#circle-photo-big{
+		height: 20px;
+		width: 20px;
+		margin: 15px 15px;
+	}
+}
