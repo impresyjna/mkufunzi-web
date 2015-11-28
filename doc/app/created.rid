@@ -1,0 +1,11 @@
+Sat, 28 Nov 2015 23:05:28 +0100
+README.rdoc	Mon, 23 Nov 2015 00:05:08 +0100
+app/controllers/application_controller.rb	Sat, 28 Nov 2015 22:15:44 +0100
+app/controllers/sessions_controller.rb	Sat, 28 Nov 2015 23:00:46 +0100
+app/controllers/static_pages_controller.rb	Mon, 23 Nov 2015 00:37:30 +0100
+app/controllers/users_controller.rb	Sat, 28 Nov 2015 22:25:28 +0100
+app/helpers/application_helper.rb	Mon, 23 Nov 2015 00:46:34 +0100
+app/helpers/sessions_helper.rb	Sat, 28 Nov 2015 23:01:30 +0100
+app/helpers/static_pages_helper.rb	Sun, 22 Nov 2015 16:13:43 +0100
+app/helpers/users_helper.rb	Thu, 26 Nov 2015 21:11:27 +0100
+app/models/user.rb	Sat, 28 Nov 2015 22:54:05 +0100
