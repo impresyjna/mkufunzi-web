@@ -1,9 +1,90 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <div class="hidden-xs" id="personal_info">
+                <img class="img-circle" id="circle-photo-big" src="img/person.jpg" alt="">
+                <%= @current_user.name %> <%= @current_user.surname%>
+            </div>
+            <li>
+                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Treningi</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Flot Charts</a>
+                    </li>
+                    <li>
+                        <a href="#">Morris.js Charts</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-archive"></i> Kartoteka<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Ciśnienie tętnicze</a>
+                    </li>
+                    <li>
+                        <a href="#">Częstość oddechów</a>
+                    </li>
+                     <li>
+                        <a href="#">Tętno</a>
+                    </li>
+                     <li>
+                        <a href="#">Temperatura ciała</a>
+                    </li>
+                     <li>
+                        <a href="#">Waga</a>
+                    </li>
+                     <li>
+                        <a href="#">Wzrost</a>
+                    </li>
+                     <li>
+                        <a href="#">Tkanka tłuszczowa</a>
+                    </li>
+                     <li>
+                        <a href="#">Masa mięsniowa</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+           
+            <li>
+                <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Napisz do trenera</a>
+                    </li>
+                    <li>
+                        <a href="#">Skrzynka odbiorcza</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->
+
+<!-- 
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     
     <ul class="nav navbar-nav side-nav" id="left-bar">
         <div class="hidden-xs" id="personal_info">
             <img class="img-circle" id="circle-photo-big" src="img/person.jpg" alt="">
-            Maria Kowalska
+            <%= @current_user.name %> <%= @current_user.surname%>
         </div>
         <li>
             <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Treningi</a>
@@ -53,5 +134,7 @@
         <li>
             <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
         </li>
+        <li>
+        </li>
     </ul>
-</div>
+</div> -->

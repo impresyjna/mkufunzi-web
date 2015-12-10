@@ -1,0 +1,25 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-fw fa-archive"></i> Kartoteka
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="list-group">
+            <% @cardIndex.each do |data| %>      
+            <a href="#" class="list-group-item">
+                <%= data.name %>
+                <span class="pull-right text-muted small"><em> <%= data.id %></em>
+                </span>
+            </a>
+            <% end %> 
+        </div>
+        <!-- /.list-group -->
+        <%= link_to new_card_index_path , class: "btn btn-default btn-block" do%> 
+            Dodaj 
+        <%end%>
+    </div>
+    <!-- /.panel-body -->
+</div>
+
+

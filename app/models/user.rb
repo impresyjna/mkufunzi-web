@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token
+  has_many :cards
+  has_many :card_indices, :through => :cards
 
+  attr_accessor :remember_token
   before_save { email.downcase! }
 
   validates :login, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }

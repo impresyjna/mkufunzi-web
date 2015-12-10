@@ -1,0 +1,18 @@
+<% provide(:title, 'Dodaj do kartoteki') %>
+<h1>Dodaj pomiar do kartoteki</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@card) do |f| %>
+        <%= render 'shared/error_messages' %>
+
+        <%= f.label :measurement %>
+        <%= f.text_field :measurement, class: 'form-control' %>
+<%= f.label :card_index_id %>
+        <%= f.text_field :card_index_id, value: params[:id],class: 'form-control' %>
+
+
+        <%= f.submit "Dodaj pomiar do kartoteki", class: "btn btn-default btn-block" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  measurement: 1
+  card_index_id: 
+  user_id: 
+
+two:
+  measurement: 1
+  card_index_id: 
+  user_id: 
