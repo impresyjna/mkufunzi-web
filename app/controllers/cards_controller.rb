@@ -19,6 +19,7 @@ class CardsController < ApplicationController
 		else
 			@cardIndexInfo = @cardIndex.find(params[:id])
 			@card = Card.where("user_id = ? AND card_index_id = ?", session[:user_id], params[:id])
+			@cardplot = Card.select("created_at, measurement").where("user_id = ? AND card_index_id = ?", session[:user_id], params[:id])
 		end
 	end
 
@@ -28,7 +29,7 @@ class CardsController < ApplicationController
 
 	  	if @card.save
 	  		flash[:success] = "Pomyślnie dodano do kartoteki"
-	  		redirect_to 'cards'
+	  		redirect_to 'cards', id: @card.card_index_id
 	  	else
 	  		render 'new'
 	  	end
