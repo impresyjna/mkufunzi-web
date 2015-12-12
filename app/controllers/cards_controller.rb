@@ -28,8 +28,9 @@ class CardsController < ApplicationController
 	  	@card.user_id = session[:user_id]
 
 	  	if @card.save
+	  		@card.id = @card.card_index_id
 	  		flash[:success] = "Pomyślnie dodano do kartoteki"
-	  		redirect_to 'cards', id: @card.card_index_id
+	  		redirect_to @card
 	  	else
 	  		render 'new'
 	  	end
