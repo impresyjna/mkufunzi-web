@@ -29,30 +29,11 @@
             <li>
                 <a href="#"><i class="fa fa-fw fa-archive"></i> Kartoteka<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Ciśnienie tętnicze</a>
-                    </li>
-                    <li>
-                        <a href="#">Częstość oddechów</a>
-                    </li>
-                     <li>
-                        <a href="#">Tętno</a>
-                    </li>
-                     <li>
-                        <a href="#">Temperatura ciała</a>
-                    </li>
-                     <li>
-                        <a href="#">Waga</a>
-                    </li>
-                     <li>
-                        <a href="#">Wzrost</a>
-                    </li>
-                     <li>
-                        <a href="#">Tkanka tłuszczowa</a>
-                    </li>
-                     <li>
-                        <a href="#">Masa mięsniowa</a>
-                    </li>
+                    <% card_indicies.each do |data| %>     
+                        <li><%= link_to cards_path(id: data.id) do%>
+                            <%= data.name %>
+                        <% end %></li>
+                    <% end %> 
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

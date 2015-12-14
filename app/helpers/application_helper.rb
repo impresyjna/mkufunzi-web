@@ -9,4 +9,9 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def card_indicies
+    @card_indicies = CardIndex.all
+  end
+
 end
