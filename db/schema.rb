@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209213321) do
+ActiveRecord::Schema.define(version: 20151216151751) do
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -26,11 +26,53 @@ ActiveRecord::Schema.define(version: 20151209213321) do
     t.integer  "user_id",       limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "protege_id",    limit: 4
   end
 
   add_index "cards", ["card_index_id", "user_id", "created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
   add_index "cards", ["card_index_id"], name: "index_cards_on_card_index_id", using: :btree
+  add_index "cards", ["protege_id"], name: "index_cards_on_protege_id", using: :btree
   add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
+
+  create_table "measure_types", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.text     "unit",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "measurements", force: :cascade do |t|
+    t.float    "value",           limit: 24
+    t.integer  "measure_type_id", limit: 4
+    t.integer  "card_id",         limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "measurements", ["card_id"], name: "index_measurements_on_card_id", using: :btree
+  add_index "measurements", ["measure_type_id"], name: "index_measurements_on_measure_type_id", using: :btree
+
+  create_table "proteges", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "trainer_id", limit: 4
+    t.text     "blood_type", limit: 65535
+    t.text     "gender",     limit: 65535
+    t.text     "eye_color",  limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "proteges", ["trainer_id"], name: "index_proteges_on_trainer_id", using: :btree
+  add_index "proteges", ["user_id"], name: "index_proteges_on_user_id", using: :btree
+
+  create_table "trainers", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.boolean  "active",     limit: 1
+  end
+
+  add_index "trainers", ["user_id"], name: "index_trainers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "login",           limit: 255
@@ -46,5 +88,11 @@ ActiveRecord::Schema.define(version: 20151209213321) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "cards", "card_indices"
+  add_foreign_key "cards", "proteges"
   add_foreign_key "cards", "users"
+  add_foreign_key "measurements", "cards"
+  add_foreign_key "measurements", "measure_types"
+  add_foreign_key "proteges", "trainers"
+  add_foreign_key "proteges", "users"
+  add_foreign_key "trainers", "users"
 end

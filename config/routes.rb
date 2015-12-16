@@ -13,8 +13,11 @@ Rails.application.routes.draw do
   get 'cards' => 'cards#show'
   get  'new_measurement' => 'cards#new'
   post 'new_measurement' => 'cards#create'
+  get 'new_measure_type' => 'measure_types#new'
+  get 'measure_type' => 'measure_types#show'
   
   resources :users
   resources :card_indices
   resources :cards
+  resources :measure_types
 end
