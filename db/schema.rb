@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216151751) do
+ActiveRecord::Schema.define(version: 20151216234336) do
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -21,18 +21,14 @@ ActiveRecord::Schema.define(version: 20151216151751) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.float    "measurement",   limit: 24
-    t.integer  "card_index_id", limit: 4
-    t.integer  "user_id",       limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "protege_id",    limit: 4
+    t.float    "measurement", limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "protege_id",  limit: 4
   end
 
-  add_index "cards", ["card_index_id", "user_id", "created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
-  add_index "cards", ["card_index_id"], name: "index_cards_on_card_index_id", using: :btree
+  add_index "cards", ["created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
   add_index "cards", ["protege_id"], name: "index_cards_on_protege_id", using: :btree
-  add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
 
   create_table "measure_types", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -87,9 +83,7 @@ ActiveRecord::Schema.define(version: 20151216151751) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  add_foreign_key "cards", "card_indices"
   add_foreign_key "cards", "proteges"
-  add_foreign_key "cards", "users"
   add_foreign_key "measurements", "cards"
   add_foreign_key "measurements", "measure_types"
   add_foreign_key "proteges", "trainers"

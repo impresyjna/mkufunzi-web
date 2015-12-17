@@ -1,0 +1,163 @@
+<% if params[:id].nil? %>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-fw fa-archive"></i> Kartoteka
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="list-group">
+                <% @measureType.each do |data| %>     
+                 <%= link_to measurements_path(id: data.id), class: "list-group-item" do%>
+                    <%= data.name %>
+                    <span class="pull-right text-muted small"><em><%= Measurement.where("card_id = ? AND measure_type_id = ?", session[:card_id], data.id).count %></em>
+                    </span>
+                <% end %>
+                <% end %> 
+            </div>
+            <!-- /.list-group -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+<% else %>
+<div class="col-md-6 col-lg-6" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <%= @measureTypeInfo.name %>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div class="table-responsive">
+              <table id="card" class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th><%= @measureTypeInfo.name %></th>
+                          <th>Data</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% @card.each do |data| %>
+                      <tr>
+                          <td><%= data.value %> <%= @measureTypeInfo.unit %> </td>
+                          <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
+                      </tr>
+                      <% end %>
+                  </tbody>
+              </table>
+          </div>
+
+          <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#myModal">
+            Dodaj pomiar do kartoteki
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <%= form_for(@measurementNew) do |f| %>
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Dodaj pomiar <%= @measureTypeInfo.name %></h4>
+                </div>
+                <div class="modal-body" style="overflow: hidden">
+                  <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10">
+                    <%= f.label :pomiar %>
+                    <%= f.text_field :value, class: 'form-control' %>
+                    <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
+                  </div>
+                  <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2" style="margin-top:30px;">
+                    <%= @measureTypeInfo.unit %>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                  <%= f.submit "Dodaj pomiar do kartoteki", class: "btn btn-primary" %>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+<div class="col-md-6 col-lg-6" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <%= @measureTypeInfo.name %>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div class="text-center">
+            <button type="button" class="btn btn-link" onclick="update(d_last_week)">Tydzien</button>
+            <button type="button" class="btn btn-link" onclick="update(d_last_month)">Miesiac</button>
+            <button type="button" class="btn btn-link" onclick="update(d_last_quarter)">Kwartal</button>
+            <button type="button" class="btn btn-link" onclick="update(d_last_year)">Rok</button>
+            <button type="button" class="btn btn-link" onclick="update(d)">Wszystko</button>
+          </div>
+          <div id="myfirstchart"></div> 
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+<script type="text/javascript">
+    var d = new Array();
+    var d_last_week = new Array();
+    var d_last_month = new Array();
+    var d_last_quarter = new Array();
+    var d_last_year = new Array();
+
+    <% @cardplot.each do |data| %>
+      <% if data.created_at > Date.today.last_week %>
+        d_last_week.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+      <% end %>
+      <% if data.created_at > Date.today.last_month %>
+        d_last_month.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+      <% end %>
+      <% if data.created_at > Date.today.last_quarter %>
+        d_last_quarter.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+      <% end %>
+      <% if data.created_at > Date.today.last_year %>
+        d_last_year.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+      <% end %>
+      d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+    <% end %>
+
+    var j = new Morris.Area({
+      // ID of the element in which to draw the chart.
+      element: 'myfirstchart',
+      // Chart data records -- each entry in this array corresponds to a point on
+      // the chart.
+      data: d_last_week,
+      // The name of the data record attribute that contains x-values.
+      xkey: 'year',
+      xLabels: 'week',
+      parseTime: true,
+
+      // A list of names of data record attributes that contain y-values.
+      ykeys: ['value'],
+      // Labels for the ykeys -- will be displayed when you hover over the
+      // chart.
+      labels: ['Value']
+    });
+
+    function update(d) {
+      j.setData(d);
+    }
+
+
+    $('#card').DataTable( {
+        "pagingType": "full_numbers",
+        "order": [[ 1, "desc" ]],
+        "dom": 'lfrt<"bottom"i<"clear">p>',
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+        }
+    } );   
+
+</script>
+
+</script>
+<% end %>

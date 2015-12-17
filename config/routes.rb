@@ -10,14 +10,19 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   get 'new_card_index' => 'card_indices#new'
   get 'card_indices' => 'card_indices#show'
-  get 'cards' => 'cards#show'
+  get 'measurements' => 'measurements#show'
+  post 'measurements' => 'measurements#create'
+
   get  'new_measurement' => 'cards#new'
   post 'new_measurement' => 'cards#create'
   get 'new_measure_type' => 'measure_types#new'
   get 'measure_type' => 'measure_types#show'
   
   resources :users
+  resources :measurement
   resources :card_indices
   resources :cards
   resources :measure_types
+  resources :proteges
+  
 end
