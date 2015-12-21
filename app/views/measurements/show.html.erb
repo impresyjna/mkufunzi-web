@@ -7,9 +7,9 @@
         <div class="panel-body">
             <div class="list-group">
                 <% @measureType.each do |data| %>     
-                 <%= link_to measurements_path(id: data.id), class: "list-group-item" do%>
+                 <%= link_to measurement_path(id: data.id), class: "list-group-item" do%>
                     <%= data.name %>
-                    <span class="pull-right text-muted small"><em><%= Measurement.where("card_id = ? AND measure_type_id = ?", session[:card_id], data.id).count %></em>
+                    <span class="pull-right text-muted small"><em><%= Measurement.where("card_id = ? AND measure_type_id = ?", User.find(session[:user_id]).proteges.find_by(user_id: session[:user_id]).card.id.to_i, data.id).count %></em>
                     </span>
                 <% end %>
                 <% end %> 
@@ -51,17 +51,17 @@
           <!-- Modal -->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-              <%= form_for(@measurementNew) do |f| %>
+              <%= form_for(@measurements) do |f| %>
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="myModalLabel">Dodaj pomiar <%= @measureTypeInfo.name %></h4>
                 </div>
                 <div class="modal-body" style="overflow: hidden">
-                  <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10">
-                    <%= f.label :pomiar %>
-                    <%= f.text_field :value, class: 'form-control' %>
-                    <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
+                  <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10"> 
+                      <%= f.label :pomiar %>
+                      <%= f.text_field :value, class: 'form-control' %>
+                      <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
                   </div>
                   <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2" style="margin-top:30px;">
                     <%= @measureTypeInfo.unit %>

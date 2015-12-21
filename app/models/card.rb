@@ -1,4 +1,4 @@
 class Card < ActiveRecord::Base
-  belongs_to :card_index
-  belongs_to :user
+	belongs_to :protege
+	has_many :measurement
 end

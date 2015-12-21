@@ -10,8 +10,8 @@ module ApplicationHelper
     end
   end
 
-  def card_indicies
-    @card_indicies = CardIndex.all
+  def measure_types
+    @measure_type = MeasureType.all
   end
 
 end

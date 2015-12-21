@@ -3,17 +3,6 @@ module SessionsHelper
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
-    @protege ||= Protege.find_by(user_id: user.id)
-    if !@protege.nil?
-      session[:protege_id] = @protege.id.to_i
-      @card = Card.find_by(protege_id: session[:protege_id])
-      session[:card_id] = @card.id.to_i
-    else
-      @trainer ||= Trainer.find_by(user_id: user.id)
-      if !@trainer.nil?
-        session[:trainer_id] = @trainer.id.to_i
-      end
-    end
   end
 
   # Remembers a user in a persistent session.
@@ -37,8 +26,18 @@ module SessionsHelper
   end
 
   def protege
-    if logged_in?
-      @protege = Protege.find_by(user_id: user_id)
+    if logged_in? and !Protege.find_by(user_id: session[:user_id]).nil?
+      @protege = Protege.find_by(user_id: session[:user_id])
+    else
+      @protege = false
+    end
+  end
+
+  def trainer
+    if logged_in? and !Trainer.find_by(user_id: session[:user_id])
+      @trainer = Trainer.find_by(user_id: session[:user_id])
+    else
+      @trainer = false
     end
   end
 
@@ -57,9 +56,6 @@ module SessionsHelper
   # Logs out the current user.
   def log_out
     forget(current_user)
-    session.delete(:protege_id)
-    session.delete(:trainer_id)
-    session.delete(:card_id)
     session.delete(:user_id)
     @current_user = nil
   end

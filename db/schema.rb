@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216234336) do
+ActiveRecord::Schema.define(version: 20151218190151) do
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -21,10 +21,9 @@ ActiveRecord::Schema.define(version: 20151216234336) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.float    "measurement", limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "protege_id",  limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "protege_id", limit: 4
   end
 
   add_index "cards", ["created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
@@ -79,6 +78,7 @@ ActiveRecord::Schema.define(version: 20151216234336) do
     t.datetime "updated_at",                  null: false
     t.string   "password_digest", limit: 255
     t.string   "remember_digest", limit: 255
+    t.boolean  "admin",           limit: 1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

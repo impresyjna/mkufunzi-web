@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :cards
+  has_many :proteges
   has_many :card_indices, :through => :cards
 
   attr_accessor :remember_token
