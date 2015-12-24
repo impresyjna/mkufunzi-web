@@ -13,7 +13,8 @@ gem 'bootstrap_sb_admin_base_v2'
 gem 'sdoc',         '0.4.0', group: :doc
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'twitter-bootstrap-rails', '~> 3.2'
-gem 'bcrypt',               '3.1.7'
+gem 'bcrypt'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'byebug'
