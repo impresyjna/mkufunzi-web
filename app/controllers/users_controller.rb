@@ -18,6 +18,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def login_mobile
+    @user = User.new
+    if !params[:email].nil? and !params[:password].nil?
+      @user = User.find_by(email: params[:email].downcase)
+      if @user && @user.authenticate(params[:password])
+        render json: @user
+      else
+        @user = User.new
+        render json: @user
+      end
+    else
+      @user = User.new
+      render json: @user
+    end
+  end
+
   private
 
     def user_params

@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   get 'cards' => 'cards#show'
   get  'new_measurement' => 'cards#new'
   post 'new_measurement' => 'cards#create'
-  
+  get 'login_mobile' => 'users#login_mobile'
+
   resources :users
   resources :card_indices
   resources :cards
+
 end
