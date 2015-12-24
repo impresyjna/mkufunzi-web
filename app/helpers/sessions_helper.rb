@@ -25,6 +25,22 @@ module SessionsHelper
     end
   end
 
+  def protege
+    if logged_in? and !Protege.find_by(user_id: session[:user_id]).nil?
+      @protege = Protege.find_by(user_id: session[:user_id])
+    else
+      @protege = false
+    end
+  end
+
+  def trainer
+    if logged_in? and !Trainer.find_by(user_id: session[:user_id])
+      @trainer = Trainer.find_by(user_id: session[:user_id])
+    else
+      @trainer = false
+    end
+  end
+
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?

@@ -6,18 +6,15 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
             <div class="list-group">
-                <% @cardIndex.each do |data| %>     
-                 <%= link_to cards_path(id: data.id), class: "list-group-item" do%>
+                <% @measureType.each do |data| %>     
+                 <%= link_to measurement_path(id: data.id), class: "list-group-item" do%>
                     <%= data.name %>
-                    <span class="pull-right text-muted small"><em><%= Card.where("user_id = ? AND card_index_id = ?", session[:user_id], data.id).count %></em>
+                    <span class="pull-right text-muted small"><em><%= Measurement.where("card_id = ? AND measure_type_id = ?", User.find(session[:user_id]).proteges.find_by(user_id: session[:user_id]).card.id.to_i, data.id).count %></em>
                     </span>
                 <% end %>
                 <% end %> 
             </div>
             <!-- /.list-group -->
-            <%= link_to new_card_index_path , class: "btn btn-default btn-block" do%> 
-                Dodaj 
-            <%end%>
         </div>
         <!-- /.panel-body -->
     </div>
@@ -25,7 +22,7 @@
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
         <div class="panel-heading">
-            <%= @cardIndexInfo.name %>
+            <%= @measureTypeInfo.name %>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -33,14 +30,14 @@
               <table id="card" class="table table-hover">
                   <thead>
                       <tr>
-                          <th><%= @cardIndexInfo.name %></th>
+                          <th><%= @measureTypeInfo.name %></th>
                           <th>Data</th>
                       </tr>
                   </thead>
                   <tbody>
                       <% @card.each do |data| %>
                       <tr>
-                          <td><%= data.measurement %> <%= @cardIndexInfo.unit %> </td>
+                          <td><%= data.value %> <%= @measureTypeInfo.unit %> </td>
                           <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                       </tr>
                       <% end %>
@@ -54,20 +51,20 @@
           <!-- Modal -->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-              <%= form_for(@cardNew) do |f| %>
+              <%= form_for(@measurements) do |f| %>
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Dodaj pomiar <%= @cardIndexInfo.name %></h4>
+                  <h4 class="modal-title" id="myModalLabel">Dodaj pomiar <%= @measureTypeInfo.name %></h4>
                 </div>
                 <div class="modal-body" style="overflow: hidden">
-                  <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10">
-                    <%= f.label :pomiar %>
-                    <%= f.text_field :measurement, class: 'form-control' %>
-                    <%= f.text_field :card_index_id, value: params[:id], class: 'hidden' %>
+                  <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10"> 
+                      <%= f.label :pomiar %>
+                      <%= f.text_field :value, class: 'form-control' %>
+                      <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
                   </div>
                   <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2" style="margin-top:30px;">
-                    <%= @cardIndexInfo.unit %>
+                    <%= @measureTypeInfo.unit %>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -87,7 +84,7 @@
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
         <div class="panel-heading">
-            <%= @cardIndexInfo.name %>
+            <%= @measureTypeInfo.name %>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -114,18 +111,18 @@
 
     <% @cardplot.each do |data| %>
       <% if data.created_at > Date.today.last_week %>
-        d_last_week.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.measurement %>" });
+        d_last_week.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
       <% end %>
       <% if data.created_at > Date.today.last_month %>
-        d_last_month.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.measurement %>" });
+        d_last_month.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
       <% end %>
       <% if data.created_at > Date.today.last_quarter %>
-        d_last_quarter.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.measurement %>" });
+        d_last_quarter.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
       <% end %>
       <% if data.created_at > Date.today.last_year %>
-        d_last_year.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.measurement %>" });
+        d_last_year.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
       <% end %>
-      d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.measurement %>" });
+      d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
     <% end %>
 
     var j = new Morris.Area({

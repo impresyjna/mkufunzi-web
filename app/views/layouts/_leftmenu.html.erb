@@ -1,10 +1,15 @@
 <div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
+    <div class="sidebar-nav navbar-collapse">    
+        <div class="hidden-xs" id="personal_info">
+            <img class="img-circle" id="circle-photo-big" src="img/person.jpg" alt="">
+            <%= @current_user.name %>  <%= @current_user.surname%> <%= @current_user.admin%> 
+        </div>
         <ul class="nav" id="side-menu">
-            <div class="hidden-xs" id="personal_info">
-                <img class="img-circle" id="circle-photo-big" src="img/person.jpg" alt="">
-                <%= @current_user.name %> <%= @current_user.surname%>
-            </div>
+            <% if @current_user.admin == true %>
+
+            <% end %>
+            <!-- Protege user menu -->
+            <% if !Protege.find_by(user_id: current_user.id.to_i).nil? %>
             <li>
                 <a href="#"><i class="fa fa-dashboard fa-fw"></i> Treningi</a>
             </li>
@@ -29,30 +34,11 @@
             <li>
                 <a href="#"><i class="fa fa-fw fa-archive"></i> Kartoteka<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Ciśnienie tętnicze</a>
-                    </li>
-                    <li>
-                        <a href="#">Częstość oddechów</a>
-                    </li>
-                     <li>
-                        <a href="#">Tętno</a>
-                    </li>
-                     <li>
-                        <a href="#">Temperatura ciała</a>
-                    </li>
-                     <li>
-                        <a href="#">Waga</a>
-                    </li>
-                     <li>
-                        <a href="#">Wzrost</a>
-                    </li>
-                     <li>
-                        <a href="#">Tkanka tłuszczowa</a>
-                    </li>
-                     <li>
-                        <a href="#">Masa mięsniowa</a>
-                    </li>
+                    <% measure_types.each do |data| %>     
+                        <li><%= link_to measurement_path(id: data.id) do%>
+                            <%= data.name %>
+                        <% end %></li>
+                    <% end %> 
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -72,6 +58,28 @@
             <li>
                 <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
             </li>
+            <% elsif !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
+            <li>
+                <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Napisz do trenera</a>
+                    </li>
+                    <li>
+                        <a href="#">Skrzynka odbiorcza</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <!-- end protege user menu -->
+
+            <!-- start trainer user menu -->
+
+            <!-- end trainer user menu -->
+
+            <% end %>
+
+
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

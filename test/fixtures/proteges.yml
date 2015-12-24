@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  trainer_id: 
+  blood_type: MyText
+  gender: MyText
+  eye_color: MyText
+
+two:
+  user_id: 
+  trainer_id: 
+  blood_type: MyText
+  gender: MyText
+  eye_color: MyText

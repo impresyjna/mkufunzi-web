@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 
+  measure_type_id: 
+  card_id: 
+
+two:
+  value: 
+  measure_type_id: 
+  card_id: 

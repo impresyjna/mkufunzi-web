@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <%= form_for(@measurement) do |f| %>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Dodaj pomiar do kartoteki</h4>
+      </div>
+      <div class="modal-body">
+          <%= f.label :value %>
+        <%= f.text_field :value, class: 'form-control' %>
+        <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit "Dodaj pomiar do kartoteki", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

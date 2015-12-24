@@ -9,4 +9,9 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def measure_types
+    @measure_type = MeasureType.all
+  end
+
 end

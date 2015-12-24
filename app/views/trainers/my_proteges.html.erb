@@ -1,0 +1,31 @@
+
+<div class="col-md-12 col-lg-12" >
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1> Moi podopieczni </h1>
+        </div>
+        <!-- /.panel-heading -->
+       	<div class="panel-body">
+          	<div class="table-responsive">
+              	<table id="card" class="table table-hover">
+                  	<thead>
+                      	<tr>
+                          	<th>Imie</th>
+                          	<th>Nazwisko</th>
+                          	<th>Data</th>
+                      	</tr>
+                  	</thead>
+                  	<tbody>
+                      <% @my_proteges.each do |data| %>
+                      <tr>
+                          <td><%= data.user.name %></td>
+                          <td><%= data.user.surname %> </td>
+                          <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
+                      </tr>
+                      <% end %>
+                  	</tbody>
+              	</table>
+          	</div>
+      	</div>
+    </div>
+</div>
