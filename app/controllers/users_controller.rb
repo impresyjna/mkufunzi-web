@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :declared_user, :except => :create
+  #before_filter :declared_user, :except => :create
 
   def show
     @user = User.find(params[:id])
