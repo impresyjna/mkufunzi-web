@@ -37,10 +37,19 @@ class UsersController < ApplicationController
   end
 
   def register_mobile
-    @user = User.new
-    puts params[:email]
-    puts params[:password]
-    render json: @user
+    @user = User.new(user_mobile)
+    if @user.save
+      render json: {status: "success", message: "Pomyślnie zarejestrowano", user: @user}
+    else
+      if !User.find_by(email: params[:email].downcase).blank?
+        render json: { status: "failure", message: "Osoba o tym emailu istnieje"}
+      elsif !User.find_by(login: params[:login]).blank?
+        render json: {status: "failure", message: "Osoba o tym loginie istnieje"}
+      else
+        render json: {status: "failure", message: "Niepoprawne dane"}
+      end
+    end
+
   end
 
   private
@@ -58,6 +67,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :surname, :email, :password,
                                    :password_confirmation, :login)
+    end
+
+    def user_mobile
+      params.permit(:name, :surname, :email, :password, :password_confirmation, :login)
     end
 
 end
