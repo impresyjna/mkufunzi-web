@@ -36,6 +36,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def register_mobile
+    @user = User.new
+    puts params[:email]
+    puts params[:password]
+    render json: @user
+  end
+
   private
 
     def declared_user

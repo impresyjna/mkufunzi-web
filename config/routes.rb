@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   get 'my_proteges' => 'trainers#my_proteges'
   post 'my_proteges' => 'trainers#add_protege'
+  post 'register_mobile' => 'users#register_mobile'
   
 
   resources :users
