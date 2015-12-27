@@ -31,25 +31,36 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
+  Dodaj podopiecznego
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <%= form_for(@av_proteges) do |f| %>
+    <%= form_tag({ controller: 'proteges', action: 'add_trainer_to_protege' }, method: 'post') do %>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Dodaj podopiecznego</h4>
       </div>
+      <% if !@av_proteges.empty? %>
       <div class="modal-body">
-        <%= select("post", "user_id", Protege.where("trainer_id is NULL").collect {|p| [ p.user.name.to_s, p.id.to_i ] })%>
+
+          <%= select_tag 'user_id', options_for_select(@av_proteges) %>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= f.submit "Dodaj", class: "btn btn-primary" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+        <%= submit_tag "Dodaj", class: "btn btn-primary" %>
       </div>
+      <% else %>
+      <div class="modal-body">
+        Brak podopiecznych do wybrania
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+      </div>
+      <% end %>
     </div>
     <% end %>
   </div>

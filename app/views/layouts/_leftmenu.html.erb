@@ -59,6 +59,9 @@
                 <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
             </li>
             <% elsif !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
+             <li>
+                <a href="/my_proteges"><i class="fa fa-fw fa-users"></i> Moi podopieczni</a>
+            </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
