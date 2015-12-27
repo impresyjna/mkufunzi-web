@@ -38,6 +38,7 @@ class UsersController < ApplicationController
 
   def register_mobile
     @user = User.new(user_mobile)
+    @user.activated = true
     if @user.save
       render json: {status: "success", message: "Pomyślnie zarejestrowano", user: @user}
     else
