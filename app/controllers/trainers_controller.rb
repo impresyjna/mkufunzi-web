@@ -1,5 +1,6 @@
 class TrainersController < ApplicationController
-	before_filter :trainer_only,  :except => :create
+	before_filter :trainer_only,  :except => [:create, :show_inactive_trainer, :activate_trainer]
+	before_action :admin_only,   only: [:show_inactive_trainer, :activate_trainer]
 
 	def create
 		@trainer = Trainer.new
@@ -9,23 +10,35 @@ class TrainersController < ApplicationController
 		redirect_to root_path
 	end
 
-	def my_proteges
-		@my_proteges = Trainer.find_by(user_id: session[:user_id]).proteges.joins(:user).includes(:user)
-		@av_proteges = Protege.new
+	def show_inactive_trainer
+		@inactive_trainer = Trainer.where(active: false).joins(:user)
 	end
 
-	def add_protege
-		@new_protege = Protege.find_by(user_id:params[:user_id])
-		flash[:success] = @new_protege.gender.to_s
-		redirect_to my_protege_path 
+	def activate_trainer
+		@trainer = Trainer.find_by(id: params[:id])
+		@trainer.active = 1
+		if @trainer.save
+			flash[:success] = @trainer.user.name.to_s + " " + @trainer.user.surname.to_s + " został aktywowany"
+			redirect_to inactive_trainers_path
+		else
+			flash[:danger] = "Nie udalo sie aktywowac trenera"
+		end
 	end
 
 	private
 
+		def admin_only
+			if logged_in?
+				if User.find_by(id: current_user.id.to_i).admin != true
+					redirect_to root_path, :alert => "Odmowa dostępu musisz być adminem"
+				end
+			end
+		end
+
 		def trainer_only
 			if logged_in?
 				if Trainer.find_by(user_id: current_user.id.to_i).nil?
-					redirect_to root_path, :alert => "Odmowa dostępu"
+					redirect_to root_path, :alert => "Odmowa dostępu111"
 				elsif !active_trainer?
 					redirect_to root_path, :alert => "Odmowa dostępu, musisz byc aktywnym trenerem" 
 				end

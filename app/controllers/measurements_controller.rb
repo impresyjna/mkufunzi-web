@@ -1,5 +1,13 @@
 class MeasurementsController < ApplicationController
-	before_filter :declared_user
+	before_action :declared_user,   only: [:show, :new, :create]
+	before_action :trainer_only,   only: [:my_protege_card]
+
+
+	def my_protege_card
+		@protege = Protege.joins(:user).find_by(user_id: params[:id])
+		@protege_measurement = @protege.card.measurement
+		@measureType = MeasureType.all
+	end
 
 	def index
 	end
@@ -44,9 +52,24 @@ class MeasurementsController < ApplicationController
 
   	private
 
+    def trainer_only
+      if logged_in?
+      	@trainer = Trainer.find_by(user_id: current_user.id.to_i)
+        if @trainer.nil?
+        	redirect_to root_path, :alert => "Access denied."
+        else
+        	if @trainer.id.to_i != Protege.find_by(user_id: params[:id]).trainer_id.to_i
+        		redirect_to root_path, :alert => "Nie masz dostępu do tej karty"
+        	end
+        end
+      else
+        redirect_to root_path, :alert => "Access denied."
+      end
+    end
+
     def declared_user
       if logged_in?
-        if Protege.find_by(user_id: current_user.id.to_i).nil? and Trainer.find_by(user_id: current_user.id.to_i).nil?
+        if Protege.find_by(user_id: current_user.id.to_i).nil?
         redirect_to root_path, :alert => "Access denied."
         end
       else

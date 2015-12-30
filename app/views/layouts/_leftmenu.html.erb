@@ -6,7 +6,11 @@
         </div>
         <ul class="nav" id="side-menu">
             <% if @current_user.admin == true %>
-
+            <li>
+                <%= link_to inactive_trainers_path do %>
+                    <i class="fa fa-users fa-fw"></i> Aktywuj trenerów
+                <% end %>
+            </li>
             <% end %>
             <!-- Protege user menu -->
             <% if !Protege.find_by(user_id: current_user.id.to_i).nil? %>

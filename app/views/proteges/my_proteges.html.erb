@@ -7,11 +7,14 @@
        	<div class="panel-body">
           	<div class="table-responsive">
               	<table id="card" class="table table-hover">
+
                   	<thead>
                       	<tr>
                           	<th>Imie</th>
                           	<th>Nazwisko</th>
                           	<th>Data</th>
+                            <th>wiecej</th>
+                            <th>usuń</th>
                       	</tr>
                   	</thead>
                   	<tbody>
@@ -20,48 +23,68 @@
                           <td><%= data.user.name %></td>
                           <td><%= data.user.surname %> </td>
                           <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
+                          <td>
+                             <%= link_to "wiecej", my_protege_card_path(:id => data.user.id), class: 'btn btn-outline btn-info'%>  
+                           </td>
+                          <td>
+                            <%= link_to "usuń", erase_trainer_from_protege_path(:id => data.id), method: :post, class: 'btn btn-outline btn-danger', data: {confirm: "Czy jesteś tego pewien?"}  %>                            
+                          </td>
                       </tr>
                       <% end %>
                   	</tbody>
               	</table>
+                <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline btn-default btn-block" data-toggle="modal" data-target="#myModal">
+                Dodaj podopiecznego
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <%= form_tag({ controller: 'proteges', action: 'add_trainer_to_protege' }, method: 'post') do %>
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Dodaj podopiecznego</h4>
+                    </div>
+                    <% if !@av_proteges.empty? %>
+                    <div class="modal-body">
+
+                        <%= select_tag 'user_id', options_for_select(@av_proteges), class: 'form-control' %>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                      <%= submit_tag "Dodaj", class: "btn btn-primary" %>
+                    </div>
+                    <% else %>
+                    <div class="modal-body">
+                      Brak podopiecznych do wybrania
+                      </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    </div>
+                    <% end %>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+
           	</div>
       	</div>
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Dodaj podopiecznego
-</button>
+<script type="text/javascript">
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <%= form_tag({ controller: 'proteges', action: 'add_trainer_to_protege' }, method: 'post') do %>
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Dodaj podopiecznego</h4>
-      </div>
-      <% if !@av_proteges.empty? %>
-      <div class="modal-body">
+  $('#card').DataTable( {
+      "pagingType": "full_numbers",
+      "order": [[ 1, "desc" ]],
+      "dom": 'lfrt<"bottom"i<"clear">p>',
+      "language": {
+          "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+      }
+  } ); 
 
-          <%= select_tag 'user_id', options_for_select(@av_proteges) %>
+</script>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-        <%= submit_tag "Dodaj", class: "btn btn-primary" %>
-      </div>
-      <% else %>
-      <div class="modal-body">
-        Brak podopiecznych do wybrania
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-      </div>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
-</div>

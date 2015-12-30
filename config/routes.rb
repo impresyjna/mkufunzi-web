@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   get 'measurement' => 'measurements#show'
   post 'measurement' => 'measurements#create'
+  get 'my_protege_card' => 'measurements#my_protege_card'
 
   get  'new_measurement' => 'cards#new'
   post 'new_measurement' => 'cards#create'
@@ -28,6 +29,10 @@ Rails.application.routes.draw do
 
   get 'my_proteges' => 'proteges#my_proteges'
   post 'my_proteges' => 'proteges#add_trainer_to_protege'
+  post 'erase_trainer_from_protege' => 'proteges#erase_trainer_from_protege'
+
+  get 'inactive_trainers' => 'trainers#show_inactive_trainer'
+  post 'activate_trainer' => 'trainers#activate_trainer'
 
   post 'register_mobile' => 'users#register_mobile'
   get 'measure_types_index' => 'measure_types#index_mobile'
