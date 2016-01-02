@@ -1,6 +1,5 @@
 class MeasureTypesController < ApplicationController
-  before_filter :declared_user 
-  before_filter :admin_only
+  #before_filter :declared_user, except: [:index_mobile]
 
   def show
   	@measureType = MeasureType.all
@@ -18,6 +17,11 @@ class MeasureTypesController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+
+  def index_mobile
+    @measure_types = MeasureType.all
+    render json: @measure_types
   end
 
   private
