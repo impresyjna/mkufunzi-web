@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     if !params[:email].nil? and !params[:password].nil?
       @user = User.find_by(email: params[:email].downcase)
       if @user && @user.authenticate(params[:password])
-        render json: @user
+        render json: {user: @user, protege: @user.protege, card: @user.protege.card}
       else
         @user = User.new
         render json: @user
@@ -39,7 +39,11 @@ class UsersController < ApplicationController
   def register_mobile
     @user = User.new(user_mobile)
     if @user.save
-      render json: {status: "success", message: "Pomyślnie zarejestrowano", user: @user}
+      @protege = Protege.new(user_id: @user.id)
+      @protege.save
+      @cart = Card.new(protege_id: @protege.id)
+      @cart.save
+      render json: {status: "success", message: "Pomyślnie zarejestrowano", user: @user, protege: @user.protege, card: @user.protege.card}
     else
       if !User.find_by(email: params[:email].downcase).blank?
         render json: { status: "failure", message: "Osoba o tym emailu istnieje"}
