@@ -15,3 +15,11 @@
 .idea/workspace.xml
 
 *.xml
+
+.idea/.generators
+
+.idea/.rakeTasks
+
+*.iml
+
+.idea/mkufunzi-web.iml
