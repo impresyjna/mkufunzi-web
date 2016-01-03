@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218190151) do
+ActiveRecord::Schema.define(version: 20160103231849) do
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20151218190151) do
     t.text     "eye_color",  limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.date     "birth_date"
   end
 
   add_index "proteges", ["trainer_id"], name: "index_proteges_on_trainer_id", using: :btree
