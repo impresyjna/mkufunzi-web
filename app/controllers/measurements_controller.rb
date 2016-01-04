@@ -25,7 +25,7 @@ class MeasurementsController < ApplicationController
 	def show
 		@measureType = MeasureType.all
 		@measurements = Measurement.new
-		@ProtegeCard = User.find(session[:user_id]).proteges.find_by(user_id: session[:user_id]).card
+		@ProtegeCard = User.find(session[:user_id]).protege.card
 		
 		if params[:id].nil?
 			@cardNew = nil
