@@ -1,5 +1,5 @@
-@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-sprockets";
 
 // $state-danger-text: #fff;
 
@@ -162,7 +162,7 @@ $mkufunzi_blue: #2e3f50;
 $mkufunzi_green: #00b494;
 $mkufunzi_gray: #bdbdbe;
 
-body {background-color: $mkufunzi_blue !important;}
+body {background-color: 000 !important;}
 
 //ustawienia header i leftmenu
 
@@ -258,19 +258,7 @@ body {background-color: $mkufunzi_blue !important;}
 
 .nolign{
 	width: 100%;
-	.top{
-		width: 100%;
-		height: 75px;
-		background-color: $mkufunzi_blue;
-		margin: -25px 0px 0px 0px;
-		h1{
-			font-family: 'Herculanum';
-			font-size: 53px;
-			color: $mkufunzi_green;
-			text-align: center;
-    		padding-top: 10px;
-		}
-	}
+
 
 	.foto{
 		background: url(../img/foto.png) no-repeat center center; 
@@ -278,19 +266,24 @@ body {background-color: $mkufunzi_blue !important;}
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
-		height: 600px;
-		padding: 0px 10px;
+		height: 300px;
+		padding: 0px 0px;
+		.foto_sub{
+			font-family: 'Herculanum';
+			font-size: 44px;
+			color: #eee;
+			text-align: center;
+    		padding-top: 60px;
+		}
 	}
 }
 
-.welcomepage_box{
+#welcomepage_box{
 	width: 100%;
 	overflow: hidden;
-    min-height: 532px;
 	padding: 10px;
-	border: 1px solid #ddd;
 	background-color: #fff;
-	margin: 35px 0px 35px 0px;
+	margin: -150px 0px 35px 0px;
 }
 
 .checkbox-inline{

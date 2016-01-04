@@ -1,23 +1,19 @@
+
 <div class="nolign">
-  <div class="top"> <h1>Mkufunzi</h1>
-  </div>
   <div class="foto">
-  <div class="col-md-8 col-lg-8 col-sm-12 col-sm-12-pull">
-    <div class="welcomepage_box" style="padding: 20px;">
-      <p> W obecnych czasach spotykamy się z coraz większym spadkiem aktywności fizycznej wśród społeczeństwa. Można przy okazji zaobserwować inicjatywy polegające na budowaniu ogólnodostępnych siłowni w parkach. Po długotrwałych obserwacjach można zauważyć, ze powoduje to zwiększone zainteresowanie własnym zdrowiem czy forma fizyczna. Z tych obserwacji powstał pomysł na stworzenie zintegrowanego systemu trenera osobistego zapewniającego monitorowanie stanu zdrowia w trakcie ćwiczeń, śledzenie ciśnienia krwi czy tętna oraz nadzorowanie wykonywanych zadań zapamiętując jak najwięcej informacji do późniejszego użytku. Trener ma być de facto połączeniem funkcjonalności trzech produktów dostepnych na rynku: urządzeń/aplikacji monitorujących wykonywanie ćwiczeń (ilość przysiadów/brzuszków/krokow, przebyta trasa itp.), elektronicznej książeczki zdrowia oraz monitoringu w siłowni, pozwalającego trenerowi stwierdzić, jak jego podopieczny sobie radzi i jak w danej chwili się czuje.
-        Nazwa wywodzi się ona z języka Suahili i oznacza trenera. Język Suahili jest językiem kontaktowym dla terenów środkowej i wschodniej Afryki (czyli takim, który nie jest oficjalnym językiem żadnego z Państw, lecz jest użytkowany jako swego rodzaju język uniwersalny w podróżach po terenach o dużej różnorodności językowej).</p>
+    <div class="foto_sub">
+      Mkufunzi
     </div>
   </div>
-  <div class="col-md-4 col-lg-4 col-sm-12 col-sm-12-push">
-    <div class="welcomepage_box">
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
+  <div class="col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8 col-sm-offset-1 col-sm-10 col-xs-12 ">
+    <div class="well"id="welcomepage_box">
+          <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist" style="display:none">
         <li role="presentation" class="active"><a href="#zaloguj_sie" aria-controls="home" role="tab" data-toggle="tab">Zaloguj się</a></li>
         <li role="presentation"><a href="#zarejestruj_sie" aria-controls="profile" role="tab" data-toggle="tab">Zarejestruj się</a></li>
       </ul>
-
       <!-- Tab panes -->
-      <div class="tab-content">
+      <div class="tab-content" style="width: 75%; margin: 0 auto;" >
         <div role="tabpanel" class="tab-pane fade in active" id="zaloguj_sie"><%= render 'sessions/new' %></div>
         <div role="tabpanel" class="tab-pane fade" id="zarejestruj_sie"><%= render 'users/new' %></div>
       </div> 
@@ -27,3 +23,11 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+function activaTab(tabID){
+    $('.nav-tabs a[href="#' + tabID + '"]').tab('show');
+};
+if (window.location.href.indexOf("signup") > -1 ) {activaTab('zarejestruj_sie');};
+
+</script>

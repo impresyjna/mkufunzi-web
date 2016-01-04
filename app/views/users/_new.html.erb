@@ -1,6 +1,8 @@
-<h1>Zarejestruj się</h1>
-
-
+<h1 style="text-align: center">Zarejestruj się</h1>
+<br>
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 <%= form_for(:user, url: signup_path, method: "create") do |f| %>
     <%= render 'shared/error_messages' %>
 
@@ -23,4 +25,5 @@
     <%= f.text_field :surname , class: 'form-control'%>
 <br>
     <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <a href="#zaloguj_sie" class="btn btn-default" role="tab" data-toggle="tab">Zaloguj się</a></p>
 <% end %>

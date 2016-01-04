@@ -6,11 +6,7 @@
         </div>
         <ul class="nav" id="side-menu">
             <% if @current_user.admin == true %>
-            <li>
-                <%= link_to inactive_trainers_path do %>
-                    <i class="fa fa-users fa-fw"></i> Aktywuj trenerów
-                <% end %>
-            </li>
+
             <% end %>
             <!-- Protege user menu -->
             <% if !Protege.find_by(user_id: current_user.id.to_i).nil? %>
@@ -63,9 +59,6 @@
                 <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
             </li>
             <% elsif !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
-             <li>
-                <a href="/my_proteges"><i class="fa fa-fw fa-users"></i> Moi podopieczni</a>
-            </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

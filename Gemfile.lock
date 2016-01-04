@@ -44,6 +44,8 @@ GEM
     bcrypt (3.1.7-x64-mingw32)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-material-design (0.2.2)
+      bootstrap-sass (~> 3.0)
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
     bootstrap_sb_admin_base_v2 (0.1.1)
@@ -227,6 +229,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   bcrypt
+  bootstrap-material-design (~> 0.2.2)
   bootstrap-sass (= 3.2.0.0)
   bootstrap_sb_admin_base_v2
   byebug
