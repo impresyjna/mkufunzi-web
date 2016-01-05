@@ -3,6 +3,8 @@ class MeasureTypesController < ApplicationController
 
   def show
   	@measureType = MeasureType.all
+    @measureTypeNew = MeasureType.new
+
   end
 
   def new

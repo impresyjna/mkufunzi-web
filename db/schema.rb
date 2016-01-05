@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103231849) do
+ActiveRecord::Schema.define(version: 20160104195228) do
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -46,6 +46,39 @@ ActiveRecord::Schema.define(version: 20160103231849) do
 
   add_index "measurements", ["card_id"], name: "index_measurements_on_card_id", using: :btree
   add_index "measurements", ["measure_type_id"], name: "index_measurements_on_measure_type_id", using: :btree
+
+  create_table "medicine_times", force: :cascade do |t|
+    t.datetime "medicine_time"
+    t.boolean  "remind",        limit: 1
+    t.datetime "remind_when"
+    t.integer  "medicine_id",   limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "medicine_times", ["medicine_id"], name: "index_medicine_times_on_medicine_id", using: :btree
+
+  create_table "medicines", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.text     "dose",       limit: 65535
+    t.text     "dose_unit",  limit: 65535
+    t.integer  "protege_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "medicines", ["protege_id"], name: "index_medicines_on_protege_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_send_id",    limit: 4
+    t.integer  "user_receive_id", limit: 4
+    t.text     "content",         limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "messages", ["user_receive_id"], name: "index_messages_on_user_receive_id", using: :btree
+  add_index "messages", ["user_send_id"], name: "index_messages_on_user_send_id", using: :btree
 
   create_table "proteges", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -87,6 +120,8 @@ ActiveRecord::Schema.define(version: 20160103231849) do
   add_foreign_key "cards", "proteges"
   add_foreign_key "measurements", "cards"
   add_foreign_key "measurements", "measure_types"
+  add_foreign_key "medicine_times", "medicines"
+  add_foreign_key "medicines", "proteges"
   add_foreign_key "proteges", "trainers"
   add_foreign_key "proteges", "users"
   add_foreign_key "trainers", "users"

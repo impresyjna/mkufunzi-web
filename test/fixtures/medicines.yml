@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  dose: MyText
+  dose_unit: MyText
+  protege_id: 
+
+two:
+  name: MyText
+  dose: MyText
+  dose_unit: MyText
+  protege_id: 

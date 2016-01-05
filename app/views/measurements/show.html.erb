@@ -9,7 +9,7 @@
                 <% @measureType.each do |data| %>     
                  <%= link_to measurement_path(id: data.id), class: "list-group-item" do%>
                     <%= data.name %>
-                    <span class="pull-right text-muted small"><em><%= Measurement.where("card_id = ? AND measure_type_id = ?", User.find(session[:user_id]).proteges.find_by(user_id: session[:user_id]).card.id.to_i, data.id).count %></em>
+                    <span class="pull-right text-muted small"><em><%= Measurement.where("card_id = ? AND measure_type_id = ?", User.find(session[:user_id]).protege.card.id.to_i, data.id).count %></em>
                     </span>
                 <% end %>
                 <% end %> 
@@ -68,7 +68,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
                   <%= f.submit "Dodaj pomiar do kartoteki", class: "btn btn-primary" %>
                 </div>
               </div>
@@ -84,16 +84,16 @@
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
         <div class="panel-heading">
-            <%= @measureTypeInfo.name %>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_week)">Tydzien</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_month)">Miesiac</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_quarter)">Kwartal</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_year)">Rok</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d)">Wszystko</button>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
           <div class="text-center">
-            <button type="button" class="btn btn-link" onclick="update(d_last_week)">Tydzien</button>
-            <button type="button" class="btn btn-link" onclick="update(d_last_month)">Miesiac</button>
-            <button type="button" class="btn btn-link" onclick="update(d_last_quarter)">Kwartal</button>
-            <button type="button" class="btn btn-link" onclick="update(d_last_year)">Rok</button>
-            <button type="button" class="btn btn-link" onclick="update(d)">Wszystko</button>
+
           </div>
           <div id="myfirstchart"></div> 
         </div>

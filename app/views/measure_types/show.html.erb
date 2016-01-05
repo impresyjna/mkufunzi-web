@@ -8,16 +8,21 @@
         <div class="list-group">
             <% @measureType.each do |data| %>      
             <a href="#" class="list-group-item">
-                <%= data.name %>
-                <span class="pull-right text-muted small"><em> <%= data.id %></em>
+                 <%= data.id %> <%= data.name %>
                 </span>
             </a>
             <% end %> 
         </div>
         <!-- /.list-group -->
-        <%= link_to new_measure_type_path , class: "btn btn-default btn-block" do%> 
-            Dodaj 
-        <%end%>
+        <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#myModal">
+            Dodaj opcje pomiaru do kartoteki
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <%= render 'measure_types/new' %>
+            </div>
+          </div>
     </div>
     <!-- /.panel-body -->
 </div>

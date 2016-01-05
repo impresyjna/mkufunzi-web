@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+
+  get 'my_medicines' => 'medicines#show'
+  post 'my_medicines' => 'medicines#new'
+  post 'new_medicine_times' => 'medicine_times#create'
+
   get 'protege/show'
 
   get 'protege/create'
@@ -46,5 +51,6 @@ Rails.application.routes.draw do
   resources :proteges
   resources :static_pages
   resources :trainers
+  resources :medicines
   
 end

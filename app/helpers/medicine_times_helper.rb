@@ -1,0 +1,2 @@
+module MedicineTimesHelper
+end

@@ -1,0 +1,32 @@
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <%= form_for data, :url => url_for(:controller => 'medicines', :action => 'new') do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <br>
+          <%= f.label :nazwa %>
+          <%= f.text_field :name, class: 'form-control' %>
+
+          <%= f.label :dawa %>
+          <%= f.text_field :dose, class: 'form-control' %>
+
+          <%= f.label :jednostka %>
+          <%= f.text_field :dose_unit, class: 'form-control' %>
+
+          <%= f.text_field :protege_id, class: 'hidden', value: protege_id%>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Dodaj lek", class: "btn btn-primary" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+        </div>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>    

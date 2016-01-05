@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medicine_time: MyString
+  datetime: MyString
+  remind: false
+  remind_when: 2016-01-04 19:13:05
+  medicine_id: 
+
+two:
+  medicine_time: MyString
+  datetime: MyString
+  remind: false
+  remind_when: 2016-01-04 19:13:05
+  medicine_id: 

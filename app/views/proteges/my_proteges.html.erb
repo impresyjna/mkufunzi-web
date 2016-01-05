@@ -1,7 +1,7 @@
 <div class="col-md-12 col-lg-12" >
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h1> Moi podopieczni </h1>
+            Moi podopieczni
         </div>
         <!-- /.panel-heading -->
        	<div class="panel-body">
@@ -24,10 +24,10 @@
                           <td><%= data.user.surname %> </td>
                           <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                           <td>
-                             <%= link_to "wiecej", my_protege_card_path(:id => data.user.id), class: 'btn btn-outline btn-info'%>  
+                             <%= link_to "wiecej", my_protege_card_path(:id => data.user.id), class: 'btn btn-raised btn-info'%>  
                            </td>
                           <td>
-                            <%= link_to "usuń", erase_trainer_from_protege_path(:id => data.id), method: :post, class: 'btn btn-outline btn-danger', data: {confirm: "Czy jesteś tego pewien?"}  %>                            
+                            <%= link_to "usuń", erase_trainer_from_protege_path(:id => data.id), method: :post, class: 'btn btn-danger', data: {confirm: "Czy jesteś tego pewien?"}  %>                            
                           </td>
                       </tr>
                       <% end %>

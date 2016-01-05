@@ -162,29 +162,55 @@ $mkufunzi_blue: #2e3f50;
 $mkufunzi_green: #00b494;
 $mkufunzi_gray: #bdbdbe;
 
-body {background-color: 000 !important;}
+$dark_primary_kolor: #689f39;
+$primary_kolor: #8cc24a;
+$light_primary_kolor: #ddedc8;
+$accent_kolor: #009788;
+
+$primary_text: #222222;
+$secondary_text: #737373;
+
+body {background-color: $primary_kolor !important;}
 
 //ustawienia header i leftmenu
+@media (min-width: 768px){
+	.sidebar {
+	 margin-top: 0px !important;
+	}
+	#logo{
+		margin-left: 250px !important;
+	}
+}
 
 .navbar-default {
-  background-color: $mkufunzi_blue !important;
-  border-color: $mkufunzi_blue !important;
+  background-color: $primary_kolor !important;
+  border-color: $primary_kolor !important;
+}
+
+.nav > li > a {
+	padding: 16px 15px !important;
 }
 
 .sidebar ul li {
-  border-bottom: 1px solid $mkufunzi_blue !important;
+  border-bottom: 1px solid $primary_kolor !important;
   a{
-  	color: $mkufunzi_gray;
+  	color: #fff;
+  }
+  a:hover, a.active{
+  	background-color: $accent_kolor !important;
   }
 }
+
+
 
 #logo {
 	font-family: 'Herculanum';
 	font-size: 25px;
-	color: $mkufunzi_green;
+	color: $accent_kolor;
 }
 
 #page-wrapper{
+	background-color: #eee !important;
 	padding-top: 20px !important;
 }
 
@@ -192,7 +218,7 @@ body {background-color: 000 !important;}
 	#personal_info{
 		height: 110px;
 		width: 100%;
-		background-color: $mkufunzi_gray;
+		background-color: $dark_primary_kolor;
 	}
 
 	#circle-photo-big{
@@ -256,7 +282,13 @@ body {background-color: 000 !important;}
 
 //sekcja dotyczaca nologin
 
-.nolign{
+div.nologin{
+	min-height: 100vh;
+	background-color: #eee !important;
+	overflow: hidden;
+}
+
+.nologin{
 	width: 100%;
 
 
@@ -292,3 +324,8 @@ body {background-color: 000 !important;}
 }
 
 //koniec sekcji dotyczaca nologin
+
+.list-group .list-group-item {
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}

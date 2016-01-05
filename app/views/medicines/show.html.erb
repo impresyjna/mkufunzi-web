@@ -1,0 +1,93 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Moje leki
+    </div>
+    <!-- /.panel-heading -->
+   	<div class="panel-body">
+      	<div class="table-responsive">
+          <% if @my_medicines.empty? %>
+            Brak leków
+          <% else %>
+          	<table id="card" class="table table-hover">
+              	<thead>
+                  	<tr>
+                      	<th>Nazwa</th>
+                      	<th>Dawka</th>
+                      	<th>Jednostka</th>
+             			<th> Dozowanie</th>
+             			<th> wiecej </th>
+                  	</tr>
+              	</thead>
+              	<tbody>
+                  <% @my_medicines.each do |data| %>
+                 
+                  <tr>
+                      <td><%= data.name %></td>
+                      <td><%= data.dose %> </td>
+                      <td><%= data.dose_unit %> </td>
+                      <td><%= data.medicine_times.count %>
+                      	<%= link_to "dodaj",'#', "data-toggle" => "modal", 'data-target' => '#MedicineTime'+data.id.to_s %>
+						<%= render 'medicine_times/new', medicine_time: @medicine_time, medicine: data %>
+
+                      	<% if data.medicine_times.count > 0 %>
+	                      	<%= link_to "wiecej",'#c2'+data.id.to_s, "data-toggle" => "collapse" %>
+	                      		<div id="c2<%= data.id.to_s %>" class="collapse">
+	    							<% data.medicine_times.each do |data2| %>
+            							<%= data2.medicine_time %>
+            						<% end %>
+	 		 					</div> 
+	 		 			<% end %>
+ 		 				</td>
+
+                      <td>
+
+					</tr>
+
+                  
+                  <% end %>
+              	</tbody>
+          	</table>
+            <% end %>
+            <%= link_to '#', "data-toggle" => "modal", 'data-target' => '#myModal' do %>
+            	<button class="btn btn-default btn-lg btn-block btn-raised">Dodaj</button>
+            <% end %>
+			<%= render 'medicines/new', data: @medicine, protege_id: current_user.protege.id %>
+      	</div>
+  	</div>
+</div>
+
+<script type="text/javascript">
+$('#card').DataTable( {
+    "pagingType": "full_numbers",
+    "order": [[ 1, "desc" ]],
+    "dom": 'lfrt<"bottom"i<"clear">p>',
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+    }
+} );
+</script>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-fw fa-archive"></i> Moje leki
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="list-group">
+            <% @my_medicines.each do |data| %>      
+            <a href="#c<%= data.id.to_s %>" class="list-group-item" data-toggle="collapse">
+                 <%= data.id %> <%= data.name %> <%= data.dose %> <%= data.dose_unit %>  <%= data.medicine_times.count %>
+                </span>
+            </a>
+            <div id="c<%= data.id.to_s %>" class="collapse">
+    			Lorem ipsum
+ 		 	</div>
+            <% end %> 
+        </div>
+        <!-- /.list-group -->
+    </div>
+    <!-- /.panel-body -->
+</div>
+
+

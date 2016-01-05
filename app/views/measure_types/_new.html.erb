@@ -1,0 +1,20 @@
+<%= form_for(@measureTypeNew) do |f| %>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Dodaj opcje pomiary do kartoteki</h4>
+        </div>
+        <div class="modal-body" style="overflow: hidden"><br>
+            <%= f.label :nazwa %>
+            <%= f.text_field :name, class: 'form-control' %>
+
+            <%= f.label :jednostka %>
+            <%= f.text_field :unit, class: 'form-control' %>
+
+        </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
+            <%= f.submit "Dodaj do kartoteki", class: "btn btn-primary" %>
+        </div>
+    </div>    
+<% end %>

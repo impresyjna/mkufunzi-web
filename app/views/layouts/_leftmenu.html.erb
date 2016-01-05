@@ -6,30 +6,27 @@
         </div>
         <ul class="nav" id="side-menu">
             <% if @current_user.admin == true %>
-
-            <% end %>
-            <!-- Protege user menu -->
-            <% if !Protege.find_by(user_id: current_user.id.to_i).nil? %>
-            <li>
-                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Treningi</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+             <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Panel Admina<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Flot Charts</a>
+                        <%= link_to inactive_trainers_path do %> 
+                        Nieatywni trenerzy 
+                        <% end %>
                     </li>
                     <li>
-                        <a href="#">Morris.js Charts</a>
+                        <%= link_to measure_type_path do %> 
+                            Rodzaje pomiarów
+                        <% end %>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <% end %>
+            <!-- Protege user menu -->
+            <% if !Protege.find_by(user_id: current_user.id.to_i).nil? %>
             <li>
-                <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                <%= link_to my_medicines_path do%><i class="fa fa-medkit fa-fw"></i> Moje leki <% end %>
             </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-archive"></i> Kartoteka<span class="fa arrow"></span></a>
@@ -59,6 +56,11 @@
                 <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
             </li>
             <% elsif !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
+            <li>
+                <%= link_to my_proteges_path do %> 
+                    Moi podopieczni 
+                <% end %>
+            </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
