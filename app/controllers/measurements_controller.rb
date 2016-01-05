@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measures_mobile]
+	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measurements_mobile]
 	before_action :trainer_only,   only: [:my_protege_card]
 
 
