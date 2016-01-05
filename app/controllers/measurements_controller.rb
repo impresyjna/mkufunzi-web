@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-	before_action :declared_user,   only: [:show, :new, :create]
+	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measures_mobile]
 	before_action :trainer_only,   only: [:my_protege_card]
 
 
@@ -48,6 +48,15 @@ class MeasurementsController < ApplicationController
 	  	else
 	  		render 'new'
 	  	end
+	end
+
+	def get_measurements_mobile
+		if !params[:card_id].nil? and !params[:measure_type_id].nil?
+			@measurements = Measurement.where("card_id = ? and measure_type_id = ?", params[:card_id], params[:measure_type_id])
+			render json: @measurements
+		else
+			render json: Measurement.all
+		end
 	end
 
   	private

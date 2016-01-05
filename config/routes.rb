@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   post 'register_mobile' => 'users#register_mobile'
   get 'measure_types_index' => 'measure_types#index_mobile'
-  
+  get 'get_measurements_mobile' => 'measurements#get_measurements_mobile'
 
   resources :users
   resources :measurements
