@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measurements_mobile]
+	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measurements_mobile, :post_measurement_mobile]
 	before_action :trainer_only,   only: [:my_protege_card]
 
 
@@ -59,6 +59,19 @@ class MeasurementsController < ApplicationController
 		end
 	end
 
+	def post_measurement_mobile
+		if !params[:value].nil? and !params[:card_id].nil? and !params[:measure_type_id].nil?
+			@measurement = Measurement.new(measurement_mobile)
+			if @measurement.save
+				render json: {status: "success" }
+			else
+				render json: {status: "failure" }
+			end
+		else
+			render json: {status: "failure" }
+		end
+	end
+
   	private
 
     def trainer_only
@@ -88,6 +101,10 @@ class MeasurementsController < ApplicationController
 
   	def measurement_params
   		params.require(:measurement).permit(:value,:measure_type_id)
-  	end
+		end
+
+		def measurement_mobile
+			params.permit(:value, :card_id, :measure_type_id)
+		end
 
 end
