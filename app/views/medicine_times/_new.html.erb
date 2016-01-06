@@ -9,34 +9,34 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         	 <h4 class="modal-title" id="myModalLabel">Dodaj dozowanie do leku <%= medicine.name %></h4>
-        
         </div>
         <div class="modal-body">
           <br>
           
           <%= f.label :medicine_time %>
           <%= f.date_field :medicine_time, class: 'form-control' %>
-          <br>
-    <div class="checkbox">
-    <%= f.label :remember_me do %>
-      <%= f.check_box :remind %>
-      <span>Pamiętaj mnie na tym komputerze</span>
-    <% end %>
-  </div>
+          
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :remind %> Ustaw przypomnienie
+            </label>
+          </div>
 
-			  <br><br>
+
           <%= f.label :remind_when %>
           <%= f.date_field :remind_when , class: 'form-control' %>
-
           <%= f.text_field :medicine_id, class: 'hidden', value: medicine.id %>
+
+          
         </div>
         <div class="modal-footer">
           <%= f.submit "Dodaj czas", class: "btn btn-primary" %>
           <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
               </fieldset>
-<% end %>
+      <% end %>
       </div>
       
     </div>
   </div>
+

@@ -15,7 +15,6 @@
                       	<th>Dawka</th>
                       	<th>Jednostka</th>
              			<th> Dozowanie</th>
-             			<th> wiecej </th>
                   	</tr>
               	</thead>
               	<tbody>
@@ -27,7 +26,6 @@
                       <td><%= data.dose_unit %> </td>
                       <td><%= data.medicine_times.count %>
                       	<%= link_to "dodaj",'#', "data-toggle" => "modal", 'data-target' => '#MedicineTime'+data.id.to_s %>
-						<%= render 'medicine_times/new', medicine_time: @medicine_time, medicine: data %>
 
                       	<% if data.medicine_times.count > 0 %>
 	                      	<%= link_to "wiecej",'#c2'+data.id.to_s, "data-toggle" => "collapse" %>
@@ -38,18 +36,13 @@
 	 		 					</div> 
 	 		 			<% end %>
  		 				</td>
-
-                      <td>
-
-					</tr>
-
-                  
+            <%= render 'medicine_times/new', medicine_time: @medicine_time, medicine: data %>
                   <% end %>
               	</tbody>
           	</table>
             <% end %>
             <%= link_to '#', "data-toggle" => "modal", 'data-target' => '#myModal' do %>
-            	<button class="btn btn-default btn-lg btn-block btn-raised">Dodaj</button>
+            	<button class="btn btn-default btn-block btn-raised">Dodaj</button>
             <% end %>
 			<%= render 'medicines/new', data: @medicine, protege_id: current_user.protege.id %>
       	</div>
