@@ -12,7 +12,7 @@ class MedicinesController < ApplicationController
   def show
   	@my_medicines = User.find(current_user.id).protege.medicines
   	@medicine = Medicine.new
-  	  	@medicine_time = MedicineTime.new
+  	@medicine_time = MedicineTime.new
 
   end
 

@@ -1,5 +1,5 @@
 class TrainersController < ApplicationController
-	before_filter :trainer_only,  :except => [:create, :show_inactive_trainer, :activate_trainer]
+	before_filter :trainer_only,  :except => [:create, :show_trainer, :activate_trainer]
 	before_action :admin_only,   only: [:show_inactive_trainer, :activate_trainer]
 
 	def create
@@ -10,8 +10,9 @@ class TrainersController < ApplicationController
 		redirect_to root_path
 	end
 
-	def show_inactive_trainer
+	def show_trainer
 		@inactive_trainer = Trainer.where(active: false).joins(:user)
+		@active_trainer = Trainer.where(active: true).joins(:user)
 	end
 
 	def activate_trainer
@@ -19,7 +20,7 @@ class TrainersController < ApplicationController
 		@trainer.active = 1
 		if @trainer.save
 			flash[:success] = @trainer.user.name.to_s + " " + @trainer.user.surname.to_s + " został aktywowany"
-			redirect_to inactive_trainers_path
+			redirect_to trainers_path
 		else
 			flash[:danger] = "Nie udalo sie aktywowac trenera"
 		end

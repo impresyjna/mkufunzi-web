@@ -1,0 +1,94 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Nieaktywni trenerzy 
+    </div>
+    <!-- /.panel-heading -->
+   	<div class="panel-body">
+      	<div class="table-responsive">
+          <% if @inactive_trainer.empty? %>
+            Brak nieaktywnych trenerów
+          <% else %>
+          	<table id="inactive_trainer" class="table table-hover">
+              	<thead>
+                  	<tr>
+                      	<th>Imie</th>
+                      	<th>Nazwisko</th>
+                      	<th>Data</th>
+                        <th>Aktywuj</th>
+                  	</tr>
+              	</thead>
+              	<tbody>
+                  <% @inactive_trainer.each do |data| %>
+                  <tr>
+                      <td><%= data.user.name %></td>
+                      <td><%= data.user.surname %> </td>
+                      <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
+                      <td> 
+                        <%= link_to "aktywuj", activate_trainer_path(:id => data.id), method: :post, class: 'btn btn-outline btn-success', data: {confirm: "Czy napewno chcesz aktywować tego użytkownika?"}  %>
+                      </td>
+                  </tr>
+                  <% end %>
+              	</tbody>
+          	</table>
+            <% end %>
+      	</div>
+  	</div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Aktywni trenerzy 
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="table-responsive">
+          <% if @active_trainer.empty? %>
+            Brak aktywnych trenerów
+          <% else %>
+            <table id="active_trainer" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Data</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% @active_trainer.each do |data| %>
+                  <tr>
+                      <td><%= data.user.name %></td>
+                      <td><%= data.user.surname %> </td>
+                      <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
+                      <td> 
+                        <%= link_to "usuń", activate_trainer_path(:id => data.id), method: :post, class: 'btn btn-outline btn-danger', data: {confirm: "Czy napewno chcesz aktywować tego użytkownika?"}  %>
+                      </td>
+                  </tr>
+                  <% end %>
+                </tbody>
+            </table>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$('#inactive_trainer').DataTable( {
+    "pagingType": "full_numbers",
+    "order": [[ 1, "desc" ]],
+    "dom": 'lfrt<"bottom"i<"clear">p>',
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+    }
+} );
+
+$('#active_trainer').DataTable( {
+    "pagingType": "full_numbers",
+    "order": [[ 1, "desc" ]],
+    "dom": 'lfrt<"bottom"i<"clear">p>',
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+    }
+} );
+</script>
+

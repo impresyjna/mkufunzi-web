@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
 
 
-  get 'my_medicines' => 'medicines#show'
-  post 'my_medicines' => 'medicines#new'
-  post 'new_medicine_times' => 'medicine_times#create'
+
 
   get 'protege/show'
-
   get 'protege/create'
 
   root             'static_pages#home'
@@ -36,13 +33,17 @@ Rails.application.routes.draw do
   post 'my_proteges' => 'proteges#add_trainer_to_protege'
   post 'erase_trainer_from_protege' => 'proteges#erase_trainer_from_protege'
 
-  get 'inactive_trainers' => 'trainers#show_inactive_trainer'
+  get 'trainers' => 'trainers#show_trainer'
   post 'activate_trainer' => 'trainers#activate_trainer'
 
   post 'register_mobile' => 'users#register_mobile'
   get 'measure_types_index' => 'measure_types#index_mobile'
   get 'get_measurements_mobile' => 'measurements#get_measurements_mobile'
   post 'post_measurement_mobile' => 'measurements#post_measurement_mobile'
+
+  get 'my_medicines' => 'medicines#show'
+  post 'my_medicines' => 'medicines#new'
+  post 'new_medicine_times' => 'medicine_times#create'
   
   resources :users
   resources :measurements
