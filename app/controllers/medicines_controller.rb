@@ -19,6 +19,6 @@ class MedicinesController < ApplicationController
   private
 
     def medicine_params
-  		params.require(:medicine_time).permit(:name, :dose, :dose_unit, :protege_id)
+  		params.require(:medicine).permit(:name, :dose, :dose_unit, :protege_id)
   	end
 end
