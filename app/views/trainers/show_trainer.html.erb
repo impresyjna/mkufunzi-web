@@ -61,7 +61,7 @@
                       <td><%= data.user.surname %> </td>
                       <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                       <td> 
-                        <%= link_to "usuń", activate_trainer_path(:id => data.id), method: :post, class: 'btn btn-outline btn-danger', data: {confirm: "Czy napewno chcesz aktywować tego użytkownika?"}  %>
+                        <%= link_to "usuń", disactivate_trainer_path(:id => data.id), method: :post, class: 'btn btn-outline btn-danger', data: {confirm: "Czy napewno chcesz dezaktywować tego użytkownika?"}  %>
                       </td>
                   </tr>
                   <% end %>

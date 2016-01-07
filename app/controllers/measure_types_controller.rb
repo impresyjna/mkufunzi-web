@@ -21,6 +21,12 @@ class MeasureTypesController < ApplicationController
   	end
   end
 
+  def destroy
+    MeasureType.find(params[:id]).destroy
+    flash[:success] = "MeasureType deleted"
+    redirect_to measure_type_path
+  end
+
   def index_mobile
     @measure_types = MeasureType.all
     render json: @measure_types

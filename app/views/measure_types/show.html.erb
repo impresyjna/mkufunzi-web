@@ -9,6 +9,10 @@
             <% @measureType.each do |data| %>      
             <div class="list-group-item">
                  <%= data.id %> <%= data.name %>
+                <span class="pull-right">
+                    <%= link_to measure_type_path(id: data.id), method: :delete, data: { confirm: "Czy jesteś tego pewien ?" } do %>
+                        <button class="btn btn-danger btn-raised btn-xs" style="margin-top: 0px; margin-bottom: 0px">Usuń</button>
+                    <% end %>
                 </span>
             </div>
             <% end %> 

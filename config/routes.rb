@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'login_mobile' => 'users#login_mobile'
   get 'new_measure_type' => 'measure_types#new'
   get 'measure_type' => 'measure_types#show'
+  delete 'measure_type' => 'measure_types#destroy'
 
   get 'my_proteges' => 'proteges#my_proteges'
   post 'my_proteges' => 'proteges#add_trainer_to_protege'
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
 
   get 'trainers' => 'trainers#show_trainer'
   post 'activate_trainer' => 'trainers#activate_trainer'
+  post 'disactivate_trainer' => 'trainers#disactivate_trainer'
 
   post 'register_mobile' => 'users#register_mobile'
   get 'measure_types_index' => 'measure_types#index_mobile'

@@ -1,5 +1,5 @@
 class TrainersController < ApplicationController
-	before_filter :trainer_only,  :except => [:create, :show_trainer, :activate_trainer]
+	before_filter :trainer_only,  :except => [:create, :show_trainer, :activate_trainer, :disactivate_trainer]
 	before_action :admin_only,   only: [:show_inactive_trainer, :activate_trainer]
 
 	def create
@@ -23,6 +23,17 @@ class TrainersController < ApplicationController
 			redirect_to trainers_path
 		else
 			flash[:danger] = "Nie udalo sie aktywowac trenera"
+		end
+	end
+
+	def disactivate_trainer
+		@trainer = Trainer.find_by(id: params[:id])
+		@trainer.active = 0
+		if @trainer.save
+			flash[:success] = @trainer.user.name.to_s + " " + @trainer.user.surname.to_s + " został dezaktywowany"
+			redirect_to trainers_path
+		else
+			flash[:danger] = "Nie udalo sie dezaktywowac trenera"
 		end
 	end
 

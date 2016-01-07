@@ -1,6 +1,4 @@
 class MeasureType < ActiveRecord::Base
-	belongs_to :measurement
-	has_one :measure_type
-
+	has_many :measurement, :dependent => :delete_all
 	validates :name, presence: true, uniqueness: { case_sensitive: false }
 end
