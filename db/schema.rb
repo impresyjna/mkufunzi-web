@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104195228) do
+ActiveRecord::Schema.define(version: 20160108161441) do
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(version: 20160104195228) do
   add_index "cards", ["protege_id"], name: "index_cards_on_protege_id", using: :btree
 
   create_table "measure_types", force: :cascade do |t|
-    t.text     "name",       limit: 65535
-    t.text     "unit",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "name",        limit: 65535
+    t.text     "unit",        limit: 65535
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "extra_field", limit: 1,     default: false
   end
 
   create_table "measurements", force: :cascade do |t|
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160104195228) do
     t.integer  "card_id",         limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.float    "second_value",    limit: 24
   end
 
   add_index "measurements", ["card_id"], name: "index_measurements_on_card_id", using: :btree
