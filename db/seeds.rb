@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+MeasureType.create(name: "ciśnienie", unit: "mm Hg", extra_field: true)
+MeasureType.create(name: "puls", unit: "/min")
+MeasureType.create(name: "waga", unit: "kg")
