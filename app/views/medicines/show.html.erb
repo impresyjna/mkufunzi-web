@@ -14,7 +14,8 @@
                       	<th>Nazwa</th>
                       	<th>Dawka</th>
                       	<th>Jednostka</th>
-             			<th> Dozowanie</th>
+             			      <th> Dozowanie</th>
+                        <th> Usuń</th>
                   	</tr>
               	</thead>
               	<tbody>
@@ -30,12 +31,13 @@
                       	<% if data.medicine_times.count > 0 %>
 	                      	<%= link_to "wiecej",'#c2'+data.id.to_s, "data-toggle" => "collapse" %>
 	                      		<div id="c2<%= data.id.to_s %>" class="collapse">
-	    							<% data.medicine_times.each do |data2| %>
-            							<%= data2.medicine_time %>
+	    							        <% data.medicine_times.each do |data2| %>
+            							   <%= data2.medicine_time %><br>
             						<% end %>
 	 		 					</div> 
 	 		 			<% end %>
  		 				</td>
+            <td> <%= link_to "usun",my_medicines_path(id: data.id), method: :delete, data: { confirm: "Czy jesteś tego pewien ?" } %> </td>
             <%= render 'medicine_times/new', medicine_time: @medicine_time, medicine: data %>
                   <% end %>
               	</tbody>
@@ -59,28 +61,4 @@ $('#card').DataTable( {
     }
 } );
 </script>
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <i class="fa fa-fw fa-archive"></i> Moje leki
-    </div>
-    <!-- /.panel-heading -->
-    <div class="panel-body">
-        <div class="list-group">
-            <% @my_medicines.each do |data| %>      
-            <a href="#c<%= data.id.to_s %>" class="list-group-item" data-toggle="collapse">
-                 <%= data.id %> <%= data.name %> <%= data.dose %> <%= data.dose_unit %>  <%= data.medicine_times.count %>
-                </span>
-            </a>
-            <div id="c<%= data.id.to_s %>" class="collapse">
-    			Lorem ipsum
- 		 	</div>
-            <% end %> 
-        </div>
-        <!-- /.list-group -->
-    </div>
-    <!-- /.panel-body -->
-</div>
-
 

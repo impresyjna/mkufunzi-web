@@ -13,7 +13,12 @@ class MedicinesController < ApplicationController
   	@my_medicines = User.find(current_user.id).protege.medicines
   	@medicine = Medicine.new
   	@medicine_time = MedicineTime.new
+  end
 
+  def destroy
+    Medicine.find(params[:id]).destroy
+    flash[:success] = "Lek został usunięty"
+    redirect_to my_medicines_path
   end
 
   private

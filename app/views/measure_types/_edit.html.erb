@@ -1,0 +1,31 @@
+  <!-- Modal -->
+  <div class="modal fade" id="EditMeasureType<%=measureType.id%>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+    <%= form_for( measureType, :url => url_for(:controller => 'measure_types', :action => 'update')) do |f| %>
+        <fieldset>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title" id="myModalLabel">Edytuj rodzaj pomiarów</h4>
+        </div>
+        <div class="modal-body">
+          <br>
+            <%= f.label :nazwa %>
+            <%= f.text_field :name, class: 'form-control' %>
+
+            <%= f.label :jednostka %>
+            <%= f.text_field :unit, class: 'form-control' %> 
+            <%= f.text_field :id, class: 'hidden' %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Dodaj czas", class: "btn btn-primary" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+        </div>
+              </fieldset>
+      <% end %>
+      </div>
+      
+    </div>
+  </div>

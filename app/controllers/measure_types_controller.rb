@@ -4,7 +4,6 @@ class MeasureTypesController < ApplicationController
   def show
   	@measureType = MeasureType.all
     @measureTypeNew = MeasureType.new
-
   end
 
   def new
@@ -12,6 +11,7 @@ class MeasureTypesController < ApplicationController
   end
 
   def create
+    measuretype_params[:name][0] = measuretype_params[:name][0].capitalize
   	@measureType = MeasureType.new(measuretype_params)
   	if @measureType.save
   		flash[:success] = "Pomyślnie dodano do kartoteki"
@@ -19,6 +19,21 @@ class MeasureTypesController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+
+  def edit
+    @measureType = MeasureType.find(params[:id])
+  end
+
+  def update
+    @measureType = MeasureType.find(measuretype_params[:id])
+    if @measureType.update_attributes(measuretype_params)
+      flash[:success] = "Typ pomiaru został zmieniony"
+      redirect_to measure_type_path
+    else
+      flash[:danger] = "Cos poszło nie tak..."
+      redirect_to measure_type_path
+    end
   end
 
   def destroy
@@ -52,4 +67,8 @@ class MeasureTypesController < ApplicationController
   	def measuretype_params
   		params.require(:measure_type).permit(:name, :unit)
   	end
+
+    def measuretype_params
+      params.require(:measure_type).permit(:id, :name, :unit)
+    end
 end

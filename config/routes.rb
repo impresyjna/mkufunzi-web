@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-
   get 'protege/show'
   get 'protege/create'
 
@@ -28,7 +25,10 @@ Rails.application.routes.draw do
   get 'login_mobile' => 'users#login_mobile'
   get 'new_measure_type' => 'measure_types#new'
   get 'measure_type' => 'measure_types#show'
+  get 'edit_measure_type' => 'measure_types#edit'
+  patch 'edit_measure_type' => 'measure_types#update'
   delete 'measure_type' => 'measure_types#destroy'
+
 
   get 'my_proteges' => 'proteges#my_proteges'
   post 'my_proteges' => 'proteges#add_trainer_to_protege'
@@ -46,7 +46,8 @@ Rails.application.routes.draw do
   get 'my_medicines' => 'medicines#show'
   post 'my_medicines' => 'medicines#new'
   post 'new_medicine_times' => 'medicine_times#create'
-  
+  delete 'my_medicines' => 'medicines#destroy'
+
   resources :users
   resources :measurements
   resources :card_indices

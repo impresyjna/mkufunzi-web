@@ -166,12 +166,13 @@ $mkufunzi_gray: #bdbdbe;
 $dark_primary_kolor: #689f39;
 $primary_kolor: #8cc24a;
 $light_primary_kolor: #ddedc8;
-$accent_kolor: #009788;
+$accent_kolor: #009688;
+$dark_accent_kolor: #00796B;
 
 $primary_text: #222222;
 $secondary_text: #737373;
 
-body {background-color: $primary_kolor !important;}
+body {background-color: $accent_kolor !important;}
 
 //ustawienia header i leftmenu
 @media (min-width: 768px){
@@ -184,8 +185,8 @@ body {background-color: $primary_kolor !important;}
 }
 
 .navbar-default {
-  background-color: $primary_kolor !important;
-  border-color: $primary_kolor !important;
+  background-color: $accent_kolor !important;
+  border-color: $accent_kolor !important;
 }
 
 .nav > li > a {
@@ -193,12 +194,12 @@ body {background-color: $primary_kolor !important;}
 }
 
 .sidebar ul li {
-  border-bottom: 1px solid $primary_kolor !important;
+  border-bottom: 1px solid $accent_kolor !important;
   a{
   	color: #fff;
   }
   a:hover, a.active{
-  	background-color: $accent_kolor !important;
+  	background-color: $primary_kolor !important;
   }
 }
 
@@ -207,7 +208,7 @@ body {background-color: $primary_kolor !important;}
 #logo {
 	font-family: 'Herculanum';
 	font-size: 25px;
-	color: $accent_kolor;
+	color: $dark_primary_kolor;
 }
 
 #page-wrapper{
@@ -219,7 +220,7 @@ body {background-color: $primary_kolor !important;}
 	#personal_info{
 		height: 110px;
 		width: 100%;
-		background-color: $dark_primary_kolor;
+		background-color: $dark_accent_kolor;
 	}
 
 	#circle-photo-big{
@@ -227,13 +228,18 @@ body {background-color: $primary_kolor !important;}
 		width: 80px;
 		margin: 15px 15px 15px 15px;
 	}
+
+	#topbar{
+		background-color: white !important;
+		margin-bottom: 0;
+		box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+	}
 }
 
 @media screen and (max-width: 768px){
 	.navbar-top-links li {
 		float: left;
 	}
-
 
 	#personal_info{
 		height: 50px;
@@ -246,6 +252,12 @@ body {background-color: $primary_kolor !important;}
 		height: 20px;
 		width: 20px;
 		margin: 15px 15px;
+	}
+
+	#topbar{
+		background-color: $dark_accent_kolor !important;
+		margin-bottom: 0;
+		box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 	}
 }
 //koniec ustawien header i leftmenu
