@@ -17,6 +17,12 @@
 
             <%= f.label :jednostka %>
             <%= f.text_field :unit, class: 'form-control' %> 
+            <div class="checkbox">
+                <label>
+                    <%= f.check_box :extra_field %> Dodatkowe pole?
+                </label>
+            </div>
+            
             <%= f.text_field :id, class: 'hidden' %>
         </div>
         <div class="modal-footer">

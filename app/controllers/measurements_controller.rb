@@ -32,7 +32,7 @@ class MeasurementsController < ApplicationController
 		else	
 			@measureTypeInfo = @measureType.find(params[:id])
 			@card = Measurement.where("card_id = ? AND measure_type_id = ?", @ProtegeCard.id.to_i , params[:id])
-			@cardplot = Measurement.select("created_at, value").where("card_id = ? AND measure_type_id = ?", @ProtegeCard.id.to_i , params[:id])
+			@cardplot = Measurement.select("created_at, value, second_value").where("card_id = ? AND measure_type_id = ?", @ProtegeCard.id.to_i , params[:id])
 		end
 	end
 
@@ -100,7 +100,7 @@ class MeasurementsController < ApplicationController
     end
 
   	def measurement_params
-  		params.require(:measurement).permit(:value,:measure_type_id)
+  		params.require(:measurement).permit(:value,:measure_type_id,:second_value)
 		end
 
 		def measurement_mobile

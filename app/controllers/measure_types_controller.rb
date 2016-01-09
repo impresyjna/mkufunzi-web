@@ -38,7 +38,7 @@ class MeasureTypesController < ApplicationController
 
   def destroy
     MeasureType.find(params[:id]).destroy
-    flash[:success] = "MeasureType deleted"
+    flash[:success] = "MeasureType został usunięty "
     redirect_to measure_type_path
   end
 
@@ -65,10 +65,10 @@ class MeasureTypesController < ApplicationController
     end
 
   	def measuretype_params
-  		params.require(:measure_type).permit(:name, :unit)
+  		params.require(:measure_type).permit(:name, :unit, :extra_field)
   	end
 
     def measuretype_params
-      params.require(:measure_type).permit(:id, :name, :unit)
+      params.require(:measure_type).permit(:id, :name, :unit, :extra_field)
     end
 end

@@ -31,13 +31,21 @@
                   <thead>
                       <tr>
                           <th><%= @measureTypeInfo.name %></th>
+                          <% if @measureTypeInfo.extra_field == true %>
+                            <th> Druga wartość </th>
+                          <% end %>
                           <th>Data</th>
                       </tr>
                   </thead>
                   <tbody>
                       <% @card.each do |data| %>
                       <tr>
-                          <td><%= data.value %> <%= @measureTypeInfo.unit %> </td>
+                        <% if @measureTypeInfo.extra_field == true %>
+                            <td><%= data.value %>  </td>
+                            <td><%= data.second_value %> <%= @measureTypeInfo.unit %> </td>
+                          <% else %>
+                            <td><%= data.value %> <%= @measureTypeInfo.unit %> </td>
+                          <% end %>
                           <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                       </tr>
                       <% end %>
@@ -45,7 +53,7 @@
               </table>
           </div>
 
-          <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#myModal">
+          <button type="button" class="btn btn-default btn-raised btn-block" data-toggle="modal" data-target="#myModal">
             Dodaj pomiar do kartoteki
           </button>
           <!-- Modal -->
@@ -58,14 +66,30 @@
                   <h4 class="modal-title" id="myModalLabel">Dodaj pomiar <%= @measureTypeInfo.name %></h4>
                 </div>
                 <div class="modal-body" style="overflow: hidden">
-                  <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10"> 
+                  <% if @measureTypeInfo.extra_field == true %>
+                      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> 
+                          <%= f.label :pomiar %>
+                          <%= f.text_field :value,  class: 'form-control' %>
+                      </div>
+                      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> 
+                          <%= f.label :drugi_pomiar %>
+                          <%= f.text_field :second_value, class: 'form-control' %>
+                          <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="margin-top:30px;">
+                        <%= @measureTypeInfo.unit %>
+                      </div>                    
+                    <% else %>                  
+                    <div class="col-xs-10 col-sm-9 col-md-10 col-lg-10"> 
                       <%= f.label :pomiar %>
                       <%= f.text_field :value, class: 'form-control' %>
                       <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
+                      <%= f.text_field :second_value,  class: 'hidden' %>
                   </div>
                   <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2" style="margin-top:30px;">
                     <%= @measureTypeInfo.unit %>
-                  </div>
+                  </div>                     
+                 <% end %>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
@@ -109,28 +133,65 @@
     var d_last_quarter = new Array();
     var d_last_year = new Array();
 
-    <% @cardplot.each do |data| %>
-      <% if data.created_at > Date.today.last_week %>
-        d_last_week.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+    <% if @measureTypeInfo.extra_field == true %>
+
+      <% @cardplot.each do |data| %>
+        <% if data.created_at > Date.today.last_week %>
+          d_last_week.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" ,"second_value": "<%= data.second_value %>" });
+        <% end %>
+        <% if data.created_at > Date.today.last_month %>
+          d_last_month.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" ,"second_value": "<%= data.second_value %>"});
+        <% end %>
+        <% if data.created_at > Date.today.last_quarter %>
+          d_last_quarter.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" ,"second_value": "<%= data.second_value %>"});
+        <% end %>
+        <% if data.created_at > Date.today.last_year %>
+          d_last_year.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" ,"second_value": "<%= data.second_value %>"});
+        <% end %>
+        d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>","second_value": "<%= data.second_value %>" });
       <% end %>
-      <% if data.created_at > Date.today.last_month %>
-        d_last_month.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
-      <% end %>
-      <% if data.created_at > Date.today.last_quarter %>
-        d_last_quarter.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
-      <% end %>
-      <% if data.created_at > Date.today.last_year %>
-        d_last_year.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
-      <% end %>
-      d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
-    <% end %>
 
     var j = new Morris.Area({
       // ID of the element in which to draw the chart.
       element: 'myfirstchart',
       // Chart data records -- each entry in this array corresponds to a point on
       // the chart.
-      data: d_last_week,
+      data: d,
+      // The name of the data record attribute that contains x-values.
+      xkey: 'year',
+      ykeys: ['value','second_value'],
+      labels: ['value','second_value'],
+      parseTime: true,
+
+      // A list of names of data record attributes that contain y-values.
+      // Labels for the ykeys -- will be displayed when you hover over the
+      // chart.
+    });
+      
+      <% else %>
+
+       <% @cardplot.each do |data| %>
+        <% if data.created_at > Date.today.last_week %>
+          d_last_week.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>"});
+        <% end %>
+        <% if data.created_at > Date.today.last_month %>
+          d_last_month.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>"});
+        <% end %>
+        <% if data.created_at > Date.today.last_quarter %>
+          d_last_quarter.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>"});
+        <% end %>
+        <% if data.created_at > Date.today.last_year %>
+          d_last_year.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+        <% end %>
+        d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+      <% end %>
+
+    var j = new Morris.Area({
+      // ID of the element in which to draw the chart.
+      element: 'myfirstchart',
+      // Chart data records -- each entry in this array corresponds to a point on
+      // the chart.
+      data: d,
       // The name of the data record attribute that contains x-values.
       xkey: 'year',
       xLabels: 'week',
@@ -143,10 +204,11 @@
       labels: ['Value']
     });
 
+    <% end %>
+
     function update(d) {
       j.setData(d);
     }
-
 
     $('#card').DataTable( {
         "pagingType": "full_numbers",

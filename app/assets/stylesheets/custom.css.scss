@@ -216,26 +216,6 @@ body {background-color: $accent_kolor !important;}
 	padding-top: 20px !important;
 }
 
-@media screen and (min-width: 768px){
-	#personal_info{
-		height: 110px;
-		width: 100%;
-		background-color: $dark_accent_kolor;
-	}
-
-	#circle-photo-big{
-		height: 80px;
-		width: 80px;
-		margin: 15px 15px 15px 15px;
-	}
-
-	#topbar{
-		background-color: white !important;
-		margin-bottom: 0;
-		box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-	}
-}
-
 @media screen and (max-width: 768px){
 	.navbar-top-links li {
 		float: left;
@@ -260,6 +240,28 @@ body {background-color: $accent_kolor !important;}
 		box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 	}
 }
+
+@media screen and (min-width: 768px){
+	#personal_info{
+		height: 110px;
+		width: 100%;
+		background-color: $dark_accent_kolor;
+	}
+
+	#circle-photo-big{
+		height: 80px;
+		width: 80px;
+		margin: 15px 15px 15px 15px;
+	}
+
+	#topbar{
+		background-color: white !important;
+		margin-bottom: 0;
+		box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+	}
+}
+
+
 //koniec ustawien header i leftmenu
 
 //cards

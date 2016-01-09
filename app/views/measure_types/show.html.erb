@@ -8,8 +8,11 @@
         <div class="list-group">
             <% @measureType.each do |data| %>      
             <div class="list-group-item">
-                 <%= data.id %> <%= data.name %>
+                 <%= data.id %> <%= data.name %> Jednostka: <%= data.unit %> 
                 <span class="pull-right">
+                    <% if data.extra_field == true %>
+                        <button class="btn btn-warning btn-raised btn-xs" style="margin-top: 0px; margin-bottom: 0px">Extra field</button>
+                    <% end %>
                         <%= link_to "edytuj",'#', class: "btn btn-info btn-raised btn-xs", style: "margin-top: 0px; margin-bottom: 0px", "data-toggle" => "modal", 'data-target' => '#EditMeasureType'+data.id.to_s %>
 
                     <%= link_to measure_type_path(id: data.id), method: :delete, data: { confirm: "Czy jesteś tego pewien ?" } do %>
