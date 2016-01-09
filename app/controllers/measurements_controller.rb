@@ -104,7 +104,7 @@ class MeasurementsController < ApplicationController
 		end
 
 		def measurement_mobile
-			params.permit(:value, :card_id, :measure_type_id)
+			params.permit(:value, :card_id, :measure_type_id, :second_value)
 		end
 
 end
