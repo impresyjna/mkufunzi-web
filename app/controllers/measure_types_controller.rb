@@ -65,7 +65,7 @@ class MeasureTypesController < ApplicationController
     end
 
   	def measuretype_params
-  		params.require(:measure_type).permit(:name, :unit)
+  		params.require(:measure_type).permit(:name, :unit, :extra_field, :first_label, :second_label)
   	end
 
     def measuretype_params
