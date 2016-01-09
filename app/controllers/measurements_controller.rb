@@ -52,10 +52,10 @@ class MeasurementsController < ApplicationController
 
 	def get_measurements_mobile
 		if !params[:card_id].nil? and !params[:measure_type_id].nil?
-			@measurements = Measurement.where("card_id = ? and measure_type_id = ?", params[:card_id], params[:measure_type_id])
+			@measurements = Measurement.where("card_id = ? and measure_type_id = ?", params[:card_id], params[:measure_type_id]).order(created_at: :desc)
 			render json: @measurements
 		else
-			render json: Measurement.all
+			render json: Measurement.all.order(created_at: :desc)
 		end
 	end
 
