@@ -1,0 +1,24 @@
+<%= image_tag @user.photo.url(:small) %>
+
+<%= form_for @user, html: { multipart: true } do |f| %>
+  <%= render 'shared/error_messages' %>
+
+  <%= f.label :imie %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+ <%= f.label :nazwisko %>
+  <%= f.text_field :surname, class: 'form-control' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+<%= f.file_field :photo %>
+
+  <%= f.label :hasło %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.label :potwierdzenie_hasła, "Confirmation" %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+  <%= f.submit "Zapisz zmiany", class: "btn btn-primary" %>
+<% end %>

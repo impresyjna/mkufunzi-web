@@ -17,6 +17,7 @@ gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
 gem 'twitter-bootstrap-rails', '~> 3.2'
 gem 'bootstrap-material-design', '~> 0.2.2'
 gem 'bcrypt'
+gem "paperclip", "~> 4.3"
 gem 'active_model_serializers'
 
 group :development, :test do

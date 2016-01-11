@@ -203,9 +203,11 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><%= link_to profile_path(id:current_user) do %>
+                                <i class="fa fa-fw fa-user"></i> Profil użytkownika
+                             <% end %>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><%= link_to edit_profile_path(id:current_user) do %><i class="fa fa-gear fa-fw"></i> Ustawienia <% end %>
                         </li>
                         <li class="divider"></li>
                         <li>

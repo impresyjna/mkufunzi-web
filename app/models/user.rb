@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token
   before_save { email.downcase! }
 
+  has_attached_file :photo, styles: { small: "80x80>"}, default_url: "/images/:style/missing.png"
+
   validates :login, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -15,6 +17,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 },allow_nil: true
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
   # Returns the hash digest of the given string.
   def User.digest(string)

@@ -1,0 +1,38 @@
+<div class="col-md-9 col-sm-6">
+    <div class="chat-panel panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-comments fa-fw"></i>
+            Konwersacja
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <ul class="chat">
+            	<% @messages.each do |data| %>
+	            	<% if data.user_send_id.to_i == current_user.id.to_i %>
+	            		<%= render 'right_message', data: data  %>
+	                <% else %>
+	                	<%= render 'left_message', data: data, receive_user: User.find(receive_user_id)  %>
+	                <% end %>
+                <% end %>
+            </ul>
+        </div>
+        <!-- /.panel-body -->
+        <div class="panel-footer">
+            <div class="input-group">
+            	<%= form_for(:message, url: send_message_path, method: "create") do |f| %> 
+                <div class="col-xs-9 col-lg-10" style="padding: 0px;">  
+                    <%= f.text_field :content, class: 'form-control input-sm', placeholder: "Tutaj pisz..." %>
+                </div>
+                    <%= f.text_field :user_send_id, value: current_user.id, class: 'hidden' %>
+                    <%= f.text_field :user_receive_id, value: receive_user_id, class: 'hidden' %>
+                <div class="col-xs-3 col-lg-2" style="padding: 0px;"> 
+                    <span class="input-group-btn"> 	
+                        <%= f.submit "wyślij", class: "btn btn-warning btn-sm", id:"btn-chat" %>
+                    </span>
+                </div>
+                <% end %>
+            </div>
+        </div>
+        <!-- /.panel-footer -->
+    </div>
+</div>

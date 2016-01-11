@@ -1,0 +1,32 @@
+<div class="col-md-3 col-sm-6">
+    <div class="chat-panel panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-comments fa-fw"></i>
+            Moi podopieczni
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <ul class="chat">
+            	<% my_proteges.each do |data| %>
+                    <%= link_to messages_path(id: data.user_id) do %>
+                        <li class="left clearfix">
+                            <span class="chat-img pull-left">
+                                <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                            </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font"><%= data.user.name %> <%= data.user.surname %></strong>
+                                </div>
+                            </div>
+                        </li>
+                    <% end %>
+                <% end %>
+            </ul>
+        </div>
+        <!-- /.panel-body -->
+        <div class="panel-footer">
+
+        </div>
+        <!-- /.panel-footer -->
+    </div>
+</div>

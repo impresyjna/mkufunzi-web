@@ -1,6 +1,6 @@
 <% if params[:id].nil? %>
     <div class="panel panel-default">
-        <div class="panel-heading" style="background-color: #673AB7;color: #fff;">
+        <div class="panel-heading">
             <i class="fa fa-fw fa-archive"></i> Kartoteka
         </div>
         <!-- /.panel-heading -->
@@ -21,7 +21,7 @@
 <% else %>
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
-        <div class="panel-heading"  style="background-color: #673AB7;color: #fff;">
+        <div class="panel-heading">
             <%= @measureTypeInfo.name %>
         </div>
         <!-- /.panel-heading -->
@@ -108,12 +108,12 @@
 
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
-        <div class="panel-heading"  style="background-color: #673AB7;color: #fff;">
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_week)" style="color: #fff;">Tydzien</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_month)" style="color: #fff;">Miesiac</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_quarter)" style="color: #fff;">Kwartal</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_year)" style="color: #fff;">Rok</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d)" style="color: #fff;">Wszystko</button>
+        <div class="panel-heading">
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_week)">Tydzien</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_month)">Miesiac</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_quarter)">Kwartal</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_year)">Rok</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d)">Wszystko</button>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">

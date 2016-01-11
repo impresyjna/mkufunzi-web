@@ -1,0 +1,7 @@
+<% @messages.each do |data| %>
+	<% if data.user_send_id.to_i == current_user.id.to_i %>
+		<%= render 'right_message', data: data  %>
+    <% else %>
+    	<%= render 'left_message', data: data, receive_user: User.find(receive_user_id)  %>
+    <% end %>
+<% end %>

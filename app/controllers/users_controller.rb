@@ -9,6 +9,21 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Pomyślnie zmieniono"
+      rendirect_to edit_profile_path(id:params[:id])
+    else
+      flash[:danger] = "Nie udalo się edytować"
+      rendirect_to edit_profile_path(id:params[:id])
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -70,7 +85,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :surname, :email, :password,
-                                   :password_confirmation, :login)
+                                   :password_confirmation, :login, :photo)
     end
 
     def user_mobile

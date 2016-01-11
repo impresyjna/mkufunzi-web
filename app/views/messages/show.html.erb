@@ -1,42 +1,18 @@
-<h1>Message#show</h1>
-<p>Find me in app/views/message/show.html.erb</p>
+<h1>Wiadomości</h1>
 
+<div class="col">
 
-<div class="col-lg-9 col-md-6">
-    <div class="chat-panel panel panel-default">
-        <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i>
-            Chat
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-            <ul class="chat">
-            	<% @messages.each do |data| %>
-	            	<% if data.user_send_id.to_i == current_user.id.to_i %>
-	            		<%= render 'right_message', data: data %>
-	                <% else %>
-	                	<%= render 'left_message', data: data, trainer: @trainer %>
-	                <% end %>
-                <% end %>
-            </ul>
-        </div>
-        <!-- /.panel-body -->
-        <div class="panel-footer">
-            <div class="input-group">
-            	<%= form_for(:message, url: send_message_path, method: "create") do |f| %>
-           
-                <%= f.text_field :content, class: 'form-control input-sm', placeholder: "Tutaj pisz..." %>
-                <%= f.text_field :user_send_id, value: current_user.id, class: 'hidden' %>
-                <%= f.text_field :user_receive_id, value: @trainer.user.id, class: 'hidden' %>
-
-                <span class="input-group-btn">
-                	
-                    <%= f.submit "wyślij", class: "btn btn-warning btn-sm", id:"btn-chat" %>
-
-                </span>
-                <% end %>
-            </div>
-        </div>
-        <!-- /.panel-footer -->
-    </div>
 </div>
+
+<% if !current_user.protege.nil? %>
+    <%= render 'trener_info'%>
+    <%= render 'message_box', receive_user_id: @trainer.user_id   %>
+<% else %>
+    <%= render 'my_proteges', my_proteges: @my_proteges %>
+    <% if params[:id].nil? %>
+
+    <% else %>
+        <%= render 'message_box', receive_user_id: params[:id]   %>
+    <% end %>
+<% end %>
+
