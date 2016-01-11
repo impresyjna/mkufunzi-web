@@ -17,10 +17,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Pomyślnie zmieniono"
-      rendirect_to edit_profile_path(id:params[:id])
+      redirect_to edit_profile_path(id:params[:id])
     else
       flash[:danger] = "Nie udalo się edytować"
-      rendirect_to edit_profile_path(id:params[:id])
+      redirect_to edit_profile_path(id:params[:id])
     end
   end
 
