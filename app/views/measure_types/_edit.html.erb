@@ -19,19 +19,55 @@
             <%= f.text_field :unit, class: 'form-control' %> 
             <div class="checkbox">
                 <label>
-                    <%= f.check_box :extra_field %> Dodatkowe pole?
+                    <%= f.check_box :extra_field, id:"extra_field"+measureType.id.to_s %> Dodatkowe pole?
                 </label>
             </div>
             
             <%= f.text_field :id, class: 'hidden' %>
+            <%= f.label :pierwsza_nazwa, id:"first_label"+measureType.id.to_s, style: "display: none" %>
+            <%= f.text_field :first_label, id:"first_label_input"+measureType.id.to_s, class: 'form-control', style: "display: none" %>
+
+            <%= f.label :druga_nazwa, id:"second_label"+measureType.id.to_s, style: "display: none" %>
+            <%= f.text_field :second_label, id:"second_label_input"+measureType.id.to_s, class: 'form-control', style: "display: none" %>
+
         </div>
         <div class="modal-footer">
-          <%= f.submit "Dodaj czas", class: "btn btn-primary" %>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+          <button type="button" class="btn btn-default btn-raised" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
+          <%= f.submit "Zapisz", class: "btn btn-primary btn-raised" %>
         </div>
               </fieldset>
       <% end %>
       </div>
-      
     </div>
   </div>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+    if ($('#extra_field'+<%= measureType.id.to_s %>).is(':checked')) {
+        $('#first_label'+<%= measureType.id.to_s %>).show();
+        $('#first_label_input'+<%= measureType.id.to_s %>).show();
+        $('#second_label'+<%= measureType.id.to_s %>).show();
+        $('#second_label_input'+<%= measureType.id.to_s %>).show();
+    } else {
+        $('#first_label'+<%= measureType.id.to_s %>).hide();
+        $('#first_label_input'+<%= measureType.id.to_s %>).hide();
+        $('#second_label'+<%= measureType.id.to_s %>).hide();
+        $('#second_label_input'+<%= measureType.id.to_s %>).hide();
+    }
+});
+
+$('#extra_field'+<%= measureType.id.to_s %> ).click(function () {
+    if ($('#extra_field'+<%= measureType.id.to_s %>).is(':checked')) {
+        $('#first_label'+<%= measureType.id.to_s %>).show();
+        $('#first_label_input'+<%= measureType.id.to_s %>).show();
+        $('#second_label'+<%= measureType.id.to_s %>).show();
+        $('#second_label_input'+<%= measureType.id.to_s %>).show();
+    } else {
+        $('#first_label'+<%= measureType.id.to_s %>).hide();
+        $('#first_label_input'+<%= measureType.id.to_s %>).hide();
+        $('#second_label'+<%= measureType.id.to_s %>).hide();
+        $('#second_label_input'+<%= measureType.id.to_s %>).hide();
+    }
+});
+</script>

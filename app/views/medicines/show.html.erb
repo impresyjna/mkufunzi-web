@@ -26,18 +26,26 @@
                       <td><%= data.dose %> </td>
                       <td><%= data.dose_unit %> </td>
                       <td><%= data.medicine_times.count %>
-                      	<%= link_to "dodaj",'#', "data-toggle" => "modal", 'data-target' => '#MedicineTime'+data.id.to_s %>
+                      	<%= link_to "dodaj" ,'#', "data-toggle" => "modal", 'data-target' => '#MedicineTime'+data.id.to_s, class: "btn btn-success btn-sm", style:"margin-top: 0px; margin-bottom: 0px" %>
 
                       	<% if data.medicine_times.count > 0 %>
-	                      	<%= link_to "wiecej",'#c2'+data.id.to_s, "data-toggle" => "collapse" %>
+	                      	<%= link_to "Pokaż dozowanie",'#c2'+data.id.to_s, "data-toggle" => "collapse", class: "btn btn-warning btn-sm", style:"margin-top: 0px; margin-bottom: 0px" %>
 	                      		<div id="c2<%= data.id.to_s %>" class="collapse">
 	    							        <% data.medicine_times.each do |data2| %>
-            							   <%= data2.medicine_time %><br>
+            							   <%= data2.medicine_time.strftime("%H:%M") %>
+                             <% if data2.remind == true %>
+                                przypomnij o <%= data2.remind_when.strftime("%H:%M") %>
+                             <% end %>
+                             <br>
             						<% end %>
 	 		 					</div> 
 	 		 			<% end %>
  		 				</td>
-            <td> <%= link_to "usun",my_medicines_path(id: data.id), method: :delete, data: { confirm: "Czy jesteś tego pewien ?" } %> </td>
+            <td> 
+              <%= link_to "usuń", my_medicines_path(id: data.id), method: :delete, class: 'btn btn-raised btn-danger btn-sm', style: "margin-top: 0px; margin-bottom: 0px", data: { confirm: "Czy jesteś tego pewien ?" }  %> 
+               
+              
+            </td>
             <%= render 'medicine_times/new', medicine_time: @medicine_time, medicine: data %>
                   <% end %>
               	</tbody>

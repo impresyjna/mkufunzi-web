@@ -44,8 +44,9 @@
                 <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Napisz do trenera</a>
-                    </li>
+<%= link_to messages_path do %> 
+                            wiadomości 
+                        <% end %>                    </li>
                     <li>
                         <a href="#">Skrzynka odbiorcza</a>
                     </li>
@@ -65,7 +66,9 @@
                 <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Napisz do trenera</a>
+                        <%= link_to messages_path do %> 
+                            wiadomości 
+                        <% end %>
                     </li>
                     <li>
                         <a href="#">Skrzynka odbiorcza</a>

@@ -27,6 +27,7 @@ class MeasureTypesController < ApplicationController
 
   def update
     @measureType = MeasureType.find(measuretype_params[:id])
+    measuretype_params[:name][0] = measuretype_params[:name][0].capitalize
     if @measureType.update_attributes(measuretype_params)
       flash[:success] = "Typ pomiaru został zmieniony"
       redirect_to measure_type_path
@@ -69,6 +70,6 @@ class MeasureTypesController < ApplicationController
   	end
 
     def measuretype_params
-      params.require(:measure_type).permit(:id, :name, :unit, :extra_field)
+      params.require(:measure_type).permit(:id, :name, :unit, :extra_field, :first_label, :second_label)
     end
 end

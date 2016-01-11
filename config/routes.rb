@@ -48,6 +48,9 @@ Rails.application.routes.draw do
   post 'new_medicine_times' => 'medicine_times#create'
   delete 'my_medicines' => 'medicines#destroy'
 
+  get 'messages' => 'messages#show'
+  post 'send_message' => 'messages#new'
+
   resources :users
   resources :measurements
   resources :card_indices
@@ -57,5 +60,6 @@ Rails.application.routes.draw do
   resources :static_pages
   resources :trainers
   resources :medicines
+  resources :messages
   
 end

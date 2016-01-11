@@ -13,14 +13,35 @@
 
             <div class="checkbox">
                 <label>
-                    <%= f.check_box :extra_field %> Dodatkowe pole?
+                    <%= f.check_box :extra_field, id:"extra_field" %> Dodatkowe pole?
                 </label>
             </div>
 
+            <%= f.label :pierwsza_nazwa, id:"first_label", style: "display: none" %>
+            <%= f.text_field :first_label, id:"first_label_input", class: 'form-control', style: "display: none" %>
+
+            <%= f.label :druga_nazwa, id:"second_label", style: "display: none" %>
+            <%= f.text_field :second_label, id:"second_label_input", class: 'form-control', style: "display: none" %>
         </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
-            <%= f.submit "Dodaj do kartoteki", class: "btn btn-primary" %>
+            <button type="button" class="btn btn-default btn-raised" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
+            <%= f.submit "Dodaj do kartoteki", class: "btn btn-primary btn-raised" %>
         </div>
     </div>    
 <% end %>
+
+<script type="text/javascript">
+$('#extra_field').click(function () {
+    if ($('#extra_field').is(':checked')) {
+        $('#first_label').show();
+        $('#first_label_input').show();
+        $('#second_label').show();
+        $('#second_label_input').show();
+    } else {
+        $('#first_label').hide();
+        $('#first_label_input').hide();
+        $('#second_label').hide();
+        $('#second_label_input').hide();
+    }
+});
+</script>

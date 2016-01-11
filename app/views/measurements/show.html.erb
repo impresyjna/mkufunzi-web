@@ -1,6 +1,6 @@
 <% if params[:id].nil? %>
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" style="background-color: #673AB7;color: #fff;">
             <i class="fa fa-fw fa-archive"></i> Kartoteka
         </div>
         <!-- /.panel-heading -->
@@ -21,7 +21,7 @@
 <% else %>
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading"  style="background-color: #673AB7;color: #fff;">
             <%= @measureTypeInfo.name %>
         </div>
         <!-- /.panel-heading -->
@@ -66,13 +66,14 @@
                   <h4 class="modal-title" id="myModalLabel">Dodaj pomiar <%= @measureTypeInfo.name %></h4>
                 </div>
                 <div class="modal-body" style="overflow: hidden">
+                  <br>
                   <% if @measureTypeInfo.extra_field == true %>
                       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> 
-                          <%= f.label :pomiar %>
+                          <%= f.label(:value, @measureTypeInfo.first_label) %>
                           <%= f.text_field :value,  class: 'form-control' %>
                       </div>
                       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"> 
-                          <%= f.label :drugi_pomiar %>
+                          <%= f.label(:second_value, @measureTypeInfo.second_label) %>
                           <%= f.text_field :second_value, class: 'form-control' %>
                           <%= f.text_field :measure_type_id, value: params[:id], class: 'hidden' %>
                       </div>
@@ -92,8 +93,8 @@
                  <% end %>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
-                  <%= f.submit "Dodaj pomiar do kartoteki", class: "btn btn-primary" %>
+                  <button type="button" class="btn btn-default btn-raised" data-dismiss="modal" style="margin-top: 10px;">Zamknij</button>
+                  <%= f.submit "Dodaj pomiar do kartoteki", class: "btn btn-primary btn-raised" %>
                 </div>
               </div>
               <% end %>
@@ -107,12 +108,12 @@
 
 <div class="col-md-6 col-lg-6" >
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_week)">Tydzien</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_month)">Miesiac</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_quarter)">Kwartal</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_year)">Rok</button>
-            <button type="button" class="btn btn-link btn-xs" onclick="update(d)">Wszystko</button>
+        <div class="panel-heading"  style="background-color: #673AB7;color: #fff;">
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_week)" style="color: #fff;">Tydzien</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_month)" style="color: #fff;">Miesiac</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_quarter)" style="color: #fff;">Kwartal</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d_last_year)" style="color: #fff;">Rok</button>
+            <button type="button" class="btn btn-link btn-xs" onclick="update(d)" style="color: #fff;">Wszystko</button>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -160,8 +161,10 @@
       // The name of the data record attribute that contains x-values.
       xkey: 'year',
       ykeys: ['value','second_value'],
-      labels: ['value','second_value'],
+      labels: ['<%= @measureTypeInfo.first_label.to_s %>','<%= @measureTypeInfo.second_label.to_s %>'],
       parseTime: true,
+      lineColors: ['#C62828', '#1565C0' ],
+
 
       // A list of names of data record attributes that contain y-values.
       // Labels for the ykeys -- will be displayed when you hover over the
@@ -201,7 +204,7 @@
       ykeys: ['value'],
       // Labels for the ykeys -- will be displayed when you hover over the
       // chart.
-      labels: ['Value']
+      labels: ['<%= @measureTypeInfo.name.to_s %>']
     });
 
     <% end %>
