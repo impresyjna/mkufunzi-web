@@ -1,7 +1,7 @@
 @import "bootstrap";
 @import "bootstrap-sprockets";
 @import "bootstrap-timepicker";
-
+ 
 // $state-danger-text: #fff;
 
 // body {
@@ -244,6 +244,7 @@ body {background-color: $accent_kolor !important;}
 @media screen and (min-width: 768px){
 	#personal_info{
 		height: 110px;
+		padding: 15px 0px 15px 15px;
 		width: 100%;
 		background-color: $dark_accent_kolor;
 	}
@@ -251,7 +252,10 @@ body {background-color: $accent_kolor !important;}
 	#circle-photo-big{
 		height: 80px;
 		width: 80px;
-		margin: 15px 15px 15px 15px;
+	    border-radius: 50%;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: cover;
 	}
 
 	#topbar{
@@ -323,6 +327,16 @@ div.nologin{
     		padding-top: 60px;
 		}
 	}
+}
+
+
+.circle-photo-chat{
+	height: 50px;
+	width: 50px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 #welcomepage_box{

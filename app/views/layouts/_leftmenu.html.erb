@@ -1,8 +1,12 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">    
         <div class="hidden-xs" id="personal_info">
-            <img class="img-circle" id="circle-photo-big" src="img/person.jpg" alt="">
-            <%= @current_user.name %>  <%= @current_user.surname%> <%= @current_user.admin%> 
+            <% if !current_user.photo_file_name.nil? %>
+                <div style="background-image: url(<%=current_user.photo.url(:small)%>);" id="circle-photo-big"></div>
+            <% else %>
+                <div style="background-image: url('img/nologinuser2.jpg');" id="circle-photo-big"></div>
+            <% end %>
+            <span style="position: absolute;left: 100px;top: 45px;"><%= @current_user.name %>  <%= @current_user.surname%></span>
         </div>
         <ul class="nav" id="side-menu">
             <% if @current_user.admin == true %>

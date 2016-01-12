@@ -219,8 +219,13 @@
                 </li>
                 <!-- /.dropdown -->
                 <div class="hidden-lg hidden-sm hidden-md" id="personal_info">
-                    <img class="img-circle" id="circle-photo-big" src="img/person.jpg" alt="">
-                        Maria Kowalska
+
+                    <% if !current_user.photo_file_name.nil? %>
+                        <%= image_tag current_user.photo.url(:small), id:"circle-photo-big", class:"img-circle" %>
+                    <% else %>
+                        <img class="img-circle" id="circle-photo-big" src="img/nologinuser2.jpg" alt="">
+                    <% end %><%= current_user.name %> <%= current_user.surname %>
+
                 </div>
             </ul>
             <!-- /.navbar-top-links -->
