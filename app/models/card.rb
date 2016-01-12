@@ -1,4 +1,4 @@
 class Card < ActiveRecord::Base
 	belongs_to :protege
-	has_many :measurement
+	has_many :measurements
 end
