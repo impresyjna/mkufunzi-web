@@ -53,6 +53,8 @@ Rails.application.routes.draw do
 
   get 'messages' => 'messages#show'
   post 'send_message' => 'messages#new'
+  get 'user_exists_mobile' => 'users#user_exists_mobile'
+  get 'get_main_data' => 'measurements#get_main_data'
 
   resources :users
   resources :measurements

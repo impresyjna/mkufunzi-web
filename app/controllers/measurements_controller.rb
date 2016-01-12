@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measurements_mobile, :post_measurement_mobile]
+	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measurements_mobile, :post_measurement_mobile, :get_main_data]
 	before_action :trainer_only,   only: [:my_protege_card]
 
 
@@ -69,6 +69,27 @@ class MeasurementsController < ApplicationController
 			end
 		else
 			render json: {status: "failure" }
+		end
+	end
+
+	def get_main_data
+		if !params[:id].nil?
+			@user = User.find(params[:id])
+			@protege = @user.protege
+			@card = @protege.card
+			@weight = @card.measurements.where(measure_type_id: (MeasureType.find_by(name: "waga"))).last
+			@height = @card.measurements.where(measure_type_id: (MeasureType.find_by(name: "wzrost"))).last
+			if @height.nil?
+				@height = Measurement.new
+			end
+			if @weight.nil?
+				@weight = Measurement.new
+			end
+			render json: {status: "success",
+										weight_value: @weight.value, weight_unit: MeasureType.find_by(name: "waga").unit,
+										height_value: @height.value, height_unit: MeasureType.find_by(name: "wzrost").unit}
+		else
+			render json: {status: "failure"}
 		end
 	end
 

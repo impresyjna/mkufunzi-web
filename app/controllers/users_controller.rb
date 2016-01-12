@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :declared_user, except: [:create, :login_mobile, :register_mobile]
+  before_filter :declared_user, except: [:create, :login_mobile, :register_mobile, :user_exists_mobile]
 
   def show
     @user = User.find(params[:id])
@@ -69,6 +69,18 @@ class UsersController < ApplicationController
       end
     end
 
+  end
+
+  def user_exists_mobile
+    @user = User.none
+    if !params[:email].nil?
+    @user = User.find_by(email: params[:email].downcase)
+    end
+    if @user.blank?
+      render json: {status: "failure"}
+    else
+      render json: {status: "success", user: @user, protege: @user.protege, card: @user.protege.card}
+    end
   end
 
   private
