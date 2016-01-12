@@ -1,0 +1,3 @@
+<% @new_messages.each do |data| %>
+	$('#messages').append("<%= escape_javascript(raw render 'left_message', data: data, receive_user: User.find(data.user_send_id))%>");
+<% end %>

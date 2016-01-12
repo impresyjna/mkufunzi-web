@@ -1,19 +1,21 @@
-<li class="left clearfix">
-    <span class="chat-img pull-left">
-        <% if !receive_user.photo_file_name.nil? %>
-            <div style="background-image: url(<%= receive_user.photo.url(:small)%>);" class="circle-photo-chat"></div>
-        <% else %>
-            <img class="img-circle" src="img/nologinuser2.jpg" style="width: 50px" alt="">
-        <% end %>
-    </span>
-    <div class="chat-body clearfix">
-        <div class="header">
-            <strong class="primary-font"><%= receive_user.name %> <%= receive_user.surname %></strong>
-            <small class="pull-right text-muted">
-                <i class="fa fa-clock-o fa-fw"></i> <%= data.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+<div class="receive" data-id="<%= data.id.to_i %>">
+    <li class="left clearfix">
+        <span class="chat-img pull-left">
+            <% if !receive_user.photo_file_name.nil? %>
+                <div style="background-image: url(<%= receive_user.photo.url(:small)%>);" class="circle-photo-chat"></div>
+            <% else %>
+                <img class="img-circle" src="img/nologinuser2.jpg" style="width: 50px" alt="">
+            <% end %>
+        </span>
+        <div class="chat-body clearfix">
+            <div class="header">
+                <strong class="primary-font"><%= receive_user.name %> <%= receive_user.surname %></strong>
+                <small class="pull-right text-muted">
+                    <i class="fa fa-clock-o fa-fw"></i> <%= data.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+            </div>
+            <p>
+                <%= data.content %>
+            </p>
         </div>
-        <p>
-            <%= data.content %>
-        </p>
-    </div>
-</li>
+    </li>
+</div>

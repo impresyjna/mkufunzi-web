@@ -1,5 +1,9 @@
 class MessagesController < ApplicationController
-  
+    
+  def new_message
+    @new_messages = Message.where("user_send_id = ? AND user_receive_id = ? AND id > ?",params[:r_id], current_user.id,params[:after].to_i)
+  end
+
   def show
     if !current_user.protege.nil?
   	   @trainer = Protege.find_by(user_id: current_user.id).trainer

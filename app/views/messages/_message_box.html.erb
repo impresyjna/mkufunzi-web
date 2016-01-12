@@ -5,8 +5,8 @@
             Konwersacja
         </div>
         <!-- /.panel-heading -->
-        <div class="panel-body">
-            <ul class="chat">
+        <div class="panel-body" id="chat_box">
+            <ul class="chat" id="messages">
             	<% @messages.each do |data| %>
 	            	<% if data.user_send_id.to_i == current_user.id.to_i %>
 	            		<%= render 'right_message', data: data  %>
@@ -36,3 +36,23 @@
         <!-- /.panel-footer -->
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var objDiv = document.getElementById("chat_box");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    });
+
+$(function() { setTimeout(updateMessages, 50000)});
+
+function updateMessages () {
+  var r_id = <%= receive_user_id %>
+  if ($(".receive").length > 0) {
+    var after = $(".receive:last").attr('data-id');
+  } else {
+    var after = "0";
+  }  
+  $.getScript("message.js?r_id=" + r_id + "&after=" + after)
+  setTimeout(updateMessages, 50000);
+}
+</script>
