@@ -43,42 +43,29 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-           
+            <% if !current_user.protege.trainer.nil? %>
             <li>
-                <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-<%= link_to messages_path do %> 
-                            wiadomości 
-                        <% end %>                    </li>
-                    <li>
-                        <a href="#">Skrzynka odbiorcza</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
+                <%= link_to messages_path do %> 
+                    <i class="fa fa-fw fa-envelope"></i> Wiadomości 
+                <% end %> 
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-users"></i> Trenerzy</a>
+                <%= link_to profile_path(id:current_user.protege.trainer.user_id) do %> <i class="fa fa-fw fa-users"></i> Mój trener <% end %>
             </li>
+            <% end %>
+
+
+
             <% elsif !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
             <li>
                 <%= link_to my_proteges_path do %> 
-                    Moi podopieczni 
+                    <i class="fa fa-fw fa-users"></i>Moi podopieczni 
                 <% end %>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-envelope"></i> Wiadomosci<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <%= link_to messages_path do %> 
-                            wiadomości 
-                        <% end %>
-                    </li>
-                    <li>
-                        <a href="#">Skrzynka odbiorcza</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
+                <%= link_to messages_path do %> 
+                    <i class="fa fa-fw fa-envelope"></i> Wiadomosci
+                <% end %>
             </li>
             <!-- end protege user menu -->
 

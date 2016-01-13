@@ -4,6 +4,20 @@ class ProtegesController < ApplicationController
 	def show
 	end
 
+	def update
+	    @protege = current_user.protege
+	    @protege.gender = params[:gender]
+	    @protege.eye_color_id = params[:eye_color]
+	    @protege.blood_type_id = params[:blood_type]
+	    if @protege.update_attributes(protege_params)
+	      flash[:success] = "Pomyślnie zmieniono"
+	      redirect_to edit_profile_path
+	    else
+	      flash[:danger] = "Nie udalo się edytować"
+	      redirect_to edit_profile_path
+	    end
+	end
+
 	def my_proteges
 		@my_proteges = Trainer.find_by(user_id: session[:user_id]).proteges.joins(:user).includes(:user)
 		@av_proteges = Protege.where("trainer_id is NULL").joins(:user).pluck("users.name","users.surname", :id)
@@ -69,6 +83,10 @@ class ProtegesController < ApplicationController
 
 	def new_protege_params
 		params.require(:protege).permit(:user_id)
+	end
+
+	def protege_params
+		params.require(:protege).permit(:gender,:eye_color,:blood_type,:birth_date)
 	end
 
 end

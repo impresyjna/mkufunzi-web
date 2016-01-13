@@ -1,36 +1,103 @@
 <% if params[:id].nil? %>
 
 <% else %>
-  <%= @protege.user.name  %> <%= @protege.user.surname  %>
-    <ul class="nav nav-tabs">
+    
+<div class="row">
+  <div class="col-md-2 col-lg-1">
+    <% if !@protege.user.photo_file_name.nil? %>
+        <div style="background-image: url(<%=@protege.user.photo.url(:small)%>);" id="circle-photo-about"></div>
+    <% else %>
+        <div style="background-image: url('img/nologinuser2.jpg');" id="circle-photo-big"></div>
+    <% end %>
+  </div>
+  <div class="col-md-10 col-lg-11">
+    <div class="well bs-component">
+      <form class="form-horizontal">
+        <fieldset>
+          <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-md-3 control-label">Imie</label>
+                <div class="col-md-9 about-me">
+                  <%= @protege.user.name  %>
+                </div>
+            </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Nazwisko</label>
+                <div class="col-md-9 about-me">
+                  <%= @protege.user.surname %>
+                </div>
+              </div>
+          <div class="form-group">
+              <label class="col-md-3 control-label">Email</label>
+                <div class="col-md-9 about-me">
+                  <%= @protege.user.email %>
+                </div>
+              </div>
+          <div class="form-group">
+                <label class="col-md-3 control-label">Login</label>
+                <div class="col-md-9 about-me">
+                  <%= @protege.user.login %>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-3 control-label">Dołączenie do seriwsu</label>
+                <div class="col-md-9 about-me">
+                  <%= @protege.user.created_at.strftime("%d-%m-%Y") %>
+                </div>
+              </div>
+            </div>
+          <div class="col-md-6">
+
+          <%= render 'proteges/about_me', protege: @protege %>
+        </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
       <% @measureType.each do |data| %>
-      <li><a href="#<%= data.name %>" data-toggle="tab" onclick="update(<%= data.id%>)"><%= data.name %></a></li>
+      <li><a href="#tab<%= data.id %>" data-toggle="tab" onclick="update(<%= data.id%>,<%= data.extra_field%>)"><%= data.name %></a></li>
       <% end %>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
-      <% @measureType.each do |data| %>
-        <div class="tab-pane fade" id="<%= data.name %>">
+      <% @measureType.each_with_index do |data, index| %>
+        <% if index == 0 %>
+        <div class="tab-pane fade in active" id="tab<%= data.id %>">
+          <% else %>
+        <div class="tab-pane fade" id="tab<%= data.id %>">
+          <% end %>
           <div class="col-md-6 col-lg-6">
           <div class="panel panel-default">
             <div class="panel-heading">
-                <%= data.name %>
+                <%= data.name %> <%=data.extra_field %>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
               <div class="table-responsive">
-                  <table id="card" class="table table-hover">
+                  <table id="card<%= data.id%>" class="table table-hover">
                       <thead>
                           <tr>
-                              <th><%=data.name %></th>
-                              <th>Data</th>
+                              <th><%= data.name %></th>
+                              <% if data.extra_field == true %>
+                                <th>Druga wartość</th>
+                              <% end %> 
+                             <th>Data</th>
                           </tr>
                       </thead>
                       <tbody>
                           <% @protege_measurement.where("measure_type_id = ?", data.id).each do |data2| %>
                           <tr>
-                              <td><%= data2.value %> <%= data.unit %> </td>
+                              <% if data.extra_field == true %>
+                                <td><%= data2.value %> </td><td><%= data2.second_value %> <%= data.unit %> </td>
+                              <% else %>
+                                <td><%= data2.value %> <%= data.unit %> </td>
+                              <% end %>
                               <td><%= data2.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                           </tr>
                           <% end %>
@@ -44,7 +111,7 @@
     </div>
     <% end %>
   </div>
- <div class="col-md-6 col-lg-6" id="left_bar" style="display: hidden">
+ <div class="col-md-6 col-lg-6" id="left_bar">
         <div class="panel panel-default">
                 <div class="panel-heading">
                 </div>
@@ -67,28 +134,28 @@
       data: d,
       // The name of the data record attribute that contains x-values.
       xkey: 'year',
-      xLabels: 'week',
+      ykeys: ['value','second_value'],
+      labels: ['pierwsza wartość','druga wartość'],
       parseTime: true,
-
-      // A list of names of data record attributes that contain y-values.
-      ykeys: ['value'],
-      // Labels for the ykeys -- will be displayed when you hover over the
-      // chart.
-      labels: ['Value']
+      lineColors: ['#C62828', '#1565C0' ],
     });
 
-function update(id) {
+function update(id,type) {
       d = [];
       <% @protege_measurement.each do |data| %>
         if ( id == "<%= data.measure_type_id %>" ) {
-          d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>" });
+          if ( type == true ){
+            d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>","second_value": "<%= data.second_value %>" });
+          }else{
+            d.push({ "year": "<%= data.created_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.value %>"});
+          }
         };
       <% end %>
       j.setData(d);
     }
 
-
-    $('.table table-hover').DataTable( {
+  <% @measureType.each do |data| %>
+    $('#card'+<%=data.id%>).DataTable( {
         "pagingType": "full_numbers",
         "order": [[ 1, "desc" ]],
         "dom": 'lfrt<"bottom"i<"clear">p>',
@@ -96,6 +163,12 @@ function update(id) {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
         }
     } );  
+
+  <% end %>
+
+$(document).ready(function(){
+  update(<%= @measureType.first.id%>,<%= @measureType.first.extra_field%>);
+});
 
 
 </script>

@@ -10,17 +10,20 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
+    @gender = [['Kobieta','K'],['Mężczyzna','M']]
+    @blood_type = BloodType.pluck(:name, :id)
+    @eye_color = EyeColor.pluck(:name, :id)
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update_attributes(user_params)
       flash[:success] = "Pomyślnie zmieniono"
-      redirect_to edit_profile_path(id:params[:id])
+      redirect_to edit_profile_path
     else
       flash[:danger] = "Nie udalo się edytować"
-      redirect_to edit_profile_path(id:params[:id])
+      redirect_to edit_profile_path
     end
   end
 

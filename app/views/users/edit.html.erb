@@ -1,24 +1,33 @@
-<%= image_tag @user.photo.url(:small) %>
+<div class="col-lg-6">
+  <div class="well bs-component">
+      <%= form_for @user, html: { multipart: true }, class: 'form-horizontal' do |f| %>
+        <fieldset>
+        <%= render 'shared/error_messages' %>
 
-<%= form_for @user, html: { multipart: true } do |f| %>
-  <%= render 'shared/error_messages' %>
+        <%= f.label :imie %>
+        <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :imie %>
-  <%= f.text_field :name, class: 'form-control' %>
+       <%= f.label :nazwisko %>
+        <%= f.text_field :surname, class: 'form-control' %>
 
- <%= f.label :nazwisko %>
-  <%= f.text_field :surname, class: 'form-control' %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+        
+        <%= f.label :zdjęcie %>
+        <%= f.file_field :photo %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email, class: 'form-control' %>
+        <%= f.label :hasło %>
+        <%= f.password_field :password, class: 'form-control' %>
 
-  <%= f.file_field :photo %>
+        <%= f.label :potwierdzenie_hasła, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= f.label :hasło %>
-  <%= f.password_field :password, class: 'form-control' %>
+        <%= f.submit "Zapisz zmiany", class: "btn btn-primary" %>
+        </fieldset>
+      <% end %>       
+  </div>
+</div>
 
-  <%= f.label :potwierdzenie_hasła, "Confirmation" %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-  <%= f.submit "Zapisz zmiany", class: "btn btn-primary" %>
+<% if !current_user.protege.nil? %>
+  <%= render 'proteges/edit', protege: @user.protege, gender: @gender, blood_type: @blood_type, eye_color: @eye_color %>
 <% end %>

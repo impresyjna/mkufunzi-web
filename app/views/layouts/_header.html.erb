@@ -249,15 +249,16 @@
                 </li> -->
                 <!-- /.dropdown --> 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-top: 10px !important; padding-bottom: 10px !important;">
+                        <i class="material-icons">more_vert</i>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li><%= link_to profile_path(id:current_user) do %>
                                 <i class="fa fa-fw fa-user"></i> Profil użytkownika
                              <% end %>
                         </li>
-                        <li><%= link_to edit_profile_path(id:current_user) do %><i class="fa fa-gear fa-fw"></i> Ustawienia <% end %>
+                        <li><%= link_to edit_profile_path do %>
+                            <i class="fa fa-gear fa-fw"></i> Ustawienia <% end %>
                         </li>
                         <li class="divider"></li>
                         <li>

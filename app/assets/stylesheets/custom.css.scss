@@ -1,5 +1,6 @@
-@import "bootstrap";
 @import "bootstrap-sprockets";
+@import "bootstrap";
+@import 'bootstrap-datetimepicker';
 @import "bootstrap-timepicker";
  
 // $state-danger-text: #fff;
@@ -363,6 +364,13 @@ div.nologin{
 	z-index: 1100 !important;
 }
 
-.dropdown-messages ul li a{
+.dropdown-messages li a{
 	height: 40px !important;
+	width: 310px;
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
+}
+
+.about-me{
+	padding-top: 7px !important; 
 }

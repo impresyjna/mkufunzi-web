@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get 'my_proteges' => 'proteges#my_proteges'
   post 'my_proteges' => 'proteges#add_trainer_to_protege'
   post 'erase_trainer_from_protege' => 'proteges#erase_trainer_from_protege'
+  post 'update_protege' => 'proteges#update'
 
   get 'trainers' => 'trainers#show_trainer'
   post 'activate_trainer' => 'trainers#activate_trainer'

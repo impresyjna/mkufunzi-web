@@ -5,7 +5,7 @@ class MeasurementsController < ApplicationController
 
 	def my_protege_card
 		@protege = Protege.joins(:user).find_by(user_id: params[:id])
-		@protege_measurement = @protege.card.measurement
+		@protege_measurement = @protege.card.measurements
 		@measureType = MeasureType.all
 	end
 

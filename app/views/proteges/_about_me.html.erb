@@ -1,0 +1,49 @@
+<% if !protege.birth_date.nil? %>
+	 <div class="form-group">
+      	<label class="col-md-3 control-label">Data urodzenia</label>
+      	<div class="col-md-9 about-me">
+      		<%= protege.birth_date.strftime("%d-%m-%Y") %> <i class="fa fa-calendar"></i>
+      	</div>
+  	</div>	
+<% end %>
+
+<% if !protege.eye_color_id.nil? %>
+	 <div class="form-group">
+      	<label class="col-md-3 control-label">Kolor oczu</label>
+      	<div class="col-md-9 about-me">
+      		<%= protege.eye_color.name.to_s %> <i class="fa fa-eye" style="color: <%= protege.eye_color.color%>"></i> 
+      	</div>
+  	</div>	
+<% end %>
+
+<% if !protege.gender.nil? %>
+	<div class="form-group">
+      	<label class="col-md-3 control-label">Płeć</label>
+      	<div class="col-md-9 about-me">
+      		<% if protege.gender.to_s == "K" %>
+      			Kobieta
+   			<% else %>
+   				Mężczyzna
+      		<% end %>
+      	</div>
+  	</div>
+<% end %>
+
+<% if !protege.blood_type_id.nil? %>
+	 <div class="form-group">
+      	<label class="col-md-3 control-label">Grupa krwi</label>
+      	<div class="col-md-9 about-me">
+			<%= protege.blood_type.name.to_s %>
+      	</div>
+  	</div>	
+<% end %>
+
+<% if current_user.id.to_i == protege.user_id.to_i and (protege.blood_type_id.nil? or protege.gender.nil? or protege.eye_color_id.nil? or protege.birth_date.nil?) %>
+    <div class="col-md-offset-3 col-md-9 about-me">
+		Przejdź do 
+		<%= link_to edit_profile_path do %>
+			<i class="fa fa-gear fa-fw"></i><i>Ustawień</i> 
+		<% end %>
+		aby uzupełnić o sobie informacje.
+  	</div>
+<% end %>

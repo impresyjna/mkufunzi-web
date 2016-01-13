@@ -1,3 +1,4 @@
 class BloodType < ActiveRecord::Base
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+	has_one :protege
+  	validates :name, presence: true, uniqueness: { case_sensitive: false }
 end

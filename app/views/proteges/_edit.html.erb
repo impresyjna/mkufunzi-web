@@ -1,0 +1,28 @@
+<div class="col-lg-6">
+  <div class="well bs-component">
+    <%= form_for(protege, url: update_protege_path, method: "update", class:'form-horizontal') do |f| %>
+      <fieldset>
+        <%= f.label :płeć %>
+        <%= select_tag(:gender, options_for_select(gender, :selected => protege.gender), class: 'form-control' ) %>
+        
+        <%= f.label :kolor_oczu %>
+        <%= select_tag(:eye_color, options_for_select(eye_color, :selected => protege.eye_color_id), class: 'form-control' ) %>
+
+        <%= f.label :blood_type %>
+        <%= select_tag(:blood_type, options_for_select(blood_type, :selected => protege.blood_type_id), class: 'form-control' ) %>
+
+        <%= f.label :data_urodzin %>
+        <%= f.text_field :birth_date, id:'datetimepicker', class: 'form-control' %>
+
+        <%= f.submit "Zapisz zmiany", class: "btn btn-primary" %>      
+      </fieldset>
+    <% end %>       
+  </div>
+</div>        
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker').datetimepicker({
+      format: 'YYYY-MM-DD',
+    });
+  });
+</script>
