@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111222356) do
+ActiveRecord::Schema.define(version: 20160113003334) do
+
+  create_table "blood_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "card_indices", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -28,6 +34,13 @@ ActiveRecord::Schema.define(version: 20160111222356) do
 
   add_index "cards", ["created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
   add_index "cards", ["protege_id"], name: "index_cards_on_protege_id", using: :btree
+
+  create_table "eye_colors", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "color",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "measure_types", force: :cascade do |t|
     t.text     "name",         limit: 65535
@@ -85,14 +98,14 @@ ActiveRecord::Schema.define(version: 20160111222356) do
   add_index "messages", ["user_send_id"], name: "index_messages_on_user_send_id", using: :btree
 
   create_table "proteges", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "trainer_id", limit: 4
-    t.text     "blood_type", limit: 65535
-    t.text     "gender",     limit: 65535
-    t.text     "eye_color",  limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "user_id",       limit: 4
+    t.integer  "trainer_id",    limit: 4
+    t.text     "gender",        limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.date     "birth_date"
+    t.integer  "eye_color_id",  limit: 4
+    t.integer  "blood_type_id", limit: 4
   end
 
   add_index "proteges", ["trainer_id"], name: "index_proteges_on_trainer_id", using: :btree
