@@ -59,6 +59,8 @@ Rails.application.routes.draw do
 
   get 'user_exists_mobile' => 'users#user_exists_mobile'
   get 'get_main_data' => 'measurements#get_main_data'
+  get 'get_blood_types_mobile' => 'blood_types#get_blood_types_mobile'
+  get 'get_eye_colors_mobile' => 'eye_colors#get_eye_colors_mobile'
 
   resources :users
   resources :measurements
