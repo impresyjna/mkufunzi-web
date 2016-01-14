@@ -1,6 +1,6 @@
 <div class="col-sm-2 col-lg-1" style="padding-left: 0px !important;">
 	<% if !@user.photo_file_name.nil? %>
-	    <div style="background-image: url(<%=@user.photo.url(:small)%>);" id="circle-photo-about"></div>
+	    <div style="background-image: url(<%=@user.photo.url(:small)%>);" id="circle-photo-big"></div>
 	<% else %>
 	    <div style="background-image: url('img/nologinuser2.jpg');" id="circle-photo-big"></div>
 	<% end %>
