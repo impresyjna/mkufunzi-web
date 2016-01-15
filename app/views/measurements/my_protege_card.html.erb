@@ -56,8 +56,6 @@
   </div>
 </div>
 
-
-
     <ul class="nav nav-tabs" style="margin-bottom: 20px;">
       <% @measureType.each do |data| %>
       <li><a href="#tab<%= data.id %>" data-toggle="tab" onclick="update(<%= data.id%>,<%= data.extra_field%>)"><%= data.name %></a></li>
@@ -72,10 +70,10 @@
           <% else %>
         <div class="tab-pane fade" id="tab<%= data.id %>">
           <% end %>
-          <div class="col-md-6 col-lg-6">
+          <div class="col-md-6 col-lg-6 protege-card-r">
           <div class="panel panel-default">
             <div class="panel-heading">
-                <%= data.name %> <%=data.extra_field %>
+                <%= data.name %>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -111,9 +109,9 @@
     </div>
     <% end %>
   </div>
- <div class="col-md-6 col-lg-6" id="left_bar">
+ <div class="col-md-6 col-lg-6 protege-card-l" id="left_bar">
         <div class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading" style="height: 40px;">
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -123,6 +121,9 @@
             </div>
             <!-- /.panel -->
           </div>
+<div class="clearfix"></div>
+          <%= render 'medicines/protege_medicines', medicines: @protege.medicines %>
+
 <script type="text/javascript">
     var d = new Array();
 

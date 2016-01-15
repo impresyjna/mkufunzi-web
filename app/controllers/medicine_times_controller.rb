@@ -13,6 +13,12 @@ class MedicineTimesController < ApplicationController
   	redirect_to my_medicines_path
   end
 
+  def destroy
+    MedicineTime.find(params[:id]).destroy
+    flash[:success] = "Dozowanie zostało usunięte "
+    redirect_to my_medicines_path
+  end
+
   private
   	def medicine_time_params
     	params.require(:medicine_time).permit(:medicine_time, :remind, :remind_when, :medicine_id)

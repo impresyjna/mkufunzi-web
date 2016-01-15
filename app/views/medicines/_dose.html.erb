@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  	<div class="panel-body">
+  		<% if data.medicine_times.count == 0 %>
+  			Brak dozowań
+  		<% elsif data.medicine_times.count == 1 %>
+  			Bierz raz dziennie
+  		<% else %>
+  			Bierz <%= data.medicine_times.count %> razy dziennie
+  		<% end %>
+  		<div style="float: right;">
+	        <%= link_to "dodaj" ,'#', "data-toggle" => "modal", 'data-target' => '#MedicineTime'+data.id.to_s, class: "btn btn-success btn-sm", style:"margin-top: 0px; margin-bottom: 0px" %>
+	        <% if data.medicine_times.count > 0 %>
+				<%= link_to "Pokaż dozowanie",'#c2'+data.id.to_s, "data-toggle" => "collapse", class: "btn btn-warning btn-sm", style:"margin-top: 0px; margin-bottom: 0px" %>
+			<% end %>
+			<%= link_to "usuń lek", my_medicines_path(id: data.id), method: :delete, class: 'btn btn-raised btn-danger btn-sm', style: "margin-top: 0px; margin-bottom: 0px", data: { confirm: "Czy jesteś tego pewien ?" }  %> 
+		</div>
+	</div>
+</div>
+
+<% if data.medicine_times.count > 0 %>
+	<div id="c2<%= data.id.to_s %>" class="collapse">
+		<% data.medicine_times.each do |data2| %>
+			<%= render 'medicine_times/show', data2: data2 %> 
+		<% end %>
+	</div> 
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113003334) do
+ActiveRecord::Schema.define(version: 20160115001331) do
 
   create_table "blood_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -34,6 +34,25 @@ ActiveRecord::Schema.define(version: 20160113003334) do
 
   add_index "cards", ["created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
   add_index "cards", ["protege_id"], name: "index_cards_on_protege_id", using: :btree
+
+  create_table "excercise_types", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.string   "formula",    limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "excercises", force: :cascade do |t|
+    t.integer  "how_many",          limit: 4
+    t.datetime "time"
+    t.integer  "training_id",       limit: 4
+    t.integer  "excercise_type_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "excercises", ["excercise_type_id"], name: "index_excercises_on_excercise_type_id", using: :btree
+  add_index "excercises", ["training_id"], name: "index_excercises_on_training_id", using: :btree
 
   create_table "eye_colors", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -120,6 +139,17 @@ ActiveRecord::Schema.define(version: 20160113003334) do
 
   add_index "trainers", ["user_id"], name: "index_trainers_on_user_id", using: :btree
 
+  create_table "trainings", force: :cascade do |t|
+    t.integer  "protege_id", limit: 4
+    t.datetime "start"
+    t.datetime "end"
+    t.text     "comment",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "trainings", ["protege_id"], name: "index_trainings_on_protege_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "login",              limit: 255
     t.string   "email",              limit: 255
@@ -139,6 +169,8 @@ ActiveRecord::Schema.define(version: 20160113003334) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "cards", "proteges"
+  add_foreign_key "excercises", "excercise_types"
+  add_foreign_key "excercises", "trainings"
   add_foreign_key "measurements", "cards"
   add_foreign_key "measurements", "measure_types"
   add_foreign_key "medicine_times", "medicines"
@@ -146,4 +178,5 @@ ActiveRecord::Schema.define(version: 20160113003334) do
   add_foreign_key "proteges", "trainers"
   add_foreign_key "proteges", "users"
   add_foreign_key "trainers", "users"
+  add_foreign_key "trainings", "proteges"
 end

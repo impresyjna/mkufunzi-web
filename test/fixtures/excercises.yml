@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  how_many: 1
+  time: 2016-01-15 01:13:31
+  training_id: 
+  excercise_type_id: 
+
+two:
+  how_many: 1
+  time: 2016-01-15 01:13:31
+  training_id: 
+  excercise_type_id: 

@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+  	<div class="panel-body">
+    Pora brania
+   	<%= data2.medicine_time.strftime("%H:%M") %> <%= link_to "usuń", delete_medicine_time_path(id: data2.id), method: :delete, class: 'btn btn-raised btn-danger btn-sm', style: "margin-top: 0px; margin-bottom: 0px; float: right;", data: { confirm: "Czy jesteś tego pewien ?" }  %> 
+	</div>
+  	<% if data2.remind == true %>
+	  	<div class="panel-footer">
+			przypomnij o <%= data2.remind_when.strftime("%H:%M") %> 
+	  	</div>
+  	<% end %>
+</div>

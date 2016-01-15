@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  protege_id: 
+  start: 2016-01-15 00:55:00
+  end: 2016-01-15 00:55:00
+  comment: MyString
+  : MyText
+
+two:
+  protege_id: 
+  start: 2016-01-15 00:55:00
+  end: 2016-01-15 00:55:00
+  comment: MyString
+  : MyText

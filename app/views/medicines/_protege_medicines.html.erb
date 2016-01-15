@@ -1,43 +1,37 @@
-<div class="panel panel-default">
+
+<div class="panel panel-default" style="margin-top: 20px;">
     <div class="panel-heading">
-        Moje leki
+        Leki podopiecznego
     </div>
     <!-- /.panel-heading -->
    	<div class="panel-body">
       	<div class="table-responsive">
-          <% if @my_medicines.empty? %>
+          <% if medicines.empty? %>
             Brak leków
           <% else %>
-          	<table id="card" class="table table-hover">
+          	<table id="medicines" class="table table-hover">
               	<thead>
                   	<tr>
                       	<th>Nazwa</th>
                       	<th>Dawka</th>
-             			      <th> Dozowanie</th>
                   	</tr>
               	</thead>
               	<tbody>
-                  <% @my_medicines.each do |data| %>
-                 
+                  <% medicines.each do |data| %>
                   <tr>
                       <td><%= data.name %></td>
                       <td><%= data.dose %> <%= data.dose_unit %> </td>
-                      <td><%= render 'medicines/dose', data: data %></td>
-            <%= render 'medicine_times/new', medicine_time: @medicine_time, medicine: data %>
+                  </tr>
                   <% end %>
               	</tbody>
           	</table>
             <% end %>
-            <%= link_to '#', "data-toggle" => "modal", 'data-target' => '#myModal' do %>
-            	<button class="btn btn-default btn-block btn-raised">Dodaj</button>
-            <% end %>
       	</div>
   	</div>
 </div>
-      <%= render 'medicines/new', data: @medicine, protege_id: current_user.protege.id %>
 
 <script type="text/javascript">
-$('#card').DataTable( {
+$('#medicines').DataTable( {
     "pagingType": "full_numbers",
     "order": [[ 1, "desc" ]],
     "dom": 'lfrt<"bottom"i<"clear">p>',
@@ -46,4 +40,3 @@ $('#card').DataTable( {
     }
 } );
 </script>
-

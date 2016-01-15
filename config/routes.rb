@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   post 'my_medicines' => 'medicines#new'
   post 'new_medicine_times' => 'medicine_times#create'
   delete 'my_medicines' => 'medicines#destroy'
+  delete 'delete_medicine_time' => 'medicine_times#destroy'
 
   get 'messages' => 'messages#show'
   post 'send_message' => 'messages#new'

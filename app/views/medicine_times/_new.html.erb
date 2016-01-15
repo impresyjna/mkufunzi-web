@@ -1,5 +1,5 @@
   <!-- Modal -->
-  <div class="modal fade" id="MedicineTime<%=medicine.id%>" role="dialog">
+  <div class="modal fade" id="MedicineTime<%=medicine.id.to_i%>" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -10,9 +10,8 @@
         </div>
         <%= form_for medicine_time , :url => url_for(:controller => 'medicine_times', :action => 'create') do |f| %>
         <div class="modal-body">
+          <fieldset>
           <br>
-                  <fieldset>
-
           <%= f.label :pora_dawkowania %>
           <%= f.text_field :medicine_time, id:"timepicker"+medicine.id.to_s , class: 'form-control'  %>
           
