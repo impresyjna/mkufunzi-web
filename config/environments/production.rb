@@ -87,4 +87,20 @@ Rails.application.configure do
     :url =>':s3_domain_url',
     :path => '/:class/:attachment/:id_partition/:style/:filename',
   }
+
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :user_name            => 'mkufunzi2015@gmail.com ',
+      :password             => 'inzynierka2015',
+      :authentication       => "plain",
+      :enable_starttls_auto => true,
+  }
+
+  host = 'http://trener-mkufunzi.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+
+  config.action_mailer.perform_deliveries = true
 end

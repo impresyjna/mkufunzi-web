@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
   has_one :trainer
   has_many :card_indices, :through => :cards
 
-  attr_accessor :remember_token
-  before_save { email.downcase! }
+  attr_accessor :remember_token, :activation_token
+  before_save   :downcase_email
+  before_create :create_activation_digest
 
   has_attached_file :photo, styles: { small: "80x80>"}, default_url: "/images/:style/missing.png"
 
@@ -42,9 +43,29 @@ class User < ActiveRecord::Base
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
+    # Returns true if the given token matches the digest.
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  private
+
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
+
+    # Creates and assigns the activation token and digest.
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
 
 end

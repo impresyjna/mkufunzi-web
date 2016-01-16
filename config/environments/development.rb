@@ -41,4 +41,22 @@ Rails.application.configure do
   # Paperclip config:
   Paperclip.options[:image_magick_path] = "/opt/ImageMagick/bin"
   Paperclip.options[:command_path] = "/opt/ImageMagick/bin"
+
+config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :user_name            => 'mkufunzi2015@gmail.com ',
+      :password             => 'inzynierka2015',
+      :authentication       => "plain",
+      :enable_starttls_auto => true,
+  }
+
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: host }
+
+  config.action_mailer.perform_deliveries = true
+
+
 end

@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   patch 'edit_measure_type' => 'measure_types#update'
   delete 'measure_type' => 'measure_types#destroy'
 
-
   get 'my_proteges' => 'proteges#my_proteges'
   post 'my_proteges' => 'proteges#add_trainer_to_protege'
   post 'erase_trainer_from_protege' => 'proteges#erase_trainer_from_protege'
@@ -57,7 +56,6 @@ Rails.application.routes.draw do
   post 'send_message' => 'messages#new'
   get 'message' => 'messages#new_message'
 
-
   get 'user_exists_mobile' => 'users#user_exists_mobile'
   get 'get_main_data' => 'measurements#get_main_data'
   get 'get_blood_types_mobile' => 'blood_types#get_blood_types_mobile'
@@ -73,5 +71,6 @@ Rails.application.routes.draw do
   resources :trainers
   resources :medicines
   resources :messages
-  
+  resources :account_activations, only: [:edit]
+
 end

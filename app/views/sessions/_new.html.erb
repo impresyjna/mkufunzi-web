@@ -1,4 +1,11 @@
 <h1 style="text-align: center">Zaloguj się</h1>
+  <div class="row">
+      <div class="col-lg-12">
+        <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+      </div>
+  </div>
 <br>
   <%= form_for(:session, url: login_path) do |f| %>
 

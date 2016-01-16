@@ -1,0 +1,187 @@
+<div class="col-lg-3 col-xs-6">
+    <%= link_to measurement_path do%> 
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: #673AB7;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-archive fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <span class="pull-left">Kartoteka</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>            
+        </div>
+    <%end%> 
+</div>
+
+<div class="col-lg-3 col-xs-6">
+    <%= link_to my_medicines_path do%> 
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: #3F51B5;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-medkit fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <span class="pull-left">Lekarstwa</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    <%end%> 
+</div>
+
+<div class="col-lg-3 col-xs-6">
+    <%= link_to measurement_path do%> 
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: #8BC34A;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa  fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <span class="pull-left">Treningi</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>   
+        </div>
+    <%end%> 
+</div>
+
+<div class="col-lg-3 col-xs-6">
+    <%= link_to messages_path do%> 
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: #FF9800;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-envelope fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <span class="pull-left">Wiadomośći</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>      
+        </div>
+    <%end%>
+</div>
+<div class="clearfix"></div>
+
+<div class="col-lg-8">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-archive fa-fw"></i> Ostatnie pomiary dodane do karototeki
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="list-group">
+                <% if measuremets.empty? %>
+                    Brak pomiarów. Przejdź do <%= link_to measurement_path do%>karototeki<% end %> aby dodać nowe pomiary.
+                <% else %>
+                    <% measuremets.each do |data| %>
+                    <a class="list-group-item">
+                        <strong><%= data.measure_type.name %></strong> 
+                        <%= data.value %> 
+                            <% if data.measure_type.extra_field == true %>
+                                / <%= data.second_value %>
+                            <% end %>
+                        <%= data.measure_type.unit %> 
+                        <span class="pull-right text-muted small"><em><%= data.created_at.strftime("%d-%m-%Y") %></em></span>
+                    </a>
+                    <% end %>
+                <% end %>
+            </div>
+            <!-- /.list-group -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+<% if @show_bmi_box == true %>
+    <div class="col-lg-4">
+        <div class="panel">
+            <div class="panel-heading" style="background: #0097A7; color: white; ">
+                <em> Body Mass Index </em>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="huge">
+                   <%= @bmi.round(2) %>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+            <div class="panel-footer">
+                <strong>Wynik: </strong> <%= @interpretate_bmi %> 
+            </div>
+             <!-- ./panel-footer -->
+        </div>
+        <!-- /.panel -->
+    </div>
+<% end %>
+
+<div class="clearfix"></div>
+
+
+
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-medkit fa-fw"></i> Leki
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="list-group">
+                <% if @medicines.empty? %>
+                    Brak leków.
+                    <%= link_to my_medicines_path do%> 
+                        Kliknij tutaj aby dodać 
+                    <% end %>
+
+                <% else %>
+                    <% @medicines.each do |data| %>
+                        <div class="list-group-item">
+                            <strong><%= data.name %></strong>  <%= data.dose %>  <%= data.dose_unit %>
+                        </div>
+                        <% data.medicine_times.each do |data2| %>
+                            <div class="list-group-item">
+                                <i class="fa fa-bell fa-fw"></i>Weź o <%= data2.medicine_time.strftime("%H:%m") %> 
+                            </div>
+                        <% end %>
+                        <br>
+                    <% end %>
+                <% end %>
+            </div>
+            <!-- /.list-group -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+
+<div class="col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Primary Panel
+        </div>
+        <div class="panel-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+        </div>
+        <div class="panel-footer">
+            Panel Footer
+        </div>
+    </div>
+</div>
+
