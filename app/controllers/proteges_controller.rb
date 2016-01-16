@@ -1,5 +1,5 @@
 class ProtegesController < ApplicationController
-	before_action :trainer_only,   only: [:my_proteges, :add_trainer_to_protege, :erase_trainer_from_protege]
+	before_action :trainer_only,   only: [:my_proteges, :add_trainer_to_protege, :erase_trainer_from_protege], except: [:update_from_mobile]
 
 	def show
 	end
@@ -60,7 +60,21 @@ class ProtegesController < ApplicationController
 	  	@card.save
 	end
   	redirect_to root_path
-  end
+	end
+
+	def update_from_mobile
+		if !params[:id].nil?
+			@protege = Protege.find(params[:id])
+			if @protege.update_attributes(protege_mobile)
+				render json: {status: "success"}
+			else
+				render json: {status: "failure"}
+			end
+		else
+			render json: {status: "failure"}
+		end
+
+	end
 
   private
 
@@ -87,6 +101,10 @@ class ProtegesController < ApplicationController
 
 	def protege_params
 		params.require(:protege).permit(:gender,:eye_color,:blood_type,:birth_date)
+	end
+
+	def protege_mobile
+		params.permit(:gender, :eye_color_id, :blood_type_id, :birth_date)
 	end
 
 end
