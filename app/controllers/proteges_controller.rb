@@ -59,7 +59,7 @@ class ProtegesController < ApplicationController
 	  	@card.protege_id = @protege.id.to_i
 	  	@card.save
 	end
-  	redirect_to root_path
+  	redirect_to edit_profile_path
   end
 
   private

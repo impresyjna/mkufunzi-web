@@ -384,3 +384,14 @@ div.nologin{
 .about-me{
 	padding-top: 7px !important; 
 }
+
+#error_explanation{
+	width: 100% !important;
+}
+
+.field_with_errors{
+	input {background-image: linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(#ff0000, #FF0000);}
+	label {color: #ff0000;}
+    width: 100%;
+    background-color: transparent !important;
+}
