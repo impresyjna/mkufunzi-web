@@ -1,0 +1,54 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Typy ćwiczeń
+    </div>
+    <!-- /.panel-heading -->
+   	<div class="panel-body">
+      	<div class="table-responsive">
+          <% if @excercise_types.empty? %>
+            Brak typów ćwiczeń
+          <% else %>
+          	<table id="excercise_type" class="table table-hover">
+              	<thead>
+                  	<tr>
+                      	<th>Nazwa</th>
+                      	<th>Formuła</th>
+                      	<th>Opcje </th>
+                  	</tr>
+              	</thead>
+              	<tbody>
+                  <% @excercise_types.each do |data| %>
+	                  <tr>
+	                      <td><%= data.name %></td>
+	                      <td><%= data.formula %></td>
+	                      <td><div class="btn-group-vertical">
+	                        <%= link_to '#', "data-toggle" => "modal", 'data-target' => '#EditExcerciseType'+data.id.to_s, class: 'btn btn-success btn-sm btn-raised' do %>
+              					Edytuj
+  							<% end %>
+							<%= link_to "usuń", excercise_types_path(id: data.id), method: :delete, class: 'btn btn-raised btn-danger btn-sm', style: "margin-top: 0px; margin-bottom: 0px", data: { confirm: "Czy jesteś tego pewien ?" }  %>
+							</div>	                      	
+							<%= render 'excercise_types/edit', data: data %>
+	                      </td>
+	                  </tr>
+                  <% end %>
+              	</tbody>
+          	</table>
+            <% end %>
+            <%= link_to '#', "data-toggle" => "modal", 'data-target' => '#myModal' do %>
+            	<button class="btn btn-default btn-block btn-raised">Dodaj</button>
+            <% end %>
+      	</div>
+  	</div>
+</div>
+	<%= render 'excercise_types/new', data: @excercise_type %>
+<script type="text/javascript">
+	$('#excercise_type').DataTable( {
+	    "pagingType": "full_numbers",
+	    "order": [[ 1, "desc" ]],
+	    "dom": 'lfrt<"bottom"i<"clear">p>',
+	    "language": {
+	        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+	    }
+	} );
+</script>
+

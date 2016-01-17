@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116154513) do
+ActiveRecord::Schema.define(version: 20160117182041) do
 
   create_table "blood_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -34,6 +34,20 @@ ActiveRecord::Schema.define(version: 20160116154513) do
 
   add_index "cards", ["created_at"], name: "index_cards_on_card_index_id_and_user_id_and_created_at", using: :btree
   add_index "cards", ["protege_id"], name: "index_cards_on_protege_id", using: :btree
+
+  create_table "done_excercises", force: :cascade do |t|
+    t.integer  "how_many",          limit: 4
+    t.datetime "time"
+    t.datetime "start"
+    t.datetime "stop"
+    t.integer  "training_id",       limit: 4
+    t.integer  "excercise_type_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "done_excercises", ["excercise_type_id"], name: "index_done_excercises_on_excercise_type_id", using: :btree
+  add_index "done_excercises", ["training_id"], name: "index_done_excercises_on_training_id", using: :btree
 
   create_table "excercise_types", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -172,6 +186,8 @@ ActiveRecord::Schema.define(version: 20160116154513) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "cards", "proteges"
+  add_foreign_key "done_excercises", "excercise_types"
+  add_foreign_key "done_excercises", "trainings"
   add_foreign_key "excercises", "excercise_types"
   add_foreign_key "excercises", "trainings"
   add_foreign_key "measurements", "cards"

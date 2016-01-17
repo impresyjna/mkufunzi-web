@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'excercise_types' => 'excercise_types#show'
+  post 'excercise_types' => 'excercise_types#new'
+  patch 'update_excercise_types' => 'excercise_types#update'
+  delete 'excercise_types' => 'excercise_types#delete'
   get 'protege/show'
   get 'protege/create'
 
@@ -62,6 +66,11 @@ Rails.application.routes.draw do
   get 'get_eye_colors_mobile' => 'eye_colors#get_eye_colors_mobile'
   post 'update_from_mobile' => 'proteges#update_from_mobile'
 
+  get 'done_excercises' => 'done_excercises#show'
+
+  get 'training' => 'trainings#show'
+  get 'training_details' => 'trainings#show_details'
+
   resources :users
   resources :measurements
   resources :card_indices
@@ -73,5 +82,9 @@ Rails.application.routes.draw do
   resources :medicines
   resources :messages
   resources :account_activations, only: [:edit]
+  resources :excercise_types
+  resources :excercises
+  resources :trainings
+  resources :done_excercises
 
 end

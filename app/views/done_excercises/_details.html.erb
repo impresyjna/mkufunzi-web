@@ -1,0 +1,16 @@
+<div class="col-xs-6">
+	<% data.each do |d| %>
+		<div class="panel panel-default">
+		  <div class="panel-heading" style="background: #FF9800; color: white"><%= d.excercise_type.name %></div>
+		  <div class="panel-body">
+		    <% if d.how_many == 1 %>
+		    	Wykonano 1 raz.
+		    <% else %>
+		    	Wykonano <%= d.how_many %> razy
+		    <% end %><br>
+		    <strong>Start</strong> <%= d.start.strftime("%Y-%m-%d %H:%M") %><br>
+		    <strong>Koniec</strong> <%= d.stop.strftime("%Y-%m-%d %H:%M") %><br>
+		  </div>
+		</div>
+	<% end %>
+</div>

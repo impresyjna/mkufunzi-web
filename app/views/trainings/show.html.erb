@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Moje treningi
+    </div>
+    <!-- /.panel-heading -->
+   	<div class="panel-body">
+      	<div class="table-responsive">
+          <% if @trainings.empty? %>
+            Brak wykonanych treningów
+          <% else %>
+          	<table id="training" class="table table-hover">
+              	<thead>
+                  	<tr>
+                      	<th>Start</th>
+                      	<th>Koniec</th>
+                      	<th>Komentarz</th>
+                      	<th>Więcej</th>
+                  	</tr>
+              	</thead>
+              	<tbody>
+                  <% @trainings.each do |data| %>
+	                  <tr>
+	                      <td><%= data.start %></td>
+	                      <td><%= data.end %></td>
+	                      <td><%= data.comment %></td>
+	                      <td><%= link_to 'wiecej', training_details_path(id:data.id), class: 'btn btn-training btn-sm btn-raised no-margin' %></td>
+	                  </tr>
+                  <% end %>
+              	</tbody>
+          	</table>
+            <% end %>
+      	</div>
+  	</div>
+</div>
+<script type="text/javascript">
+	$('#training').DataTable( {
+	    "pagingType": "full_numbers",
+	    "order": [[ 1, "desc" ]],
+	    "dom": 'lfrt<"bottom"i<"clear">p>',
+	    "language": {
+	        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Polish.json"
+	    }
+	} );
+</script>
+

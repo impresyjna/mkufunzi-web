@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Szczegółowe informacje
+    </div>
+    <!-- /.panel-heading -->
+   	<div class="panel-body">
+      <form class="form-horizontal">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Start</label>
+            <div class="col-md-9 about-me">
+              <%= @training.start.strftime("%Y-%m-%d %H:%M") %>
+            </div>
+          </div>
+          <div class="form-group">          
+            <label class="col-md-3 control-label">Koniec</label>
+            <div class="col-md-9 about-me">
+              <%= @training.end.strftime("%Y-%m-%d %H:%M") %>
+            </div>
+          </div>
+            <% if !@training.comment.blank? %>
+              <div class="form-group">
+                <label class="col-md-3 control-label"> Komentarz</label>
+                <div class="col-md-9 about-me">
+                  <%= @training.comment %>
+                </div>
+              </div>
+            <% end %>
+            <% if !@training.done_excercise.nil? %>
+              <%= render 'done_excercises/details', data: @training.done_excercise %>
+            <% end %>
+            <% if !@training.excercise.nil? %>
+              <%= render 'excercises/details', data: @training.excercise %>
+              <% end %>
+
+        </fieldset>
+      </form>
+  	</div>
+</div>
+
+

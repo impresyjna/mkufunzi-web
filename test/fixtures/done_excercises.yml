@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  how_many: 1
+  time: 2016-01-17 19:20:41
+  start: 2016-01-17 19:20:41
+  stop: 2016-01-17 19:20:41
+  training_id: 
+  excercise_type_id: 
+
+two:
+  how_many: 1
+  time: 2016-01-17 19:20:41
+  start: 2016-01-17 19:20:41
+  stop: 2016-01-17 19:20:41
+  training_id: 
+  excercise_type_id: 
