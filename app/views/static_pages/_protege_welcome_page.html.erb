@@ -175,42 +175,44 @@
     <!-- /.panel -->
 </div>
 
-<% training.each_with_index do |data,index| %>
-<div class="col-lg-4">
-    <div class="panel panel-primary">
-        <div class="panel-heading" style="background: #FF9800;">
-            # <%= index+1 %>
-        </div>
-        <div class="panel-body">
-      <form class="form-horizontal">
-        <fieldset>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Start</label>
-            <div class="col-md-9 about-me">
-              <%= data.start.strftime("%Y-%m-%d %H:%M") %>
+<% if !training.nil? %>
+    <% training.each_with_index do |data,index| %>
+    <div class="col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: #FF9800;">
+                # <%= index+1 %>
             </div>
-          </div>
-          <div class="form-group">          
-            <label class="col-md-3 control-label">Koniec</label>
-            <div class="col-md-9 about-me">
-              <%= data.end.strftime("%Y-%m-%d %H:%M") %>
-            </div>
-          </div>
-            <% if !data.comment.blank? %>
+            <div class="panel-body">
+          <form class="form-horizontal">
+            <fieldset>
               <div class="form-group">
-                <label class="col-md-3 control-label"> Komentarz</label>
+                <label class="col-md-3 control-label">Start</label>
                 <div class="col-md-9 about-me">
-                  <%= data.comment %>
+                  <%= data.start.strftime("%Y-%m-%d %H:%M") %>
                 </div>
               </div>
-            <% end %>
-        </fieldset>
-      </form>
-        </div>
-        <div class="panel-footer">
-            <%= link_to 'Zobacz szczegóły', training_details_path(id: data.id) %>
+              <div class="form-group">          
+                <label class="col-md-3 control-label">Koniec</label>
+                <div class="col-md-9 about-me">
+                  <%= data.end.strftime("%Y-%m-%d %H:%M") %>
+                </div>
+              </div>
+                <% if !data.comment.blank? %>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label"> Komentarz</label>
+                    <div class="col-md-9 about-me">
+                      <%= data.comment %>
+                    </div>
+                  </div>
+                <% end %>
+            </fieldset>
+          </form>
+            </div>
+            <div class="panel-footer">
+                <%= link_to 'Zobacz szczegóły', training_details_path(id: data.id) %>
+            </div>
         </div>
     </div>
-</div>
+    <% end %>
 <% end %>
 
