@@ -75,7 +75,6 @@ class ProtegesController < ApplicationController
 		end
 
 	end
->>>>>>> origin/master
 
   private
 
