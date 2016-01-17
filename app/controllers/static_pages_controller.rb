@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
         @protege = current_user.protege
         @card = @protege.card
         @medicines = @protege.medicines
-        @last_measurements = @card.measurements.where("`measurements`.`id` in (select max(`measurements`.`id`) from measurements where card_id = ? group by measure_type_id)",@card.id.to_i).joins(:measure_type)
+        @last_measurements = @card.measurements.where('"measurements"."id" in (select max("measurements"."id") from measurements where card_id = ? group by measure_type_id)',@card.id.to_i).joins(:measure_type)
         
         if !@last_measurements.where("measure_types.name = ? ",'waga').empty? and !@last_measurements.where("measure_types.name = ? ",'wzrost').empty?
           waga = @last_measurements.where("measure_types.name = ? ",'waga').last.value 
