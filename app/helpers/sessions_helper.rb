@@ -25,6 +25,7 @@ module SessionsHelper
     end
   end
 
+  # Returns true if user is protege.
   def protege
     if logged_in? and !Protege.find_by(user_id: session[:user_id]).nil?
       @protege = Protege.find_by(user_id: session[:user_id])
@@ -33,6 +34,7 @@ module SessionsHelper
     end
   end
 
+  # Returns true if user is trainer.
   def trainer
     if logged_in? and !Trainer.find_by(user_id: session[:user_id])
       @trainer = Trainer.find_by(user_id: session[:user_id])

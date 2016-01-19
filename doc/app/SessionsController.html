@@ -89,6 +89,8 @@
 
   <section class="description">
     
+<p>Log out and login user.</p>
+
   </section>
 
   
@@ -123,19 +125,24 @@
 
         <div class="method-description">
           
-          
+          <p>Login user.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:email</span>].<span class="ruby-identifier">downcase</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:password</span>])
-    <span class="ruby-identifier">log_in</span> <span class="ruby-identifier">user</span>
-    <span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:remember_me</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;1&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">remember</span>(<span class="ruby-identifier">user</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">forget</span>(<span class="ruby-identifier">user</span>)
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">user</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">activated</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">log_in</span> <span class="ruby-identifier">user</span>
+      <span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:remember_me</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;1&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">remember</span>(<span class="ruby-identifier">user</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">forget</span>(<span class="ruby-identifier">user</span>)
+      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:danger</span>] = <span class="ruby-string">&#39;Użytkownik nie jest aktywny&#39;</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-string">&#39;new&#39;</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:danger</span>] = <span class="ruby-string">&#39;Invalid email/password combination&#39;</span>
     <span class="ruby-identifier">render</span> <span class="ruby-string">&#39;new&#39;</span>
@@ -164,13 +171,13 @@
 
         <div class="method-description">
           
-          
+          <p>Log out user.</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">log_out</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">logged_in?</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
@@ -198,13 +205,13 @@
 
         <div class="method-description">
           
-          
+          <p>Prepare data for login user.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

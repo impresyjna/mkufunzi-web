@@ -3,13 +3,17 @@ class User < ActiveRecord::Base
   has_one :trainer
   has_many :card_indices, :through => :cards
 
-  attr_accessor :remember_token, :activation_token
+  
+  attr_accessor :remember_token
+  attr_accessor :activation_token
+  
   before_save   :downcase_email
   before_create :create_activation_digest
 
   has_attached_file :photo, styles: { small: "80x80>"}, default_url: "/images/:style/missing.png"
 
   validates :login, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
+  #set correct email pattern
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -32,6 +36,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
+  #Update attribute remember_digest to true.
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))

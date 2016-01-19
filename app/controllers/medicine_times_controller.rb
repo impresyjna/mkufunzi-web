@@ -1,8 +1,10 @@
 class MedicineTimesController < ApplicationController
+  #Prepare data to add to database
   def new
   	@medicine_time = MedicineTime.new
   end
 
+  #Adding new record to database.
   def create
   	@medicine_time = MedicineTime.new(medicine_time_params)
   	if @medicine_time.save
@@ -13,6 +15,7 @@ class MedicineTimesController < ApplicationController
   	redirect_to my_medicines_path
   end
 
+  #Destroy medicine time.
   def destroy
     MedicineTime.find(params[:id]).destroy
     flash[:success] = "Dozowanie zostało usunięte "

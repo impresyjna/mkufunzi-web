@@ -2,7 +2,7 @@ class MeasurementsController < ApplicationController
 	before_action :declared_user,   only: [:show, :new, :create], except: [:get_measurements_mobile, :post_measurement_mobile, :get_main_data]
 	before_action :trainer_only,   only: [:my_protege_card]
 
-
+	#Displaying my proteges card. Only for trainer.
 	def my_protege_card
 		@protege = Protege.joins(:user).find_by(user_id: params[:id])
 		@protege_measurement = @protege.card.measurements
@@ -12,6 +12,7 @@ class MeasurementsController < ApplicationController
 	def index
 	end
 
+	#Preparing to add new record into measurements. Only for protege.
 	def new
 		if params[:id].nil?
 			flash[:danger] = "Coś poszlo nie tak..."
@@ -22,6 +23,7 @@ class MeasurementsController < ApplicationController
 		end
 	end
 
+	#Displaying all current user measuremetns.
 	def show
 		@measureType = MeasureType.all
 		@measurements = Measurement.new
@@ -36,6 +38,7 @@ class MeasurementsController < ApplicationController
 		end
 	end
 
+	#Add new measurement to database.
 	def create
 	  	@measurement = Measurement.new(measurement_params)
 	  	@card = Card.find_by(protege_id: protege.id)
@@ -50,6 +53,7 @@ class MeasurementsController < ApplicationController
 	  	end
 	end
 
+	#Displaying measurements for mobile app.
 	def get_measurements_mobile
 		if !params[:card_id].nil? and !params[:measure_type_id].nil?
 			@measurements = Measurement.where("card_id = ? and measure_type_id = ?", params[:card_id], params[:measure_type_id]).order(created_at: :desc)
@@ -59,6 +63,7 @@ class MeasurementsController < ApplicationController
 		end
 	end
 
+	#Add new measurements from mobile app.
 	def post_measurement_mobile
 		if !params[:value].nil? and !params[:card_id].nil? and !params[:measure_type_id].nil?
 			@measurement = Measurement.new(measurement_mobile)
@@ -72,6 +77,7 @@ class MeasurementsController < ApplicationController
 		end
 	end
 
+	#Get data from database for current user to display welcome info.
 	def get_main_data
 		if !params[:id].nil?
 			@user = User.find(params[:id])
@@ -95,6 +101,7 @@ class MeasurementsController < ApplicationController
 
   	private
 
+  	#Returns true if current user is trainer.
     def trainer_only
       if logged_in?
       	@trainer = Trainer.find_by(user_id: current_user.id.to_i)
@@ -110,6 +117,7 @@ class MeasurementsController < ApplicationController
       end
     end
 
+    #Return true if current user is protege.
     def declared_user
       if logged_in?
         if Protege.find_by(user_id: current_user.id.to_i).nil?
@@ -122,10 +130,10 @@ class MeasurementsController < ApplicationController
 
   	def measurement_params
   		params.require(:measurement).permit(:value,:measure_type_id,:second_value)
-		end
+	end
 
-		def measurement_mobile
-			params.permit(:value, :card_id, :measure_type_id, :second_value)
-		end
+	def measurement_mobile
+		params.permit(:value, :card_id, :measure_type_id, :second_value)
+	end
 
 end

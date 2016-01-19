@@ -1,0 +1,18 @@
+<h1>Aktywne ćwiczenia</h1>
+<p>Find me in app/views/active_excercises/show.html.erb</p>
+
+
+
+
+
+<script type="text/javascript">
+
+$(function() { setTimeout(updateMessages, 50000)});
+
+function active_excercise () {
+  var r_id = <%= receive_user_id %>
+ 
+  $.getScript("active_excercise.js")
+  setTimeout(updateMessages, 50000);
+}
+</script>

@@ -73,7 +73,11 @@
     
     <li ><a href="#method-i-logged_in-3F">#logged_in?</a>
     
+    <li ><a href="#method-i-protege">#protege</a>
+    
     <li ><a href="#method-i-remember">#remember</a>
+    
+    <li ><a href="#method-i-trainer">#trainer</a>
     
   </ul>
 </div>
@@ -134,7 +138,7 @@
     <span class="ruby-ivar">@current_user</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_id</span>)
   <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>[<span class="ruby-value">:user_id</span>])
     <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_id</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticated?</span>(<span class="ruby-identifier">cookies</span>[<span class="ruby-value">:remember_token</span>])
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticated?</span>(<span class="ruby-value">:remember</span>, <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:remember_token</span>])
       <span class="ruby-identifier">log_in</span> <span class="ruby-identifier">user</span>
       <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">user</span>
     <span class="ruby-keyword">end</span>
@@ -169,7 +173,7 @@
 
           
           <div class="method-source-code" id="forget-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forget</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">forget</span>
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:user_id</span>)
@@ -237,7 +241,7 @@
 
           
           <div class="method-source-code" id="log_out-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">log_out</span>
   <span class="ruby-identifier">forget</span>(<span class="ruby-identifier">current_user</span>)
   <span class="ruby-identifier">session</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:user_id</span>)
@@ -272,9 +276,46 @@
 
           
           <div class="method-source-code" id="logged_in-3F-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">logged_in?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-protege" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">protege</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns true if user is protege.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="protege-source">
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">protege</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">logged_in?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-constant">Protege</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]).<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@protege</span> = <span class="ruby-constant">Protege</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@protege</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -310,6 +351,43 @@
   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">remember</span>
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">permanent</span>.<span class="ruby-identifier">signed</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">permanent</span>[<span class="ruby-value">:remember_token</span>] = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">remember_token</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-trainer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">trainer</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns true if user is trainer.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="trainer-source">
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">trainer</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">logged_in?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-constant">Trainer</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+    <span class="ruby-ivar">@trainer</span> = <span class="ruby-constant">Trainer</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@trainer</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

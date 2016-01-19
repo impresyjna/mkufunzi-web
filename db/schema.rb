@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117182041) do
+ActiveRecord::Schema.define(version: 20160119124648) do
+
+  create_table "active_excercises", force: :cascade do |t|
+    t.integer  "how_many",          limit: 4
+    t.integer  "excercise_type_id", limit: 4
+    t.integer  "training_id",       limit: 4
+    t.datetime "time"
+    t.integer  "puls",              limit: 4
+    t.integer  "protege_id",        limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "active_excercises", ["excercise_type_id"], name: "index_active_excercises_on_excercise_type_id", using: :btree
+  add_index "active_excercises", ["protege_id"], name: "index_active_excercises_on_protege_id", using: :btree
+  add_index "active_excercises", ["training_id"], name: "index_active_excercises_on_training_id", using: :btree
 
   create_table "blood_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -185,6 +200,9 @@ ActiveRecord::Schema.define(version: 20160117182041) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "active_excercises", "excercise_types"
+  add_foreign_key "active_excercises", "proteges"
+  add_foreign_key "active_excercises", "trainings"
   add_foreign_key "cards", "proteges"
   add_foreign_key "done_excercises", "excercise_types"
   add_foreign_key "done_excercises", "trainings"

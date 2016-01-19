@@ -28,6 +28,10 @@
             <%= render 'protege_welcome_page', measuremets:  @last_measurements, training: @last_training %>
         <% end %>
 
+        <% if !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
+            <%= render 'trainer_welcome_page'%>
+        <% end %>
+
     <% end %>
 
 <%end %>

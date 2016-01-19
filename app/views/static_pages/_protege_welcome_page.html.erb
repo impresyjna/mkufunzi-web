@@ -34,7 +34,7 @@
             </div>            
         </div>
     <%end%> 
-</div>
+</div> 
 
 <div class="col-lg-3 col-xs-6">
     <%= link_to my_medicines_path do%> 
@@ -81,7 +81,7 @@
 
 <div class="col-lg-8">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" style="background: #673AB7;color:white;">
             <i class="fa fa-archive fa-fw"></i> Ostatnie pomiary dodane do karototeki
         </div>
         <!-- /.panel-heading -->
@@ -138,7 +138,7 @@
 
 <div class="col-lg-12">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" style="background: #3F51B5;color:white;" >
             <i class="fa fa-medkit fa-fw"></i> Leki
         </div>
         <!-- /.panel-heading -->
@@ -156,12 +156,13 @@
                             <strong><%= data.name %></strong>  <%= data.dose %>  <%= data.dose_unit %>
                         </div>
                         <% if !data.medicine_times.empty? %>
-                            <div class="well">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
                                 <% data.medicine_times.each do |data2| %>
-                                    <div class="list-group-item">
-                                        <i class="fa fa-bell fa-fw"></i>Weź o <%= data2.medicine_time.strftime("%H:%M") %> 
-                                    </div>
-                                <% end %>
+                                    
+                                        <i class="fa fa-bell fa-fw"></i>Weź o <%= data2.medicine_time.strftime("%H:%M") %> <br>
+                                   
+                                <% end %> </div>
                             </div>
                         <% end %>
                         <br>
@@ -208,9 +209,11 @@
             </fieldset>
           </form>
             </div>
-            <div class="panel-footer">
-                <%= link_to 'Zobacz szczegóły', training_details_path(id: data.id) %>
-            </div>
+            <%= link_to training_details_path(id: data.id) do %>            
+                <div class="panel-footer">
+                    Zobacz więcej <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                </div>
+            <% end %>
         </div>
     </div>
     <% end %>

@@ -1,14 +1,14 @@
+#Set's all methods for User. Create, edit and update User.
 class UsersController < ApplicationController
   before_filter :declared_user, except: [:create, :login_mobile, :register_mobile, :user_exists_mobile]
 
+
+  # Display current user.
   def show
     @user = User.find(params[:id])
   end
 
-  def new
-    @user = User.new
-  end
-
+  # Display current user data for updating purpose.
   def edit
     @user = current_user
     @gender = [['Kobieta','K'],['Mężczyzna','M']]
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @eye_color = EyeColor.pluck(:name, :id)
   end
 
+  # Update current user with data provided by user.
   def update
     @user = current_user
     if @user.update_attributes(user_params)
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Create new user account and sending email with activation link to user.
   def create
     @user = User.new(user_params)
     if @user.save
@@ -38,6 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Enable user to login on mobile app.
   def login_mobile
     @user = User.new
     if !params[:email].nil? and !params[:password].nil?
@@ -54,6 +57,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Register uset on mobile app.
   def register_mobile
     @user = User.new(user_mobile)
     if @user.save
@@ -74,6 +78,7 @@ class UsersController < ApplicationController
 
   end
 
+  #Return success if user exits
   def user_exists_mobile
     @user = User.none
     if !params[:email].nil?
@@ -88,6 +93,7 @@ class UsersController < ApplicationController
 
   private
 
+    #Return true if user is declared. It means that user is set to be protege or trainer.
     def declared_user
       if logged_in?
         if Protege.find_by(user_id: current_user.id.to_i).nil? and Trainer.find_by(user_id: current_user.id.to_i).nil?

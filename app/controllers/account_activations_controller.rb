@@ -1,5 +1,6 @@
+#User account activation
 class AccountActivationsController < ApplicationController
-
+  #Activate user accout. After registration, system sent email to user with activation link
   def edit
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:id])

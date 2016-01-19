@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'active_excercises/show'
+
   get 'excercise_types' => 'excercise_types#show'
   post 'excercise_types' => 'excercise_types#new'
   patch 'update_excercise_types' => 'excercise_types#update'
@@ -7,13 +9,11 @@ Rails.application.routes.draw do
   get 'protege/show'
   get 'protege/create'
 
-  root             'static_pages#home'
+  root 'static_pages#home'
   get 'start' => 'static_pages#home'
   post 'new_protege' => 'proteges#create'
   post 'new_trainer' => 'trainers#create'
 
-  get 'contact' => 'static_pages#contact'
-  get 'about'   => 'static_pages#about'
   get 'signup'  => 'users#new'
   post 'signup'  => 'users#create'
   get 'profile' => 'users#show'

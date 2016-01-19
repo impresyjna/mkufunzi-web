@@ -2,6 +2,11 @@
 @import "bootstrap";
 @import 'bootstrap-datetimepicker';
 @import "bootstrap-timepicker";
+
+@font-face {
+  font-family: Herculanum;
+  src: url(Herculanum.ttf);
+}
  
 // $state-danger-text: #fff;
 
@@ -207,7 +212,7 @@ body {background-color: $accent_kolor !important;}
 
 
 #logo {
-	font-family: 'Herculanum';
+	font-family: Herculanum;
 	font-size: 25px;
 	color: $dark_primary_kolor;
 }

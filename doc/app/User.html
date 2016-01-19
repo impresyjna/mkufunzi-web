@@ -112,7 +112,7 @@
       
         <dt id="VALID_EMAIL_REGEX">VALID_EMAIL_REGEX
         
-        <dd>
+        <dd><p>set correct email pattern</p>
         
       
       </dl>
@@ -125,6 +125,19 @@
         <h3>Attributes</h3>
       </header>
 
+      
+      <div id="attribute-i-activation_token" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">activation_token</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
       
       <div id="attribute-i-remember_token" class="method-detail">
         <div class="method-heading attribute-method-heading">
@@ -168,7 +181,7 @@
 
           
           <div class="method-source-code" id="digest-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">string</span>)
   <span class="ruby-identifier">cost</span> = <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">SecurePassword</span>.<span class="ruby-identifier">min_cost</span> <span class="ruby-operator">?</span> <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN_COST</span> <span class="ruby-operator">:</span>
       <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span>.<span class="ruby-identifier">cost</span>
@@ -203,7 +216,7 @@
 
           
           <div class="method-source-code" id="new_token-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">new_token</span>
   <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">urlsafe_base64</span>
 <span class="ruby-keyword">end</span></pre>
@@ -244,7 +257,7 @@
 
           
           <div class="method-source-code" id="authenticated-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticated?</span>(<span class="ruby-identifier">remember_token</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">remember_digest</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Password</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">remember_digest</span>).<span class="ruby-identifier">is_password?</span>(<span class="ruby-identifier">remember_token</span>)
@@ -278,7 +291,7 @@
 
           
           <div class="method-source-code" id="forget-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forget</span>
   <span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:remember_digest</span>, <span class="ruby-keyword">nil</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -305,13 +318,13 @@
 
         <div class="method-description">
           
-          
+          <p>Update attribute remember_digest to true.</p>
           
           
 
           
           <div class="method-source-code" id="remember-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remember</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">remember_token</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new_token</span>
   <span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:remember_digest</span>, <span class="ruby-constant">User</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">remember_token</span>))

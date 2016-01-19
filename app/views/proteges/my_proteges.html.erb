@@ -24,10 +24,10 @@
                           <td><%= data.user.surname %> </td>
                           <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                           <td>
-                             <%= link_to "wiecej", my_protege_card_path(:id => data.user.id), class: 'btn btn-raised btn-info'%>  
+                             <%= link_to "wiecej", my_protege_card_path(:id => data.user.id), class: 'btn btn-sm btn-raised btn-info no-margin'%>  
                            </td>
                           <td>
-                            <%= link_to "usuń", erase_trainer_from_protege_path(:id => data.id), method: :post, class: 'btn btn-danger', data: {confirm: "Czy jesteś tego pewien?"}  %>                            
+                            <%= link_to "usuń", erase_trainer_from_protege_path(:id => data.id), method: :post, class: 'btn btn-danger no-margin btn-sm', data: {confirm: "Czy jesteś tego pewien?"}  %>                            
                           </td>
                       </tr>
                       <% end %>

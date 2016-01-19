@@ -4,6 +4,7 @@ class Protege < ActiveRecord::Base
   has_one :card
   has_many :medicines
   has_many :training
+  has_many :active_excercise
   belongs_to :eye_color
   belongs_to :blood_type
 

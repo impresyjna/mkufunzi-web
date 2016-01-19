@@ -1,4 +1,5 @@
 class MedicinesController < ApplicationController
+  #Add new medicine to database.
   def new
   	@medicine = Medicine.new(medicine_params)
   	if @medicine.save
@@ -9,12 +10,14 @@ class MedicinesController < ApplicationController
   	redirect_to my_medicines_path
   end
 
+  #Displaying all current user medicines.
   def show
   	@my_medicines = User.find(current_user.id).protege.medicines
   	@medicine = Medicine.new
   	@medicine_time = MedicineTime.new
   end
 
+  #Delete selected medicines.
   def destroy
     Medicine.find(params[:id]).destroy
     flash[:success] = "Lek został usunięty"

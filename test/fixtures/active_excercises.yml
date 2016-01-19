@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  how_many: 1
+  excercise_type_id: 
+  training_id: 
+  time: 2016-01-19 13:46:48
+  puls: 1
+  protege_id: 
+
+two:
+  how_many: 1
+  excercise_type_id: 
+  training_id: 
+  time: 2016-01-19 13:46:48
+  puls: 1
+  protege_id: 

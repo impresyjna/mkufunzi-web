@@ -10,6 +10,7 @@ module ApplicationHelper
     end
   end
 
+  # Returns all types of measure.
   def measure_types
     @measure_type = MeasureType.all
   end

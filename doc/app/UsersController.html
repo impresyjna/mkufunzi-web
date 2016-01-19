@@ -72,9 +72,17 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-new">#new</a>
+    <li ><a href="#method-i-edit">#edit</a>
+    
+    <li ><a href="#method-i-login_mobile">#login_mobile</a>
+    
+    <li ><a href="#method-i-register_mobile">#register_mobile</a>
     
     <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-user_exists_mobile">#user_exists_mobile</a>
     
   </ul>
 </div>
@@ -89,6 +97,9 @@
 
   <section class="description">
     
+<p>Set&#39;s all methods for <a href="User.html">User</a>. Create, edit and
+update <a href="User.html">User</a>.</p>
+
   </section>
 
   
@@ -123,19 +134,19 @@
 
         <div class="method-description">
           
-          
+          <p>Create new user account and sending email with activation link to user.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_params</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
-    <span class="ruby-identifier">log_in</span> <span class="ruby-ivar">@user</span>
-    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Pomyślnie zarejestrowano&quot;</span>
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@user</span>
+    <span class="ruby-constant">UserMailer</span>.<span class="ruby-identifier">account_activation</span>(<span class="ruby-ivar">@user</span>).<span class="ruby-identifier">deliver_now</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:info</span>] = <span class="ruby-string">&quot;Proszę sprawdź swój email, aby aktywować konto&quot;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">render</span> <span class="ruby-string">&#39;new&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -150,10 +161,10 @@
       </div>
 
     
-      <div id="method-i-new" class="method-detail ">
+      <div id="method-i-edit" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">new</span><span
+          <span class="method-name">edit</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -163,15 +174,112 @@
 
         <div class="method-description">
           
-          
+          <p>Display current user data for updating purpose.</p>
           
           
 
           
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
+  <span class="ruby-ivar">@gender</span> = [[<span class="ruby-string">&#39;Kobieta&#39;</span>,<span class="ruby-string">&#39;K&#39;</span>],[<span class="ruby-string">&#39;Mężczyzna&#39;</span>,<span class="ruby-string">&#39;M&#39;</span>]]
+  <span class="ruby-ivar">@blood_type</span> = <span class="ruby-constant">BloodType</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>)
+  <span class="ruby-ivar">@eye_color</span> = <span class="ruby-constant">EyeColor</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-login_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">login_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Enable user to login on mobile app.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="login_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">login_mobile</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>].<span class="ruby-identifier">downcase</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>])
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>, <span class="ruby-identifier">protege</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>, <span class="ruby-identifier">card</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">card</span>}
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-register_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">register_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Register uset on mobile app.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="register_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">register_mobile</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_mobile</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-ivar">@protege</span> = <span class="ruby-constant">Protege</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@protege</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-ivar">@cart</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">protege_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@protege</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-ivar">@cart</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Pomyślnie zarejestrowano&quot;</span>, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>, <span class="ruby-identifier">protege</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>, <span class="ruby-identifier">card</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">card</span>}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>].<span class="ruby-identifier">downcase</span>).<span class="ruby-identifier">blank?</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Osoba o tym emailu istnieje&quot;</span>}
+    <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">login</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:login</span>]).<span class="ruby-identifier">blank?</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Osoba o tym loginie istnieje&quot;</span>}
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Niepoprawne dane&quot;</span>}
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -196,15 +304,96 @@
 
         <div class="method-description">
           
-          
+          <p>Display current user.</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Update current user with data provided by user.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">user_params</span>)
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Pomyślnie zmieniono&quot;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_profile_path</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:danger</span>] = <span class="ruby-string">&quot;Nie udalo się edytować&quot;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_profile_path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-user_exists_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">user_exists_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return success if user exits</p>
+          
+          
+
+          
+          <div class="method-source-code" id="user_exists_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">user_exists_mobile</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">none</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>].<span class="ruby-identifier">downcase</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>, <span class="ruby-identifier">protege</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>, <span class="ruby-identifier">card</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">card</span>}
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

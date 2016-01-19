@@ -1,9 +1,12 @@
+
 class MessagesController < ApplicationController
     
+  #Checking if current user received message from another user.  
   def new_message
     @new_messages = Message.where("user_send_id = ? AND user_receive_id = ? AND id > ?",params[:r_id], current_user.id,params[:after].to_i)
   end
 
+  #Displays all curent user messages.
   def show
     if !current_user.protege.nil?
   	   @trainer = Protege.find_by(user_id: current_user.id).trainer
@@ -17,6 +20,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  #Add new message to database, sent by current user to specified one.
   def new
   	@message = Message.new(message_params)
   	@message.save
