@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'active_excercises/show'
+  get 'active_excercises' => 'active_excercises#show'
+  get 'active' => 'active_excercises#active'
 
   get 'excercise_types' => 'excercise_types#show'
   post 'excercise_types' => 'excercise_types#new'
@@ -86,5 +87,6 @@ Rails.application.routes.draw do
   resources :excercises
   resources :trainings
   resources :done_excercises
+  resources :active_excercises
 
 end

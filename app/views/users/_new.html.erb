@@ -12,16 +12,16 @@
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
 
-    <%= f.label :password %>
+    <%= f.label :hasło %>
     <%= f.password_field :password, class: 'form-control' %>
 
-    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.label :password_confirmation, "Potwierdzenie hasła" %>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-    <%= f.label :name %>
+    <%= f.label :imie %>
     <%= f.text_field :name , class: 'form-control'%>
 
-    <%= f.label :surname %>
+    <%= f.label :nazwisko %>
     <%= f.text_field :surname , class: 'form-control'%>
 <br>
     <%= f.submit "Utwórz konto", class: "btn btn-primary btn-raised" %>

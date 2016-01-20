@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: Herculanum;
-  src: url(Herculanum.ttf);
+  src: url(stylesheets/Herculanum.ttf);
 }
  
 // $state-danger-text: #fff;
@@ -406,7 +406,25 @@ div.nologin{
 	margin-top: 0px !important;
 }
 
+.no-padding{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
 .btn-training{
 	background-color: #FF9800 !important;
 	color: #fff !important;
+}
+
+.photo-center{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 80px;
+	width: 80px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }

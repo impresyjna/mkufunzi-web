@@ -64,6 +64,7 @@ class UsersController < ApplicationController
   # Register uset on mobile app.
   def register_mobile
     @user = User.new(user_mobile)
+    @user.activated = true
     if @user.save
       @protege = Protege.new(user_id: @user.id)
       @protege.save

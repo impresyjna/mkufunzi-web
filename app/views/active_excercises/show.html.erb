@@ -1,18 +1,13 @@
-<h1>Aktywne ćwiczenia</h1>
-<p>Find me in app/views/active_excercises/show.html.erb</p>
+<h3>Aktywne ćwiczenia</h3>
 
-
-
-
+<div id="active_triainings">
+	<%= render partial: 'active_tab', locals: { active_protege: @active_protege} %>
+</div>
 
 <script type="text/javascript">
-
-$(function() { setTimeout(updateMessages, 50000)});
-
-function active_excercise () {
-  var r_id = <%= receive_user_id %>
- 
-  $.getScript("active_excercise.js")
-  setTimeout(updateMessages, 50000);
-}
-</script>
+// $(function() { setTimeout(active_excercise, 1000)});
+// 	function active_excercise(){
+// 		$.getScript("active.js")
+// 		setTimeout(active_excercise, 1000);
+// 	}
+ </script>

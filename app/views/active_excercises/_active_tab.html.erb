@@ -1,0 +1,59 @@
+<% @active_protege.each do |data| %>
+    <% if !data.active_excercise.blank? %>
+        <div class="col-sm-6 col-lg-4">
+            <div class="panel panel-default">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <% if !data.user.photo_file_name.nil? %>
+                        <div style="background-image: url(<%=data.user.photo.url(:small)%>);" class="photo-center"></div>
+                    <% else %>
+                        <div style="background-image: url('img/nologinuser2.jpg');"  class="photo-center"></div>
+                    <% end %>
+                    <div class="form-group">
+                        <label >Imie i nazwisko</label>
+                        <div><%= data.user.name %> <%= data.user.surname %></div>
+                    </div>
+                    <div class="form-group">
+                        <label >Krew</label>
+                        <% if !data.blood_type.nil? %>
+                            <div><%= data.blood_type.name %></div>
+                        <% else %>
+                            <div> brak informacji</div>
+                        <% end %>
+                    </div>
+                    <div class="form-group">
+                        <label >Płeć</label>
+                        <% if data.gender.nil? %>
+                            <div> brak informacji </div>
+                        <% elsif data.gender == 'K' %>
+                            <div> kobieta </div>
+                        <% else %>
+                            <div> meżczyzna </div>
+                        <% end %>
+                        <div></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Puls</label>
+                        <div>
+                            <% if !data.active_excercise.last.puls.nil? %>
+                                <%= data.active_excercise.last.puls %> / min
+                            <% else %>
+                                brak
+                            <% end %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Typ ćwiczenia</label>
+                        <div>
+                            <%= data.active_excercise.last.excercise_type.name %>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    <% end %>
+<% end %>
