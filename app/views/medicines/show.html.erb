@@ -34,7 +34,8 @@
       	</div>
   	</div>
 </div>
-      <%= render 'medicines/new', data: @medicine, protege_id: current_user.protege.id %>
+
+<%= render 'medicines/new', data: @medicine, protege_id: current_user.protege.id %>
 
 <script type="text/javascript">
 $('#card').DataTable( {
@@ -47,3 +48,4 @@ $('#card').DataTable( {
 } );
 </script>
 
+ 

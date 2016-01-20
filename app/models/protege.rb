@@ -8,7 +8,6 @@ class Protege < ActiveRecord::Base
   belongs_to :eye_color
   belongs_to :blood_type
 
-
   def full_name
     "#{first} #{second}"
   end
