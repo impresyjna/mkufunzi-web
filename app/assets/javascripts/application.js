@@ -12,12 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-//= require jquery.turbolinks    
-//= require bootstrap 
+//= require jquery.turbolinks
+//= require bootstrap
 //= require bootstrap-timepicker
 //= require turbolinks
 //= require bootstrap_sb_admin_base_v2
 //= require bootstrap-material-design
 //= require moment
 //= require bootstrap-datetimepicker
+//= require_tree .
