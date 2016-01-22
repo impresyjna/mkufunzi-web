@@ -5,9 +5,9 @@
 <div class="row">
   <div class="col-md-2 col-lg-1">
     <% if !@protege.user.photo_file_name.nil? %>
-        <div style="background-image: url(<%=@protege.user.photo.url(:small)%>);" id="circle-photo-big"></div>
+        <div style="background-image: url(<%=@protege.user.photo.url(:small)%>);" class="photo-center"></div>
     <% else %>
-        <div style="background-image: url('img/nologinuser2.jpg');" id="circle-photo-big"></div>
+        <div style="background-image: url('img/nologinuser2.jpg');" class="photo-center"></div>
     <% end %>
   </div>
   <div class="col-md-10 col-lg-11">
