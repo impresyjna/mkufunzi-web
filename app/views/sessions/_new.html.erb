@@ -6,13 +6,13 @@
         <% end %>
       </div>
   </div>
-<br>
+  <br>
   <%= form_for(:session, url: login_path) do |f| %>
 
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
 
-    <%= f.label :hasło %>
+    <%= f.label :hasło %> <%= link_to "(przypomnij hasło)", my_protege_card_path %>
     <%= f.password_field :password, class: 'form-control' %>
     
     <div class="checkbox">

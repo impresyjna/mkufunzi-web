@@ -9,6 +9,7 @@
             <span style="position: absolute;left: 100px;top: 45px;"><%= @current_user.name %>  <%= @current_user.surname%></span>
         </div>
         <ul class="nav" id="side-menu">
+            <li><%= link_to root_path, id:'start' do %> <i class="material-icons" style="font-size: 17px;vertical-align: middle;">dashboard</i>Start<% end %></li>
             <% if @current_user.admin == true %>
              <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Panel Admina<span class="fa arrow"></span></a>
@@ -74,7 +75,7 @@
             </li>
             <li>
                 <%= link_to active_excercises_path do %> 
-                    <i class="fa fa-fw fa-envelope"></i> Aktywne treningi
+                    <i class="material-icons" style="font-size: 17px;vertical-align: middle;">directions_run</i>Aktywne ćwiczenia
                 <% end %>
             </li>
             <!-- end protege user menu -->
@@ -91,3 +92,10 @@
     <!-- /.sidebar-collapse -->
 </div>
 <!-- /.navbar-static-side -->
+
+<script>
+$(document).ready(function () {
+$('#start').removeClass('active');
+}); 
+
+</script>
