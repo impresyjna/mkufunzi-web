@@ -15,6 +15,10 @@
       <div class="tab-content" style="width: 75%; margin: 0 auto;" >
         <div role="tabpanel" class="tab-pane fade in active" id="zaloguj_sie"><%= render 'sessions/new' %></div>
         <div role="tabpanel" class="tab-pane fade" id="zarejestruj_sie"><%= render 'users/new' %></div>
+        <div role="tabpanel" class="tab-pane fade" id="przypomnij_haslo"><%= render 'password_resets/new' %></div>
+        <% if !params[:id].nil? %>
+        <div role="tabpanel" class="tab-pane fade" id="password_resets"><%= render 'password_resets/edit' %></div>
+        <% end %>
       </div> 
     </div>
   </div>
@@ -24,10 +28,18 @@
 </div>
 
 <script type="text/javascript">
+$(function(){
 function activaTab(tabID){
     $('.nav-tabs a[href="#' + tabID + '"]').tab('show');
 };
 
-if (window.location.href.indexOf("signup") > -1 ) {activaTab('zarejestruj_sie');};
+if (window.location.href.indexOf("password_resets") > -1 ) {
+  $('#password_resets').addClass('in active');
+  $('#zaloguj_sie').removeClass('in active');
+};
+
+if (window.location.href.indexOf("signup") > -1 ) {
+  activaTab('zarejestruj_sie');
+};});
 
 </script>

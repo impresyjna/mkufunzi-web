@@ -1,0 +1,10 @@
+<h1>Przypomnij hasło</h1>
+<br>
+
+<%= form_for(:password_reset, url: password_resets_path) do |f| %>
+	<%= f.label :email %>
+	<%= f.email_field :email, class: 'form-control' %>
+
+	<%= f.submit "Wyślij", class: "btn btn-primary btn-raised" %>
+	 <a href="#zaloguj_sie" class="btn btn-default btn-raised" role="tab" data-toggle="tab">Zaloguj się</a>
+<% end %>

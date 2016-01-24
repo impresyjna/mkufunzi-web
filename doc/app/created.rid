@@ -1,6 +1,7 @@
-Mon, 18 Jan 2016 23:27:29 +0100
+Sun, 24 Jan 2016 02:39:02 +0100
 README.rdoc	Wed, 25 Nov 2015 13:17:12 +0100
 app/controllers/account_activations_controller.rb	Mon, 18 Jan 2016 22:56:02 +0100
+app/controllers/active_excercises_controller.rb	Wed, 20 Jan 2016 17:54:01 +0100
 app/controllers/application_controller.rb	Sun, 27 Dec 2015 14:11:25 +0100
 app/controllers/blood_types_controller.rb	Mon, 18 Jan 2016 20:10:39 +0100
 app/controllers/card_indices_controller.rb	Mon, 18 Jan 2016 22:57:49 +0100
@@ -15,11 +16,12 @@ app/controllers/medicines_controller.rb	Mon, 18 Jan 2016 23:22:53 +0100
 app/controllers/messages_controller.rb	Mon, 18 Jan 2016 23:09:29 +0100
 app/controllers/proteges_controller.rb	Sun, 17 Jan 2016 01:05:14 +0100
 app/controllers/sessions_controller.rb	Mon, 18 Jan 2016 23:22:07 +0100
-app/controllers/static_pages_controller.rb	Mon, 18 Jan 2016 23:20:36 +0100
+app/controllers/static_pages_controller.rb	Tue, 19 Jan 2016 13:21:38 +0100
 app/controllers/trainers_controller.rb	Mon, 18 Jan 2016 22:26:15 +0100
 app/controllers/trainings_controller.rb	Mon, 18 Jan 2016 20:19:17 +0100
-app/controllers/users_controller.rb	Mon, 18 Jan 2016 21:55:23 +0100
+app/controllers/users_controller.rb	Wed, 20 Jan 2016 18:21:02 +0100
 app/helpers/account_activations_helper.rb	Mon, 18 Jan 2016 22:00:09 +0100
+app/helpers/active_excercises_helper.rb	Tue, 19 Jan 2016 13:47:56 +0100
 app/helpers/application_helper.rb	Mon, 18 Jan 2016 22:00:07 +0100
 app/helpers/blood_types_helper.rb	Fri, 15 Jan 2016 01:15:27 +0100
 app/helpers/card_index_helper.rb	Sat, 05 Dec 2015 18:08:19 +0100
@@ -40,19 +42,20 @@ app/helpers/trainings_helper.rb	Sun, 17 Jan 2016 21:39:06 +0100
 app/helpers/users_helper.rb	Fri, 27 Nov 2015 09:29:07 +0100
 app/mailers/application_mailer.rb	Sun, 17 Jan 2016 00:59:03 +0100
 app/mailers/user_mailer.rb	Sun, 17 Jan 2016 12:14:05 +0100
+app/models/active_excercise.rb	Tue, 19 Jan 2016 13:46:48 +0100
 app/models/blood_type.rb	Wed, 13 Jan 2016 12:01:13 +0100
 app/models/card.rb	Wed, 13 Jan 2016 17:16:47 +0100
 app/models/card_index.rb	Thu, 10 Dec 2015 01:31:43 +0100
 app/models/done_excercise.rb	Sun, 17 Jan 2016 19:20:41 +0100
 app/models/excercise.rb	Fri, 15 Jan 2016 01:15:27 +0100
-app/models/excercise_type.rb	Sun, 17 Jan 2016 18:15:23 +0100
+app/models/excercise_type.rb	Tue, 19 Jan 2016 14:08:26 +0100
 app/models/eye_color.rb	Wed, 13 Jan 2016 12:01:09 +0100
 app/models/measure_type.rb	Fri, 08 Jan 2016 19:36:33 +0100
 app/models/measurement.rb	Thu, 07 Jan 2016 01:00:35 +0100
 app/models/medicine.rb	Fri, 08 Jan 2016 19:36:33 +0100
 app/models/medicine_time.rb	Sun, 10 Jan 2016 16:09:21 +0100
 app/models/message.rb	Mon, 11 Jan 2016 18:34:09 +0100
-app/models/protege.rb	Sun, 17 Jan 2016 17:12:45 +0100
+app/models/protege.rb	Wed, 20 Jan 2016 17:55:23 +0100
 app/models/trainer.rb	Mon, 21 Dec 2015 00:23:43 +0100
 app/models/training.rb	Sun, 17 Jan 2016 22:59:12 +0100
 app/models/user.rb	Mon, 18 Jan 2016 21:57:38 +0100

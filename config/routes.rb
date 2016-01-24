@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get 'active_excercises' => 'active_excercises#show'
   get 'active' => 'active_excercises#active'
 
@@ -88,5 +92,6 @@ Rails.application.routes.draw do
   resources :trainings
   resources :done_excercises
   resources :active_excercises
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 
 end

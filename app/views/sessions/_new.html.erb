@@ -12,7 +12,7 @@
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
 
-    <%= f.label :hasło %> <%= link_to "(przypomnij hasło)", my_protege_card_path %>
+    <%= f.label :hasło %> <a href="#przypomnij_haslo" role="tab" data-toggle="tab">(przypomnij hasło)</a>
     <%= f.password_field :password, class: 'form-control' %>
     
     <div class="checkbox">
@@ -25,3 +25,4 @@
   <% end %>
           
   <p>Nowy użytkownik ? <a href="#zarejestruj_sie" role="tab" data-toggle="tab">Zarejestruj się juz teraz!</a></p>
+<a href="#password_resets" role="tab" data-toggle="tab">password_resets</a>
