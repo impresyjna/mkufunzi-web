@@ -76,6 +76,11 @@ Rails.application.routes.draw do
   get 'training' => 'trainings#show'
   get 'training_details' => 'trainings#show_details'
 
+  post 'create_active_excercise_mobile' => 'active_excercises#create_active_excercise_mobile'
+  post 'update_active_excercise_mobile' => 'active_excercises#update_active_excercise_mobile'
+  post 'create_training_mobile' => 'trainings#create_training_mobile'
+  post 'update_training_mobile' => 'trainings#update_training_mobile'
+
   resources :users
   resources :measurements
   resources :card_indices

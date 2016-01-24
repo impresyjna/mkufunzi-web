@@ -9,5 +9,33 @@ class ActiveExcercisesController < ApplicationController
 	respond_to do |format|
 		format.js
 	end 	
-  end
+	end
+
+  def create_active_excercise_mobile
+		if(!params[:training_id].nil? && !params[:protege_id].nil?)
+			@active_excercise = ActiveExcercise.new(active_excercise_mobile)
+			@active_excercise.save
+			render json: {status: "success", active_excercise: @active_excercise}
+		else
+			render json: {status: "failure"}
+		end
+	end
+
+  def update_active_excercise_mobile
+		if(!params[:id].nil?)
+			@active_excercise = ActiveExcercise.find(params[:id])
+			if @active_excercise.update_attributes(active_excercise_mobile)
+				render json: {status: "success"}
+			else
+				render json: {status: "failure"}
+			end
+		else
+			render json: {status: "failure"}
+		end
+	end
+
+	private
+	def active_excercise_mobile
+		params.permit(:how_many, :excercise_type_id, :training_id, :time, :puls, :protege_id)
+	end
 end
