@@ -42,14 +42,15 @@
                             <% end %>
                         </div>
                     </div>
-                
-                    <% if !data.active_excercise.last.excercise_type.name.nil? %>
-                        <div class="form-group">
-                            <label>Typ ćwiczenia</label>
-                            <div>
-                                <%= data.active_excercise.last.excercise_type.name %>
+                    <% if !data.active_excercise.last.excercise_type.nil? %>
+                        <% if !data.active_excercise.last.excercise_type.name.nil? %>
+                            <div class="form-group">
+                                <label>Typ ćwiczenia</label>
+                                <div>
+                                    <%= data.active_excercise.last.excercise_type.name %>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     <% end %>
 
                     <% if !data.active_excercise.last.how_many.nil? %>
