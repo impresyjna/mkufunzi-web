@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124180301) do
+ActiveRecord::Schema.define(version: 20160125230104) do
 
   create_table "active_excercises", force: :cascade do |t|
     t.integer  "how_many",          limit: 4
     t.integer  "excercise_type_id", limit: 4
     t.integer  "training_id",       limit: 4
-    t.datetime "time"
+    t.string   "time",              limit: 255
     t.integer  "puls",              limit: 4
     t.integer  "protege_id",        limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "active_excercises", ["excercise_type_id"], name: "index_active_excercises_on_excercise_type_id", using: :btree
