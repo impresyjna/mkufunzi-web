@@ -186,6 +186,7 @@
             <div class="panel-body">
           <form class="form-horizontal">
             <fieldset>
+                <% if !data.start.nil? and !data.end.nil? %>
               <div class="form-group">
                 <label class="col-md-3 control-label">Start</label>
                 <div class="col-md-9 about-me">
@@ -198,6 +199,7 @@
                   <%= data.end.strftime("%Y-%m-%d %H:%M") %>
                 </div>
               </div>
+              <% end %>
                 <% if !data.comment.blank? %>
                   <div class="form-group">
                     <label class="col-md-3 control-label"> Komentarz</label>
