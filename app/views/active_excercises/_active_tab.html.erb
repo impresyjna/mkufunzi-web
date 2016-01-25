@@ -42,21 +42,24 @@
                             <% end %>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Typ ćwiczenia</label>
-                        <div>
-                            <%= data.active_excercise.last.excercise_type.name %>
+                
+                    <% if !data.active_excercise.last.excercise_type.name.nil? %>
+                        <div class="form-group">
+                            <label>Typ ćwiczenia</label>
+                            <div>
+                                <%= data.active_excercise.last.excercise_type.name %>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
 
-
-                    <div class="form-group">
-                        <label>Liczba powtórzeń</label>
-                        <div>
-                            <%= data.active_excercise.last.how_many %>
+                    <% if !data.active_excercise.last.how_many.nil? %>
+                        <div class="form-group">
+                            <label>Liczba powtórzeń</label>
+                            <div>
+                                <%= data.active_excercise.last.how_many %>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                 </div>
                 <!-- /.panel-body -->
             </div>
