@@ -34,6 +34,21 @@ class ActiveExcercisesController < ApplicationController
 		end
 	end
 
+  def end_active_excercise_mobile
+		if(!params[:id].nil?)
+			@active_excercise = ActiveExcercise.find(params[:id])
+			@done_excercise = DoneExcercise.new(@active_excercise.attributes)
+			if @done_excercise.save
+				render json: {status: "success", done_excercise: @done_excercise}
+				@active_excercise.destroy
+			else
+				render json: {status: "failure"}
+			end
+		else
+			render json: {status: "failure"}
+		end
+	end
+
 	private
 	def active_excercise_mobile
 		params.permit(:how_many, :excercise_type_id, :training_id, :time, :puls, :protege_id)

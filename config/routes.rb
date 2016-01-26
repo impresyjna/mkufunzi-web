@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   post 'update_active_excercise_mobile' => 'active_excercises#update_active_excercise_mobile'
   post 'create_training_mobile' => 'trainings#create_training_mobile'
   post 'update_training_mobile' => 'trainings#update_training_mobile'
+  get 'end_active_excercise_mobile' => 'active_excercises#end_active_excercise_mobile'
 
   resources :users
   resources :measurements
