@@ -29,7 +29,7 @@
         <% end %>
 
         <% if !Trainer.find_by(user_id: current_user.id.to_i).nil? %>
-            <%= render 'trainer_welcome_page'%>
+            <%= render 'trainer_welcome_page', proteges: @proteges %>
         <% end %>
 
     <% end %>

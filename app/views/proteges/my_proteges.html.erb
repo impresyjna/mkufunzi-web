@@ -14,7 +14,6 @@
                           	<th>Nazwisko</th>
                           	<th>Data</th>
                             <th>wiecej</th>
-                            <th>usuń</th>
                       	</tr>
                   	</thead>
                   	<tbody>
@@ -24,15 +23,16 @@
                           <td><%= data.user.surname %> </td>
                           <td><%= data.created_at.strftime("%Y-%m-%d %H:%M") %> </td>
                           <td>
-                             <%= link_to "wiecej", my_protege_card_path(:id => data.user.id), class: 'btn btn-sm btn-raised btn-info no-margin'%>  
-                           </td>
-                          <td>
+                            <%= link_to "treningi", training_path(:id => data.user.id), class: 'btn btn-sm btn-raised btn-training no-margin'%>  
+                             <%= link_to "karta", my_protege_card_path(:id => data.user.id), class: 'btn btn-sm btn-raised btn-card no-margin'%>  
+                          
                             <%= link_to "usuń", erase_trainer_from_protege_path(:id => data.id), method: :post, class: 'btn btn-danger no-margin btn-sm', data: {confirm: "Czy jesteś tego pewien?"}  %>                            
                           </td>
                       </tr>
                       <% end %>
                   	</tbody>
               	</table>
+
                 <!-- Button trigger modal -->
               <button type="button" class="btn btn-outline btn-default btn-block btn-raised" data-toggle="modal" data-target="#myModal">
                 Dodaj podopiecznego

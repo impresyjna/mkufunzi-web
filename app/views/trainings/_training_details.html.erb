@@ -1,0 +1,24 @@
+<% if trainings.empty? %>
+  Brak wykonanych treningów
+<% else %>
+	<table id="training" class="table table-hover">
+    	<thead>
+        	<tr>
+            	<th>Start</th>
+            	<th>Koniec</th>
+            	<th>Komentarz</th>
+            	<th>Więcej</th>
+        	</tr>
+    	</thead>
+    	<tbody>
+        <% trainings.each do |data| %>
+          <tr>
+              <td><%= data.start.strftime("%Y-%m-%d %H:%M") if !data.start.nil? %></td>
+              <td><%= data.end.strftime("%Y-%m-%d %H:%M") if !data.end.nil? %></td>
+              <td><%= data.comment %></td>
+              <td><%= link_to 'wiecej', training_details_path(id:data.id), class: 'btn btn-training btn-sm btn-raised no-margin' %></td>
+          </tr>
+        <% end %>
+    	</tbody>
+	</table>
+  <% end %>

@@ -29,6 +29,10 @@ class StaticPagesController < ApplicationController
         end
       end
 
+      if !current_user.trainer.nil?
+        @proteges = current_user.trainer.proteges
+      end
+
   	end
   end
 

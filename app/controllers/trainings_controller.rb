@@ -1,17 +1,22 @@
 class TrainingsController < ApplicationController
   #Displays all current user trainings.  
   def show
-  	@trainings = current_user.protege.training
+  	if !current_user.protege.nil? 
+  		@trainings = current_user.protege.training
+  	end
+  	 if !current_user.trainer.proteges.nil? 
+  		@trainings = User.find(params[:id]).protege.training
+  	end
   end
 
   #Displays selected training.
   def show_details
   	if params[:id]
-  		@training = current_user.protege.training.find(params[:id])
+  		@training = Training.find(params[:id])
   	else	
   		redirect_to root_url
   	end
-	end
+end
 
 	def create_training_mobile
 		if(!params[:protege_id].nil?)
