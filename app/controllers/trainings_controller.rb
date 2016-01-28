@@ -3,8 +3,7 @@ class TrainingsController < ApplicationController
   def show
   	if !current_user.protege.nil? 
   		@trainings = current_user.protege.training
-  	end
-  	 if !current_user.trainer.proteges.nil? 
+	elsif !current_user.trainer.proteges.nil? 
   		@trainings = User.find(params[:id]).protege.training
   	end
   end
