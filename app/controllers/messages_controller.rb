@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     @new_messages = Message.where("user_send_id = ? AND user_receive_id = ? AND id > ?",params[:r_id], current_user.id,params[:after].to_i)
   end
 
-  #Displays all curent user messages.
+  #Displays all current user messages.
   def show
     if !current_user.protege.nil?
   	   @trainer = Protege.find_by(user_id: current_user.id).trainer
@@ -34,8 +34,9 @@ class MessagesController < ApplicationController
   def my_messages_index_mobile
     if !params[:id].nil?
       @user = User.find(params[:id])
+      @trainer = User.find(Protege.find_by(user_id: @user.id).trainer.user_id)
       @messages = Message.where("user_send_id = ?  OR user_receive_id = ?", @user.id, @user.id)
-      render json: {status: "success", messages: @messages }
+      render json: {status: "success", messages: @messages, trainer: { name: @trainer.name, surname: @trainer.surname }}
     else
       render json: {status: "failure"}
     end
