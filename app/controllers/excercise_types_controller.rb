@@ -34,7 +34,12 @@ class ExcerciseTypesController < ApplicationController
   		flash[:danger] = "coś poszło nie tak..."
   	end
   	redirect_to excercise_types_path
-  end
+	end
+
+	def excercise_types_index_mobile
+		@excercise_types = ExcerciseType.all
+		render json: @excercise_types
+	end
 
   private
   	def excercise_type_params
