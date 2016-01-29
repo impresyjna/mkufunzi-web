@@ -39,8 +39,8 @@ class ActiveExcercisesController < ApplicationController
 			@active_excercise = ActiveExcercise.find(params[:id])
 			@done_excercise = DoneExcercise.new(@active_excercise.attributes)
 			if @done_excercise.save
-				render json: {status: "success", done_excercise: @done_excercise}
 				@active_excercise.destroy
+				render json: {status: "success", done_excercise: @done_excercise}
 			else
 				render json: {status: "failure"}
 			end
