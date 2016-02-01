@@ -78,7 +78,7 @@ Rails.application.routes.draw do
 
   post 'create_active_excercise_mobile' => 'active_excercises#create_active_excercise_mobile'
   post 'update_active_excercise_mobile' => 'active_excercises#update_active_excercise_mobile'
-  post 'create_training_mobile' => 'trainings#create_training_mobile'
+  get 'create_training_mobile' => 'trainings#create_training_mobile'
   post 'update_training_mobile' => 'trainings#update_training_mobile'
   post 'end_active_excercise_mobile' => 'active_excercises#end_active_excercise_mobile'
   get 'my_messages_index_mobile' => 'messages#my_messages_index_mobile'
