@@ -14,6 +14,10 @@ class ActiveExcercisesController < ApplicationController
   def create_active_excercise_mobile
 		if(!params[:training_id].nil? && !params[:protege_id].nil?)
 			@old_active_excercise = ActiveExcercise.where("protege_id = ?", params[:protege_id])
+			@old_active_excercise.each do |p|
+				@done_excercise = DoneExcercise.new(p.attributes)
+				@done_excercise.save
+			end
 			@old_active_excercise.destroy_all
 			@active_excercise = ActiveExcercise.new(active_excercise_mobile)
 			@active_excercise.save
