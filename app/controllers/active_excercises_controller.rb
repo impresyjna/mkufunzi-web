@@ -22,6 +22,7 @@ class ActiveExcercisesController < ApplicationController
 			@active_excercise = ActiveExcercise.new(active_excercise_mobile)
 			@training = Training.find(params[:training_id])
 			@training.start = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+			@training.save
 			@active_excercise.save
 			render json: {status: "success", active_excercise: @active_excercise}
 		else
