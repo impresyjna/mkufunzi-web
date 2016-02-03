@@ -58,7 +58,7 @@
 
     <ul class="nav nav-tabs" style="margin-bottom: 20px;">
       <% @measureType.each do |data| %>
-      <li><a href="#tab<%= data.id %>" data-toggle="tab" onclick="update(<%= data.id%>,<%= data.extra_field%>)"><%= data.name %></a></li>
+      <li><a href="#tab<%= data.id %>" data-toggle="tab" title="" data-original-title="Tooltip on bottom" onclick="update(<%= data.id%>,<%= data.extra_field%>)"><%= data.name %> <span class="badge nav_badge" ><%= @protege_measurement.where("measure_type_id = ?", data.id).count %> </span></a></li>
       <% end %>
   </ul>
 

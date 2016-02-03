@@ -22,6 +22,8 @@ gem 'bcrypt'
 gem 'paperclip', "~> 4.3"
 gem 'aws-sdk', '< 2.0'
 gem 'active_model_serializers'
+gem 'prawn'
+gem 'prawn-table', '~> 0.1.0'
 
 group :development, :test do
   gem 'byebug'

@@ -27,7 +27,8 @@ class MeasurementsController < ApplicationController
 	def show
 		@measureType = MeasureType.all
 		@measurements = Measurement.new
-		@ProtegeCard = User.find(session[:user_id]).protege.card
+		@current_user = User.find(session[:user_id])
+		@ProtegeCard = @current_user.protege.card
 		
 		if params[:id].nil?
 			@cardNew = nil
@@ -35,6 +36,13 @@ class MeasurementsController < ApplicationController
 			@measureTypeInfo = @measureType.find(params[:id])
 			@card = Measurement.where("card_id = ? AND measure_type_id = ?", @ProtegeCard.id.to_i , params[:id])
 			@cardplot = Measurement.select("created_at, value, second_value").where("card_id = ? AND measure_type_id = ?", @ProtegeCard.id.to_i , params[:id])
+			respond_to do |format|
+		      format.html
+		      format.pdf do
+		        pdf = CardPdf.new(@card,@measureTypeInfo,@current_user)
+		        send_data pdf.render, filename: 'card.pdf', type: 'application/pdf', disposition: 'inline'
+		      end
+		    end
 		end
 	end
 

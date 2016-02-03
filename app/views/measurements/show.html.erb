@@ -23,6 +23,15 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <%= @measureTypeInfo.name %>
+              <div class="btn-group pull-right" style="box-shadow: none; margin:0px;">
+                <a data-target="#" class="btn dropdown-toggle" data-toggle="dropdown" style="padding: 0px;">
+                  <i class="material-icons" style="font-size: 20px;">more_vert</i>
+                </a>
+                <ul class="dropdown-menu measurement-dropdown-menu">
+                  <li><a href="measurement.pdf?id=<%=params[:id]%>"> <i class="fa fa-file-text-o"></i> Wyświetl PDF</a></li>
+                  <li><a href="measurement.pdf?id=<%=params[:id]%>" download="card"> <i class="fa fa-download"></i></i> Pobież </a></li>
+                </ul>
+              </div>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
