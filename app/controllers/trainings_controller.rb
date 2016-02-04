@@ -27,11 +27,18 @@ end
 		end
 	end
 
-	def update_training_mobile
+	def end_training_mobile
 		if(!params[:id].nil?)
 			@training = Training.find(params[:id])
-			if @training.update_attributes(training_mobile)
-				render json: {status: "success"}
+			@training.end = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+			@old_active_excercise = ActiveExcercise.where("training_id = ?", @training.id)
+			@old_active_excercise.each do |p|
+				@done_excercise = DoneExcercise.new(p.attributes)
+				@done_excercise.save
+			end
+			@old_active_excercise.destroy_all
+			if @training.save
+				render json: {status: "success", training: @training}
 			else
 				render json: {status: "failure"}
 			end
