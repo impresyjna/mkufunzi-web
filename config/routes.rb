@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   get 'my_messages_index_mobile' => 'messages#my_messages_index_mobile'
   post 'create_message_mobile' => 'messages#create_message_mobile'
   get 'excercise_types_index_mobile' => 'excercise_types#excercise_types_index_mobile'
+  get 'trainings_index_mobile' => 'trainings#trainings_index_mobile'
 
   resources :users
   resources :measurements

@@ -48,6 +48,11 @@ end
 
 	end
 
+	def trainings_index_mobile
+		@trainings = Training.where("start is not null").order(start: :desc)
+		render json: @trainings
+	end
+
 	private
 	def training_mobile
 		params.permit(:protege_id, :start, :end, :comment)
