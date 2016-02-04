@@ -49,8 +49,12 @@ end
 	end
 
 	def trainings_index_mobile
-		@trainings = Training.where("start is not null").order(start: :desc)
-		render json: @trainings
+		if(!params[:protege_id].nil?)
+			@trainings = Training.where("start is not null and protege_id = ?", params[:protege_id]).order(start: :desc)
+			render json: {status: "success", trainings: @trainings}
+		else
+			render json: {status: "failure"}
+		end
 	end
 
 	private
