@@ -57,6 +57,16 @@ end
 		end
 	end
 
+	def training_show_mobile
+		if(!params[:id].nil?)
+			@training = Training.find(params[:id])
+			@done_excercises = @training.done_excercises
+			render json: {status: "success", training: @training, done_excercises: @done_excercises}
+		else
+			render json: {status: "failure"}
+		end
+	end
+
 	private
 	def training_mobile
 		params.permit(:protege_id, :start, :end, :comment)
