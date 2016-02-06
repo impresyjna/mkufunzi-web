@@ -67,6 +67,20 @@ end
 		end
 	end
 
+	def add_comment_to_training_mobile
+		if(!params[:id].nil?)
+			@training = Training.find(params[:id])
+			if @training.update_attributes(training_mobile)
+				render json: {status: "success"}
+			else
+				render json: {status: "failure"}
+			end
+		else
+			render json: {status: "failure"}
+		end
+
+	end
+
 	private
 	def training_mobile
 		params.permit(:protege_id, :start, :end, :comment)

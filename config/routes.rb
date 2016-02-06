@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   get 'excercise_types_index_mobile' => 'excercise_types#excercise_types_index_mobile'
   get 'trainings_index_mobile' => 'trainings#trainings_index_mobile'
   get 'training_show_mobile' => 'trainings#training_show_mobile'
+  post 'add_comment_to_training_mobile' => 'trainings#add_comment_to_training_mobile'
 
   resources :users
   resources :measurements
