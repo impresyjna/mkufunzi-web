@@ -31,10 +31,10 @@
               </div>
             <% end %>
             <% if !@training.done_excercise.nil? %>
-              <%= render 'done_excercises/details', data: @training.done_excercise %>
+              <%= render 'done_excercises/details', data: @training.done_excercises %>
             <% end %>
             <% if !@training.excercise.nil? %>
-              <%= render 'excercises/details', data: @training.excercise %>
+              <%= render 'excercises/details', data: @training.excercises %>
             <% end %>
 
         </fieldset>
