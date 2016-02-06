@@ -91,8 +91,8 @@ class MeasurementsController < ApplicationController
 			@user = User.find(params[:id])
 			@protege = @user.protege
 			@card = @protege.card
-			@weight = @card.measurements.where(measure_type_id: (MeasureType.find_by(name: "waga"))).last
-			@height = @card.measurements.where(measure_type_id: (MeasureType.find_by(name: "wzrost"))).last
+			@weight = @card.measurements.where(measure_type_id: (MeasureType.find_by(name: "Waga"))).last
+			@height = @card.measurements.where(measure_type_id: (MeasureType.find_by(name: "Wzrost"))).last
 			if @height.nil?
 				@height = Measurement.new
 			end
@@ -100,8 +100,8 @@ class MeasurementsController < ApplicationController
 				@weight = Measurement.new
 			end
 			render json: {status: "success",
-										weight_value: @weight.value, weight_unit: MeasureType.find_by(name: "waga").unit,
-										height_value: @height.value, height_unit: MeasureType.find_by(name: "wzrost").unit}
+										weight_value: @weight.value, weight_unit: MeasureType.find_by(name: "Waga").unit,
+										height_value: @height.value, height_unit: MeasureType.find_by(name: "Wzrost").unit}
 		else
 			render json: {status: "failure"}
 		end
