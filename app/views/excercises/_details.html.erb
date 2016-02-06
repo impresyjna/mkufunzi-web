@@ -2,13 +2,16 @@
 	<% data.each do |d| %>
 		<div class="panel panel-default">
 		  <div class="panel-heading" style="background: #FFE0B2;"><%= d.excercise_type.name %></div>
-		  <div class="panel-body">
+		  <% if how_many == true %>
+		 	<div class="panel-body">
 		    <% if d.how_many == 1 %>
 		    	Wykonaj 1 raz.
 		    <% else %>
 		    	Wykonaj <%= d.how_many %> razy
 		    <% end %>
 		  </div>
+		  <% end %>
+		  
 		  <div class="panel-footer">
 		  	<!-- Trigger the modal with a button -->
 			<button type="button" class="btn btn-default btn-raised btn-block no-margin" data-toggle="modal" data-target="#myModal<%= d.id.to_s %>">Więcej</button>

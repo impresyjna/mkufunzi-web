@@ -33,8 +33,10 @@
             <% if !@training.done_excercises.nil? %>
               <%= render 'done_excercises/details', data: @training.done_excercises %>
             <% end %>
-            <% if !@training.excercises.nil? %>
-              <%= render 'excercises/details', data: @training.excercises %>
+            <% if !@training.excercises.empty? %>
+              <%= render 'excercises/details', data: @training.excercises, how_many: true %>
+            <% else %>
+              <%= render 'excercises/details', data: @training.done_excercises, how_many: false %>
             <% end %>
 
         </fieldset>
