@@ -30,10 +30,10 @@
                 </div>
               </div>
             <% end %>
-            <% if !@training.done_excercise.nil? %>
+            <% if !@training.done_excercises.nil? %>
               <%= render 'done_excercises/details', data: @training.done_excercises %>
             <% end %>
-            <% if !@training.excercise.nil? %>
+            <% if !@training.excercises.nil? %>
               <%= render 'excercises/details', data: @training.excercises %>
             <% end %>
 
