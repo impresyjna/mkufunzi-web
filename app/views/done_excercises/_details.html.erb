@@ -8,8 +8,12 @@
 		    <% else %>
 		    	Wykonano <%= d.how_many %> razy
 		    <% end %><br>
-		    <strong>Start</strong> <%= d.start.strftime("%Y-%m-%d %H:%M") %><br>
-		    <strong>Koniec</strong> <%= d.stop.strftime("%Y-%m-%d %H:%M") %><br>
+		    <% if !d.start.nil? %>
+		    	<strong>Start</strong> <%= d.start.strftime("%Y-%m-%d %H:%M")  %><br>
+		    <% end %>
+		    <% if !d.stop.nil? %>
+		   		<strong>Koniec</strong> <%= d.stop.strftime("%Y-%m-%d %H:%M") %><br>
+		   	<% end %>
 		  </div>
 		</div>
 	<% end %>
