@@ -76,8 +76,16 @@
 
 <script type="text/javascript">
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 var how_many_data = new Array();
 var puls_data = new Array();
+var lcolors = new Array('#F44336','#E91E63','#9C27B0','#673AB7','#3F51B5','#2196F3','#03A9F4','#00BCD4','#FFEB3B','#795548')
+var lcolor = new Array();
+var v = Math.floor(getRandomArbitrary(0,9));
+lcolor.push(lcolors[v]);
 
 <% @training.done_excercises.each do |data| %>
   <% if !data.how_many.nil? %>
@@ -94,13 +102,13 @@ Morris.Donut({
   colors: ['#006064','#00838F','#0097A7','#00ACC1','#00BCD4','#26C6DA','#4DD0E1','#80DEEA','#B2EBF2']
 });
 
-Morris.Area({
+Morris.Line({
   element: 'puls_chart',
   data: puls_data,
   xkey: 'data',
   ykeys: ['value'],
   labels: ['puls'],
-  lineColors: ['#DD2C00']
+  lineColors: lcolor
 });
 
 if (how_many_data.length === 0){
