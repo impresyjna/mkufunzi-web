@@ -1,3 +1,4 @@
+<div class="col-md-12">
 <div class="panel panel-default">
     <div class="panel-heading">
         Szczegółowe informacje
@@ -43,5 +44,74 @@
       </form>
   	</div>
 </div>
+</div>
 
+<% if !@training.done_excercises.nil? %>
+  <div class="col-md-4" id="v_how_many_chart">
+    <div class="panel panel-default" >
+        <div class="panel-heading">
+            <i class="fa fa-pie-chart"></i> Ilość powtórzeń
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <form class="form-horizontal">
+            <div id="how_many_chart"></div> 
+          </form>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-8" id="v_puls_chart">
+    <div class="panel panel-default" >
+        <div class="panel-heading">
+            <i class="fa fa-area-chart"></i> Puls
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <form class="form-horizontal">
+            <div id="puls_chart"></div> 
+          </form>
+        </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+
+var how_many_data = new Array();
+var puls_data = new Array();
+
+<% @training.done_excercises.each do |data| %>
+  <% if !data.how_many.nil? %>
+    how_many_data.push({ "label": "<%= data.excercise_type.name %>", "value": "<%= data.how_many %>"});
+  <% end %>
+  <% if !data.puls.nil? %>
+    puls_data.push({ "data": "<%= data.updated_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.puls %>"});
+  <% end %>
+<% end %>
+
+Morris.Donut({
+  element: 'how_many_chart',
+  data: how_many_data,
+  colors: ['#006064','#00838F','#0097A7','#00ACC1','#00BCD4','#26C6DA','#4DD0E1','#80DEEA','#B2EBF2']
+});
+
+Morris.Area({
+  element: 'puls_chart',
+  data: puls_data,
+  xkey: 'data',
+  ykeys: ['value'],
+  labels: ['puls'],
+  lineColors: ['#DD2C00']
+});
+
+if (how_many_data.length === 0){
+  var vhmc = document.getElementById("v_how_many_chart");
+  vhmc.className += " hidden";
+};
+if (puls_data.length === 0){
+  var vpc = document.getElementById("v_puls_chart");
+  vpc.className += " hidden";
+};
+</script>
+
+<% end %>
 
