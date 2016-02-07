@@ -70,9 +70,19 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-add_comment_to_training_mobile">#add_comment_to_training_mobile</a>
+    
+    <li ><a href="#method-i-create_training_mobile">#create_training_mobile</a>
+    
+    <li ><a href="#method-i-end_training_mobile">#end_training_mobile</a>
+    
     <li ><a href="#method-i-show">#show</a>
     
     <li ><a href="#method-i-show_details">#show_details</a>
+    
+    <li ><a href="#method-i-training_show_mobile">#training_show_mobile</a>
+    
+    <li ><a href="#method-i-trainings_index_mobile">#trainings_index_mobile</a>
     
   </ul>
 </div>
@@ -108,6 +118,142 @@
        </header>
 
     
+      <div id="method-i-add_comment_to_training_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_comment_to_training_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called via phone when user wants to add the comment about training.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_comment_to_training_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_comment_to_training_mobile</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>)
+                <span class="ruby-ivar">@training</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@training</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">training_mobile</span>)
+                        <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>}
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+        <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create_training_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_training_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called when user starts new training on phone. In return it gives
+the message about failure or success and if success, message contains
+information about training to later update</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create_training_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_training_mobile</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:protege_id</span>].<span class="ruby-identifier">nil?</span>)
+                <span class="ruby-ivar">@training</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">training_mobile</span>)
+                <span class="ruby-ivar">@training</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">training</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@training</span>}
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-end_training_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">end_training_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called when user ends training on phone. It has to move all
+active_excercises to done, save the end date and give user the information
+about transaction.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="end_training_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">end_training_mobile</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>)
+                <span class="ruby-ivar">@training</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+                <span class="ruby-ivar">@training</span>.<span class="ruby-identifier">end</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)
+                <span class="ruby-ivar">@old_active_excercise</span> = <span class="ruby-constant">ActiveExcercise</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;training_id = ?&quot;</span>, <span class="ruby-ivar">@training</span>.<span class="ruby-identifier">id</span>)
+                <span class="ruby-ivar">@old_active_excercise</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+                        <span class="ruby-ivar">@done_excercise</span> = <span class="ruby-constant">DoneExcercise</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">p</span>.<span class="ruby-identifier">attributes</span>)
+                        <span class="ruby-ivar">@done_excercise</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-ivar">@old_active_excercise</span>.<span class="ruby-identifier">destroy_all</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@training</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">training</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@training</span>}
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+                <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+        <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-show" class="method-detail ">
         
         <div class="method-heading">
@@ -129,7 +275,11 @@
           <div class="method-source-code" id="show-source">
             <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 3</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-      <span class="ruby-ivar">@trainings</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">training</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">nil?</span> 
+              <span class="ruby-ivar">@trainings</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">training</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">trainer</span>.<span class="ruby-identifier">proteges</span>.<span class="ruby-identifier">nil?</span> 
+              <span class="ruby-ivar">@trainings</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">training</span>
+      <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -160,13 +310,92 @@
 
           
           <div class="method-source-code" id="show_details-source">
-            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show_details</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
-              <span class="ruby-ivar">@training</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">training</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-      <span class="ruby-keyword">else</span> 
-              <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
-      <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 12</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_details</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+                <span class="ruby-ivar">@training</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+        <span class="ruby-keyword">else</span> 
+                <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-training_show_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">training_show_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called to get information about single training. It gives the
+information about done_excercises, training if success, the message failure
+otherwise</p>
+          
+          
+
+          
+          <div class="method-source-code" id="training_show_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">training_show_mobile</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>)
+                <span class="ruby-ivar">@training</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+                <span class="ruby-ivar">@done_excercises</span> = <span class="ruby-ivar">@training</span>.<span class="ruby-identifier">done_excercises</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">training</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@training</span>, <span class="ruby-identifier">done_excercises</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@done_excercises</span>}
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-trainings_index_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">trainings_index_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called via phone to get all trainings belongs to user.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="trainings_index_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/trainings_controller.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">trainings_index_mobile</span>
+        <span class="ruby-keyword">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:protege_id</span>].<span class="ruby-identifier">nil?</span>)
+                <span class="ruby-ivar">@trainings</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;start is not null and protege_id = ?&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:protege_id</span>]).<span class="ruby-identifier">order</span>(<span class="ruby-identifier">start</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>)
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">trainings</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@trainings</span>}
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+        <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

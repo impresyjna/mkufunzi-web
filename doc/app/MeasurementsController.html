@@ -139,7 +139,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
        <span class="ruby-ivar">@measurement</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">measurement_params</span>)
        <span class="ruby-ivar">@card</span> = <span class="ruby-constant">Card</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">protege_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">protege</span>.<span class="ruby-identifier">id</span>)
@@ -182,23 +182,32 @@
 
           
           <div class="method-source-code" id="get_main_data-source">
-            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 81</span>
+            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_main_data</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>
                 <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
                 <span class="ruby-ivar">@protege</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">protege</span>
                 <span class="ruby-ivar">@card</span> = <span class="ruby-ivar">@protege</span>.<span class="ruby-identifier">card</span>
-                <span class="ruby-ivar">@weight</span> = <span class="ruby-ivar">@card</span>.<span class="ruby-identifier">measurements</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">measure_type_id</span><span class="ruby-operator">:</span> (<span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;waga&quot;</span>))).<span class="ruby-identifier">last</span>
-                <span class="ruby-ivar">@height</span> = <span class="ruby-ivar">@card</span>.<span class="ruby-identifier">measurements</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">measure_type_id</span><span class="ruby-operator">:</span> (<span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;wzrost&quot;</span>))).<span class="ruby-identifier">last</span>
+                <span class="ruby-ivar">@weight</span> = <span class="ruby-ivar">@card</span>.<span class="ruby-identifier">measurements</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">measure_type_id</span><span class="ruby-operator">:</span> (<span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Waga&quot;</span>))).<span class="ruby-identifier">last</span>
+                <span class="ruby-ivar">@height</span> = <span class="ruby-ivar">@card</span>.<span class="ruby-identifier">measurements</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">measure_type_id</span><span class="ruby-operator">:</span> (<span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Wzrost&quot;</span>))).<span class="ruby-identifier">last</span>
+                <span class="ruby-ivar">@message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_receive_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">last</span>
+                <span class="ruby-ivar">@last_training</span> = <span class="ruby-ivar">@protege</span>.<span class="ruby-identifier">training</span>.<span class="ruby-identifier">last</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@height</span>.<span class="ruby-identifier">nil?</span>
                         <span class="ruby-ivar">@height</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">new</span>
                 <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">if</span> <span class="ruby-ivar">@weight</span>.<span class="ruby-identifier">nil?</span>
                         <span class="ruby-ivar">@weight</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">new</span>
                 <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@message</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-ivar">@message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-ivar">@last_training</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-ivar">@last_training</span> = <span class="ruby-constant">Training</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-keyword">end</span>
                 <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>,
-                                                                        <span class="ruby-identifier">weight_value</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@weight</span>.<span class="ruby-identifier">value</span>, <span class="ruby-identifier">weight_unit</span><span class="ruby-operator">:</span> <span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;waga&quot;</span>).<span class="ruby-identifier">unit</span>,
-                                                                        <span class="ruby-identifier">height_value</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@height</span>.<span class="ruby-identifier">value</span>, <span class="ruby-identifier">height_unit</span><span class="ruby-operator">:</span> <span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;wzrost&quot;</span>).<span class="ruby-identifier">unit</span>}
+                                                                        <span class="ruby-identifier">weight_value</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@weight</span>.<span class="ruby-identifier">value</span>, <span class="ruby-identifier">weight_unit</span><span class="ruby-operator">:</span> <span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Waga&quot;</span>).<span class="ruby-identifier">unit</span>,
+                                                                        <span class="ruby-identifier">height_value</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@height</span>.<span class="ruby-identifier">value</span>, <span class="ruby-identifier">height_unit</span><span class="ruby-operator">:</span> <span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Wzrost&quot;</span>).<span class="ruby-identifier">unit</span>,
+                                                                        <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@message</span>.<span class="ruby-identifier">content</span>, <span class="ruby-identifier">training</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@last_training</span>.<span class="ruby-identifier">start</span> }
         <span class="ruby-keyword">else</span>
                 <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
         <span class="ruby-keyword">end</span>
@@ -232,7 +241,7 @@
 
           
           <div class="method-source-code" id="get_measurements_mobile-source">
-            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_measurements_mobile</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:card_id</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:measure_type_id</span>].<span class="ruby-identifier">nil?</span>
                 <span class="ruby-ivar">@measurements</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;card_id = ? and measure_type_id = ?&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:card_id</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:measure_type_id</span>]).<span class="ruby-identifier">order</span>(<span class="ruby-identifier">created_at</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>)
@@ -376,7 +385,7 @@
 
           
           <div class="method-source-code" id="post_measurement_mobile-source">
-            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/controllers/measurements_controller.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">post_measurement_mobile</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:value</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:card_id</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:measure_type_id</span>].<span class="ruby-identifier">nil?</span>
                 <span class="ruby-ivar">@measurement</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">measurement_mobile</span>)
@@ -422,7 +431,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
         <span class="ruby-ivar">@measureType</span> = <span class="ruby-constant">MeasureType</span>.<span class="ruby-identifier">all</span>
         <span class="ruby-ivar">@measurements</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">new</span>
-        <span class="ruby-ivar">@ProtegeCard</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>]).<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">card</span>
+        <span class="ruby-ivar">@current_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
+        <span class="ruby-ivar">@ProtegeCard</span> = <span class="ruby-ivar">@current_user</span>.<span class="ruby-identifier">protege</span>.<span class="ruby-identifier">card</span>
         
         <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>
                 <span class="ruby-ivar">@cardNew</span> = <span class="ruby-keyword">nil</span>
@@ -430,6 +440,13 @@
                 <span class="ruby-ivar">@measureTypeInfo</span> = <span class="ruby-ivar">@measureType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
                 <span class="ruby-ivar">@card</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;card_id = ? AND measure_type_id = ?&quot;</span>, <span class="ruby-ivar">@ProtegeCard</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_i</span> , <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
                 <span class="ruby-ivar">@cardplot</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;created_at, value, second_value&quot;</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;card_id = ? AND measure_type_id = ?&quot;</span>, <span class="ruby-ivar">@ProtegeCard</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_i</span> , <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+                <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+              <span class="ruby-identifier">format</span>.<span class="ruby-identifier">pdf</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">pdf</span> = <span class="ruby-constant">CardPdf</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@card</span>,<span class="ruby-ivar">@measureTypeInfo</span>,<span class="ruby-ivar">@current_user</span>)
+                <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">pdf</span>.<span class="ruby-identifier">render</span>, <span class="ruby-identifier">filename</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;card.pdf&#39;</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;application/pdf&#39;</span>, <span class="ruby-identifier">disposition</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;inline&#39;</span>
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
         <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

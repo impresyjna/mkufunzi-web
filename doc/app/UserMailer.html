@@ -130,7 +130,7 @@
             <pre><span class="ruby-comment"># File app/mailers/user_mailer.rb, line 3</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">account_activation</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
-  <span class="ruby-identifier">mail</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Aktywacja konta&quot;</span>
+  <span class="ruby-identifier">mail</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Aktywacja konta.&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -146,7 +146,7 @@
         
         <div class="method-heading">
           <span class="method-name">password_reset</span><span
-            class="method-args">()</span>
+            class="method-args">(user)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -166,10 +166,9 @@ following lookup:</p>
           
           <div class="method-source-code" id="password_reset-source">
             <pre><span class="ruby-comment"># File app/mailers/user_mailer.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">password_reset</span>
-  <span class="ruby-ivar">@greeting</span> = <span class="ruby-string">&quot;Hi&quot;</span>
-
-  <span class="ruby-identifier">mail</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;to@example.org&quot;</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password_reset</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+  <span class="ruby-identifier">mail</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Resetacja hasła.&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

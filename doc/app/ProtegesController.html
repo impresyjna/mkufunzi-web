@@ -366,13 +366,14 @@
 
         <div class="method-description">
           
-          
+          <p>Method called via phone to update protege data in database . In return it
+shows the message about failure or success</p>
           
           
 
           
           <div class="method-source-code" id="update_from_mobile-source">
-            <pre><span class="ruby-comment"># File app/controllers/proteges_controller.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/controllers/proteges_controller.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_from_mobile</span>
         <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>
                 <span class="ruby-ivar">@protege</span> = <span class="ruby-constant">Protege</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])

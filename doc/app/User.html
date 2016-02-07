@@ -76,9 +76,15 @@
     
     <li ><a href="#method-i-authenticated-3F">#authenticated?</a>
     
+    <li ><a href="#method-i-create_reset_digest">#create_reset_digest</a>
+    
     <li ><a href="#method-i-forget">#forget</a>
     
+    <li ><a href="#method-i-password_reset_expired-3F">#password_reset_expired?</a>
+    
     <li ><a href="#method-i-remember">#remember</a>
+    
+    <li ><a href="#method-i-send_password_reset_email">#send_password_reset_email</a>
     
   </ul>
 </div>
@@ -152,6 +158,19 @@
         </div>
       </div>
       
+      <div id="attribute-i-reset_token" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">reset_token</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
     </section>
     
 
@@ -181,7 +200,7 @@
 
           
           <div class="method-source-code" id="digest-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">string</span>)
   <span class="ruby-identifier">cost</span> = <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">SecurePassword</span>.<span class="ruby-identifier">min_cost</span> <span class="ruby-operator">?</span> <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN_COST</span> <span class="ruby-operator">:</span>
       <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Engine</span>.<span class="ruby-identifier">cost</span>
@@ -216,7 +235,7 @@
 
           
           <div class="method-source-code" id="new_token-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">new_token</span>
   <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">urlsafe_base64</span>
 <span class="ruby-keyword">end</span></pre>
@@ -257,10 +276,45 @@
 
           
           <div class="method-source-code" id="authenticated-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticated?</span>(<span class="ruby-identifier">remember_token</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">remember_digest</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Password</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">remember_digest</span>).<span class="ruby-identifier">is_password?</span>(<span class="ruby-identifier">remember_token</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create_reset_digest" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_reset_digest</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sets the password reset attributes.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create_reset_digest-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_reset_digest</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reset_token</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new_token</span>
+  <span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:reset_digest</span>,  <span class="ruby-constant">User</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">reset_token</span>))
+  <span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:reset_sent_at</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -291,9 +345,42 @@
 
           
           <div class="method-source-code" id="forget-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 59</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forget</span>
   <span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:remember_digest</span>, <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-password_reset_expired-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">password_reset_expired?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns true if a password reset has expired.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="password_reset_expired-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password_reset_expired?</span>
+  <span class="ruby-identifier">reset_sent_at</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">hours</span>.<span class="ruby-identifier">ago</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -324,10 +411,43 @@
 
           
           <div class="method-source-code" id="remember-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">remember</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">remember_token</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new_token</span>
   <span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:remember_digest</span>, <span class="ruby-constant">User</span>.<span class="ruby-identifier">digest</span>(<span class="ruby-identifier">remember_token</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-send_password_reset_email" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">send_password_reset_email</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sends password reset email.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="send_password_reset_email-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_password_reset_email</span>
+  <span class="ruby-constant">UserMailer</span>.<span class="ruby-identifier">password_reset</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">deliver_now</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

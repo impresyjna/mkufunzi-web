@@ -70,6 +70,10 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-create_message_mobile">#create_message_mobile</a>
+    
+    <li ><a href="#method-i-my_messages_index_mobile">#my_messages_index_mobile</a>
+    
     <li ><a href="#method-i-new">#new</a>
     
     <li ><a href="#method-i-new_message">#new_message</a>
@@ -108,6 +112,87 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-create_message_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_message_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called via phone to send message. It creates the message using send
+data and saves it in database. In return it gives the message about success
+or failure</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create_message_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/messages_controller.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_message_mobile</span>
+  <span class="ruby-ivar">@message</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">message_mobile</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@message</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-my_messages_index_mobile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">my_messages_index_mobile</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Method called via phone to get all messages from user to his trainer and
+from trainer to user. In return it shows json with all data</p>
+          
+          
+
+          
+          <div class="method-source-code" id="my_messages_index_mobile-source">
+            <pre><span class="ruby-comment"># File app/controllers/messages_controller.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">my_messages_index_mobile</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+    <span class="ruby-ivar">@trainer</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-constant">Protege</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">trainer</span>.<span class="ruby-identifier">user_id</span>)
+    <span class="ruby-ivar">@messages</span> = <span class="ruby-constant">Message</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;user_send_id = ?  OR user_receive_id = ?&quot;</span>, <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;success&quot;</span>, <span class="ruby-identifier">messages</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@messages</span>, <span class="ruby-identifier">trainer</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@trainer</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">surname</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@trainer</span>.<span class="ruby-identifier">surname</span> }}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;failure&quot;</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-new" class="method-detail ">
@@ -195,7 +280,7 @@
 
         <div class="method-description">
           
-          <p>Displays all curent user messages.</p>
+          <p>Displays all current user messages.</p>
           
           
 
