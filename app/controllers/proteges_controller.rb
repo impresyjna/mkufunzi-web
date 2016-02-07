@@ -62,6 +62,7 @@ class ProtegesController < ApplicationController
   	redirect_to edit_profile_path
   end
 
+	#Method called via phone to update protege data in database . In return it shows the message about failure or success
 	def update_from_mobile
 		if !params[:id].nil?
 			@protege = Protege.find(params[:id])

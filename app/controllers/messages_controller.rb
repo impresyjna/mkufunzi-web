@@ -31,6 +31,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  #Method called via phone to get all messages from user to his trainer and from trainer to user. In return it shows json with all data
   def my_messages_index_mobile
     if !params[:id].nil?
       @user = User.find(params[:id])
@@ -42,6 +43,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  #Method called via phone to send message. It creates the message using send data and saves it in database. In return it gives the message about success or failure
   def create_message_mobile
     @message = Message.new(message_mobile)
     if @message.save

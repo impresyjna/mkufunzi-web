@@ -17,6 +17,7 @@ class TrainingsController < ApplicationController
   	end
 end
 
+	#Method called when user starts new training on phone. In return it gives the message about failure or success and if success, message contains information about training to later update
 	def create_training_mobile
 		if(!params[:protege_id].nil?)
 			@training = Training.new(training_mobile)
@@ -27,6 +28,7 @@ end
 		end
 	end
 
+	#Method called when user ends training on phone. It has to move all active_excercises to done, save the end date and give user the information about transaction.
 	def end_training_mobile
 		if(!params[:id].nil?)
 			@training = Training.find(params[:id])
@@ -48,6 +50,7 @@ end
 
 	end
 
+	#Method called via phone to get all trainings belongs to user.
 	def trainings_index_mobile
 		if(!params[:protege_id].nil?)
 			@trainings = Training.where("start is not null and protege_id = ?", params[:protege_id]).order(start: :desc)
@@ -57,6 +60,7 @@ end
 		end
 	end
 
+	#Method called to get information about single training. It gives the information about done_excercises, training if success, the message failure otherwise
 	def training_show_mobile
 		if(!params[:id].nil?)
 			@training = Training.find(params[:id])
@@ -67,6 +71,7 @@ end
 		end
 	end
 
+	#Method called via phone when user wants to add the comment about training. 
 	def add_comment_to_training_mobile
 		if(!params[:id].nil?)
 			@training = Training.find(params[:id])

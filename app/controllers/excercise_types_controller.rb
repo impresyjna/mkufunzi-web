@@ -36,6 +36,7 @@ class ExcerciseTypesController < ApplicationController
   	redirect_to excercise_types_path
 	end
 
+	#Method called via phone to get all excercise types. In return it gives json with data
 	def excercise_types_index_mobile
 		@excercise_types = ExcerciseType.all
 		render json: @excercise_types

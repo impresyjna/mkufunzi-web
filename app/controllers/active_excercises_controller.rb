@@ -11,6 +11,7 @@ class ActiveExcercisesController < ApplicationController
 	end 	
 	end
 
+  #Method called via phone when user starts training. In return it gives the telephone data about new active_excercise to allow later update
   def create_active_excercise_mobile
 		if(!params[:training_id].nil? && !params[:protege_id].nil?)
 			@old_active_excercise = ActiveExcercise.where("protege_id = ?", params[:protege_id])
@@ -32,6 +33,7 @@ class ActiveExcercisesController < ApplicationController
 		end
 	end
 
+  #Method called via phone to update active_excercise with actual data from phone
   def update_active_excercise_mobile
 		if(!params[:id].nil?)
 			@active_excercise = ActiveExcercise.find(params[:id])
@@ -45,6 +47,7 @@ class ActiveExcercisesController < ApplicationController
 		end
 	end
 
+  #Method called via phone when user wants to change excercise
   def end_active_excercise_mobile
 		if(!params[:id].nil?)
 			@active_excercise = ActiveExcercise.find(params[:id])
