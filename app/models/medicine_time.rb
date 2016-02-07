@@ -1,3 +1,4 @@
+#Class used to validate and control data involving MedicineTime model
 class MedicineTime < ActiveRecord::Base
   belongs_to :medicine
   validates :medicine_time, presence: true

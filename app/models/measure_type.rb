@@ -1,3 +1,4 @@
+#Class used to validate and control data involving MeasureType model
 class MeasureType < ActiveRecord::Base
 	has_many :measurement, :dependent => :delete_all
 
