@@ -87,12 +87,12 @@ var lcolor = new Array();
 var v = Math.floor(getRandomArbitrary(0,9));
 lcolor.push(lcolors[v]);
 
-<% @training.done_excercises.each do |data| %>
+<% @training.done_excercises.each_with_index do |data,index| %>
   <% if !data.how_many.nil? %>
     how_many_data.push({ "label": "<%= data.excercise_type.name %>", "value": "<%= data.how_many %>"});
   <% end %>
   <% if !data.puls.nil? %>
-    puls_data.push({ "data": "<%= data.updated_at.strftime('%Y-%m-%d %H:%M') %>", "value": "<%= data.puls %>"});
+    puls_data.push({ "data": "<%= index %>", "value": "<%= data.puls %>"});
   <% end %>
 <% end %>
 

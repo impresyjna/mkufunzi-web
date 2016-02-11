@@ -57,7 +57,8 @@ class MeasurementsController < ApplicationController
 	  		flash[:success] = "Pomyślnie dodano do kartoteki"
 	  		redirect_to measurement_path(id:@measurement.id.to_i)
 	  	else
-	  		render 'new'
+	  		flash[:danger] = "Podana wartość nie jest liczbą"
+	  		redirect_to measurement_path(id:@measurement.measure_type_id.to_i)
 	  	end
 	end
 
